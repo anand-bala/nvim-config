@@ -1,9 +1,9 @@
+local command = vim.api.nvim_create_user_command
+
 --- Fuzzy search
 
 --- Mappings for telescope.nvim
 local function telescope_mappings()
-  local command = vim.api.nvim_create_user_command
-
   local mappings = {
     i = {
       ["<C-u>"] = false,
@@ -12,77 +12,60 @@ local function telescope_mappings()
       ["<C-Up>"] = require("telescope.actions").cycle_history_prev,
     },
   }
-  command("Helptags", "Telescope help_tags", { force = true })
-  command("Buffers", "Telescope buffers", { force = true })
   return mappings
 end
 
-return {
-  {
-    "nvim-telescope/telescope.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-      -- "nvim-telescope/telescope-ui-select.nvim",
+local opts = {
+  defaults = {
+    sorting_strategy = "ascending",
+    layout_strategy = "flex",
+    layout_config = {
+      prompt_position = "top",
+      vertical = { prompt_position = "top" },
+      horizontal = { prompt_position = "top" },
     },
-    cmd = { "Telescope", "Helptags", "Buffers" },
-    keys = {
-      { "<C-f>", "<cmd>Telescope find_files<cr>", "n", remap = false },
-      { "<C-g>", "<cmd>Telescope live_grep<cr>", "n", remap = false },
-      { "<C-b>", "<cmd>Telescope buffers<cr>", "n", remap = false },
+    path_display = { truncate = 3 },
+    color_devicons = true,
+    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+    mappings = telescope_mappings(),
+    vimgrep_arguments = {
+      "rg",
+      "--hidden",
+      "--color=never",
+      "--no-heading",
+      "--with-filename",
+      "--line-number",
+      "--column",
+      "--smart-case",
     },
-    opts = function()
-      return {
-        defaults = {
-          sorting_strategy = "ascending",
-          layout_strategy = "flex",
-          layout_config = {
-            prompt_position = "top",
-            vertical = { prompt_position = "top" },
-            horizontal = { prompt_position = "top" },
-          },
-          path_display = { truncate = 3 },
-          color_devicons = true,
-          set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
-          mappings = telescope_mappings(),
-          vimgrep_arguments = {
-            "rg",
-            "--hidden",
-            "--color=never",
-            "--no-heading",
-            "--with-filename",
-            "--line-number",
-            "--column",
-            "--smart-case",
-          },
-        },
-        pickers = {
-          find_files = {
-            find_command = { "fd", "--hidden", "-L", "--type", "file" },
-          },
-        },
-        extensions = {
-          fzf = {
-            fuzzy = true, -- false will only do exact matching
-            override_generic_sorter = true, -- override the generic sorter
-            override_file_sorter = true, -- override the file sorter
-            case_mode = "smart_case", -- or "ignore_case" or "respect_case"
-            -- the default case_mode is "smart_case"
-          },
-          -- ["ui-select"] = {
-          --   require("telescope.themes").get_dropdown {},
-          -- },
-        },
-      }
-    end,
-    config = function(_, opts)
-      local telescope = require "telescope"
-      telescope.setup(opts)
-      telescope.load_extension "fzf"
-      if pcall(require, "notify") then
-        telescope.load_extension "notify"
-      end
-      -- telescope.load_extension "ui-select"
-    end,
+  },
+  pickers = {
+    find_files = {
+      find_command = { "fd", "--hidden", "-L", "--type", "file" },
+    },
+  },
+  extensions = {
+    fzf = {
+      fuzzy = true, -- false will only do exact matching
+      override_generic_sorter = true, -- override the generic sorter
+      override_file_sorter = true, -- override the file sorter
+      case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+      -- the default case_mode is "smart_case"
+    },
   },
 }
+
+local telescope = require "telescope"
+telescope.setup(opts)
+-- telescope.load_extension "fzf"
+if pcall(require, "notify") then
+  telescope.load_extension "notify"
+end
+-- telescope.load_extension "ui-select"
+
+command("Helptags", "Telescope help_tags", { force = true })
+command("Buffers", "Telescope buffers", { force = true })
+
+vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>", { remap = false })
+vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<cr>", { remap = false })
+vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { remap = false })

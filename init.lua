@@ -61,6 +61,11 @@ end
 vim.opt.mouse = "a" -- Enable mouse mode
 vim.opt.showmode = false -- Don't show mode since we are using statusline
 
+-- Turn on global statusline
+vim.opt.laststatus = 3
+-- Turn on sign column
+vim.wo.signcolumn = "yes"
+
 -- Split pane settings
 -- Right and bottom splits as opposed to left and top
 vim.opt.splitbelow = true
@@ -112,49 +117,21 @@ vim.keymap.set("i", "<Up>", "<C-o>gk", { remap = false })
 -- Yank entire line on Y
 vim.keymap.set("n", "Y", "yy", { remap = false })
 
--- Setup lazy.nvim
-local lazypath = vim.fn.stdpath "data" .. "/lazy/lazy.nvim"
-if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
-    "git",
-    "clone",
-    "--filter=blob:none",
-    "https://github.com/folke/lazy.nvim.git",
-    "--branch=stable", -- latest stable release
-    lazypath,
-  }
-end
-vim.opt.rtp:prepend(lazypath)
+-- Navigate buffers
+vim.keymap.set(
+  "n",
+  "]b",
+  "<cmd>bnext<cr>",
+  { remap = false, desc = "Move to next buffer in list" }
+)
+vim.keymap.set(
+  "n",
+  "[b",
+  "<cmd>bprevious<cr>",
+  { remap = false, desc = "Move to previous buffer in list" }
+)
 
--- Load lazy.nvim plugins
-require("lazy").setup("plugins", {
-  defaults = { lazy = true },
-  install = { colorscheme = { "dayfox" } },
-  checker = { enabled = true, notify = false },
-  change_detection = {
-    -- automatically check for config file changes and reload the ui
-    enabled = true,
-    notify = false, -- get a notification when changes are found
-  },
-  performance = {
-    cache = {
-      enabled = true,
-      -- disable_events = {},
-    },
-    rtp = {
-      disabled_plugins = {
-        -- "gzip",
-        -- "matchit",
-        -- "matchparen",
-        "netrwPlugin",
-        "tarPlugin",
-        "tohtml",
-        "tutor",
-        -- "zipPlugin",
-      },
-    },
-  },
-})
+require "_rocks"
 
 -- Register some custom behavior via autocmds
 
@@ -225,6 +202,16 @@ do
 end
 
 -- Populate quickfix list when diagnostics change
+do
+  vim.api.nvim_create_autocmd("DiagnosticChanged", {
+    callback = function()
+      vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
+    end,
+  })
+end
+
+-- LSP debug
+-- vim.lsp.set_log_level "DEBUG"
 do
   vim.api.nvim_create_autocmd("DiagnosticChanged", {
     callback = function()
