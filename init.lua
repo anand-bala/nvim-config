@@ -132,6 +132,7 @@ vim.keymap.set(
 )
 
 require "_rocks"
+vim.cmd "colorscheme dayfox"
 
 -- Register some custom behavior via autocmds
 

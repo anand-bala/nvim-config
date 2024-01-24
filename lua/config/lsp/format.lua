@@ -46,12 +46,16 @@ function M.format(opts)
     M.notify(formatters)
   end
 
-  -- prefer formatter.nvim
-  if not vim.tbl_isempty(formatters.formatter_nvim) then
-    vim.cmd [[Format]]
-  end
-
-  if #client_ids > 0 then
+  if not vim.tbl_isempty(formatters.null_ls) then
+    vim.lsp.buf.format(vim.tbl_deep_extend("force", {
+      bufnr = buf,
+      filter = function(client)
+        return client.name == "null-ls"
+      end,
+    }, M.opts.format or {}))
+  -- elseif not vim.tbl_isempty(formatters.formatter_nvim) then
+  --   vim.cmd [[Format]]
+  elseif #client_ids > 0 then
     vim.lsp.buf.format(vim.tbl_deep_extend("force", {
       bufnr = buf,
       filter = function(client)
@@ -160,7 +164,7 @@ end
 function M.setup(opts)
   M.opts = opts
 
-  vim.api.nvim_create_autocmd("BufWritePost", {
+  vim.api.nvim_create_autocmd("BufWritePre", {
     group = vim.api.nvim_create_augroup("LspFormatOnWrite", {}),
     pattern = { "*" },
     callback = function()

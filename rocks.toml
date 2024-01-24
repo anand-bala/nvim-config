@@ -23,13 +23,13 @@ vim-matchup = { git = "andymass/vim-matchup" }
 vim-easy-align = { git = "junegunn/vim-easy-align" }
 nvim-treesitter = { git = "nvim-treesitter/nvim-treesitter" }
 "mini.comment" = { git = "echasnovski/mini.comment" }
-"which-key.nvim" = { git = "folke/which-key.nvim" }
+"which-key.nvim" = { git = "folke/which-key.nvim", config = true }
 
 # UI stuff
 "nightfox.nvim" = { git = "EdenEast/nightfox.nvim" }
-"gitsigns.nvim" = { git = "lewis6991/gitsigns.nvim" }
+"gitsigns.nvim" = { git = "lewis6991/gitsigns.nvim", config = true }
 nvim-web-devicons = "0.99"
-"dressing.nvim" = { git = "stevearc/dressing.nvim" }
+"dressing.nvim" = { git = "stevearc/dressing.nvim", config = true }
 "mini.statusline" = { git = "echasnovski/mini.statusline" }
 "mini.tabline" = { git = "echasnovski/mini.tabline" }
 "nvim-notify" = { git = "rcarriga/nvim-notify" }
@@ -47,7 +47,7 @@ lspkind-nvim = { git = "onsails/lspkind-nvim" }
 "mason-lspconfig.nvim" = { git = "williamboman/mason-lspconfig.nvim" }
 
 # Coding helpers
-nvim-cmp = "scm-1"
+nvim-cmp = { git = "hrsh7th/nvim-cmp" }
 cmp-buffer = { git = "hrsh7th/cmp-buffer" }
 cmp-nvim-lsp = { git = "hrsh7th/cmp-nvim-lsp" }
 cmp-nvim-lua = { git = "hrsh7th/cmp-nvim-lua" }
@@ -59,16 +59,19 @@ cmp-pandoc-references = { git = "jmbuhr/cmp-pandoc-references" }
 
 luasnip = "2.2.0"
 friendly-snippets = { git = "rafamadriz/friendly-snippets" }
-"formatter.nvim" = { git = "mhartington/formatter.nvim" }
-nvim-lint = { git = "mfussenegger/nvim-lint" }
+# "formatter.nvim" = { git = "mhartington/formatter.nvim" }
+# nvim-lint = { git = "mfussenegger/nvim-lint" }
 rustaceanvim = "3.17.2"
 "ltex-ls.nvim" = { git = "vigoux/ltex-ls.nvim" }
+"none-ls.nvim" = { git = "nvimtools/none-ls.nvim" }
 
 quarto-nvim = { git = "quarto-dev/quarto-nvim" }
 "otter.nvim" = { git = "jmbuhr/otter.nvim" }
 vim-markdown = { git = "preservim/vim-markdown" }
 vimtex = { git = "lervag/vimtex" }
-
+"image.nvim" = "scm-1"
+molten-nvim = { git = "benlubas/molten-nvim" }
 
 # Other random things
 vim-startuptime = { git = "dstein64/vim-startuptime" }
+"plenary.nvim" = "scm"
