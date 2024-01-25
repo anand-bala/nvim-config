@@ -13,7 +13,6 @@
 [plugins]
 "rocks.nvim" = "2.7.0"
 "rocks-git.nvim" = "1.2.1"
-"rocks-config.nvim" = { git = "nvim-neorocks/rocks-config.nvim" }
 
 # Everyday tools
 vim-obsession = { git = "tpope/vim-obsession" }
@@ -21,15 +20,15 @@ vim-abolish = { git = "tpope/vim-abolish" }
 vim-fugitive = { git = "tpope/vim-fugitive" }
 vim-matchup = { git = "andymass/vim-matchup" }
 vim-easy-align = { git = "junegunn/vim-easy-align" }
-nvim-treesitter = { git = "nvim-treesitter/nvim-treesitter" }
+nvim-treesitter = { git = "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" }
 "mini.comment" = { git = "echasnovski/mini.comment" }
-"which-key.nvim" = { git = "folke/which-key.nvim", config = true }
+"which-key.nvim" = { git = "folke/which-key.nvim" }
 
 # UI stuff
 "nightfox.nvim" = { git = "EdenEast/nightfox.nvim" }
-"gitsigns.nvim" = { git = "lewis6991/gitsigns.nvim", config = true }
+"gitsigns.nvim" = { git = "lewis6991/gitsigns.nvim" }
 nvim-web-devicons = "0.99"
-"dressing.nvim" = { git = "stevearc/dressing.nvim", config = true }
+"dressing.nvim" = { git = "stevearc/dressing.nvim" }
 "mini.statusline" = { git = "echasnovski/mini.statusline" }
 "mini.tabline" = { git = "echasnovski/mini.tabline" }
 "nvim-notify" = { git = "rcarriga/nvim-notify" }
@@ -54,14 +53,14 @@ cmp-nvim-lua = { git = "hrsh7th/cmp-nvim-lua" }
 cmp-omni = { git = "hrsh7th/cmp-omni" }
 cmp-path = { git = "hrsh7th/cmp-path" }
 cmp-treesitter = { git = "ray-x/cmp-treesitter" }
-cmp-latex-symbols = { git = "kdheepak/cmp-latex-symbols" }
+cmp-latex-symbols = { git = "kdheepak/cmp-latex-symbols", opt = true }
 cmp-pandoc-references = { git = "jmbuhr/cmp-pandoc-references" }
 
 luasnip = "2.2.0"
 friendly-snippets = { git = "rafamadriz/friendly-snippets" }
 # "formatter.nvim" = { git = "mhartington/formatter.nvim" }
 # nvim-lint = { git = "mfussenegger/nvim-lint" }
-rustaceanvim = "3.17.2"
+rustaceanvim = { git = "mrcjkb/rustaceanvim" }
 "ltex-ls.nvim" = { git = "vigoux/ltex-ls.nvim" }
 "none-ls.nvim" = { git = "nvimtools/none-ls.nvim" }
 
@@ -69,9 +68,9 @@ quarto-nvim = { git = "quarto-dev/quarto-nvim" }
 "otter.nvim" = { git = "jmbuhr/otter.nvim" }
 vim-markdown = { git = "preservim/vim-markdown" }
 vimtex = { git = "lervag/vimtex" }
-"image.nvim" = "scm-1"
-molten-nvim = { git = "benlubas/molten-nvim" }
+"image.nvim" = { version = "scm-1", opt = true }
+molten-nvim = { git = "benlubas/molten-nvim", build = ":UpdateRemotePlugins", opt = true }
 
 # Other random things
-vim-startuptime = { git = "dstein64/vim-startuptime" }
+vim-startuptime = { git = "dstein64/vim-startuptime", opt = true }
 "plenary.nvim" = "scm"

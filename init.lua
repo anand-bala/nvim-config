@@ -66,6 +66,9 @@ vim.opt.laststatus = 3
 -- Turn on sign column
 vim.wo.signcolumn = "yes"
 
+-- Default to light background
+vim.opt.background = "light"
+
 -- Split pane settings
 -- Right and bottom splits as opposed to left and top
 vim.opt.splitbelow = true
@@ -131,25 +134,18 @@ vim.keymap.set(
   { remap = false, desc = "Move to previous buffer in list" }
 )
 
-require "_rocks"
-vim.cmd "colorscheme dayfox"
+local ok, err = pcall(require, "_rocks")
+if ok then
+  require "_rocks"
+  vim.cmd "colorscheme dayfox"
+elseif type(err) == "string" then
+  error(err)
+end
 
 -- Register some custom behavior via autocmds
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-
--- Custom filetype mappings
-do
-  local ft_mappings = augroup("ft_mappings", {})
-  autocmd({ "BufRead", "BufNewFile" }, {
-    group = ft_mappings,
-    pattern = { "*.tex", "*.latex" },
-    callback = function()
-      vim.opt_local.filetype = "tex"
-    end,
-  })
-end
 
 -- Custom spellfile for filetypes
 do
@@ -176,50 +172,3 @@ autocmd("TermOpen", {
     vim.opt_local.statuscolumn = ""
   end,
 })
-
--- LSP default on_attach hooks
-do
-  local on_attach_hook = require("config.lsp").on_attach_hook
-  on_attach_hook(
-    require("config.lsp").keymaps,
-    { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
-  )
-end
-
--- Commands to set the quickfix buffer/loclist buffer
-do
-  vim.api.nvim_create_user_command("Diagnostics", function()
-    vim.diagnostic.setloclist { title = "Buffer Diagnostics" }
-  end, {
-    desc = "Populate location list for this buffer with diagnostics",
-    force = true,
-  })
-  vim.api.nvim_create_user_command("WorkspaceDiagnostics", function()
-    vim.diagnostic.setqflist { title = "Workspace Diagnostics" }
-  end, {
-    desc = "Populate quickfix list for with workspace diagnostics",
-    force = true,
-  })
-end
-
--- Populate quickfix list when diagnostics change
-do
-  vim.api.nvim_create_autocmd("DiagnosticChanged", {
-    callback = function()
-      vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
-    end,
-  })
-end
-
--- LSP debug
--- vim.lsp.set_log_level "DEBUG"
-do
-  vim.api.nvim_create_autocmd("DiagnosticChanged", {
-    callback = function()
-      vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
-    end,
-  })
-end
-
--- LSP debug
--- vim.lsp.set_log_level "DEBUG"

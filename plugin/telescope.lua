@@ -1,3 +1,8 @@
+if vim.g.loaded_telescope_settings then
+  return
+end
+vim.g.loaded_telescope_settings = true
+
 local command = vim.api.nvim_create_user_command
 
 --- Fuzzy search

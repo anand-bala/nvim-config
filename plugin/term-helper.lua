@@ -1,5 +1,9 @@
 -- Minimal helpers for built-in terminal
 
+if vim.g.loaded_term_helper then
+  return
+end
+
 local cmd = vim.api.nvim_create_user_command
 local map = vim.keymap.set
 
@@ -98,3 +102,5 @@ map("n", "<C-w>|", "<cmd>VTerm<CR>", { silent = true, remap = false })
 
 -- Escape out of terminal mode to normal mode
 map("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = false })
+
+vim.g.loaded_term_helper = true
