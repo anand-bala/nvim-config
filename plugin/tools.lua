@@ -159,13 +159,8 @@ local function configure_cmp()
   })
 end
 
-autocmd({ "BufReadPost" }, {
-  once = true,
-  callback = function()
-    configure_luasnip()
-    configure_treesitter()
-    configure_cmp()
-    require("mini.comment").setup()
-  end,
-  pattern = "*",
-})
+configure_treesitter()
+
+configure_luasnip()
+configure_cmp()
+require("mini.comment").setup()

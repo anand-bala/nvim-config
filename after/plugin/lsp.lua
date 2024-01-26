@@ -103,13 +103,7 @@ local function configure_lsp()
   }
 end
 
-vim.api.nvim_create_autocmd({ "BufReadPost" }, {
-  once = true,
-  callback = function()
-    configure_lsp()
-  end,
-  pattern = "*",
-})
+configure_lsp()
 
 -- LSP default on_attach hooks
 require("config.lsp").on_attach_hook(

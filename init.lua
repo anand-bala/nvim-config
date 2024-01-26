@@ -12,7 +12,7 @@ if string.match(vim.o.shell, "fish$") then
 end
 
 -- Enable vim syntax highlighting
-vim.cmd "syntax enable"
+-- vim.cmd "syntax enable"
 
 -- Default formatting options
 vim.opt.encoding = "utf-8" -- Default encoding
@@ -146,21 +146,6 @@ end
 
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
-
--- Custom spellfile for filetypes
-do
-  local function set_spellfile()
-    vim.opt_local.spell = true
-    vim.opt_local.spellfile = "project.utf-8.add"
-  end
-
-  local ft_spellfile = augroup("ft_spellfile", {})
-  autocmd({ "FileType" }, {
-    group = ft_spellfile,
-    pattern = "markdown,tex,quarto,pandoc",
-    callback = set_spellfile,
-  })
-end
 
 -- Terminal
 autocmd("TermOpen", {

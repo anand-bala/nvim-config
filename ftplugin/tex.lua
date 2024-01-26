@@ -1,3 +1,6 @@
+vim.opt_local.spell = true
+vim.opt_local.spellfile = "project.utf-8.add"
+
 vim.g.tex_conceal = "abdgm"
 vim.g.tex_flavor = "latex"
 

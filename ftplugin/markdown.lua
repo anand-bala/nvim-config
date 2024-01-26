@@ -1,3 +1,6 @@
+vim.opt_local.spell = true
+vim.opt_local.spellfile = "project.utf-8.add"
+
 vim.opt_local.tabstop = 2 -- Size of a hard tab (which will be expanded)
 vim.opt_local.softtabstop = 2 -- Size of a soft tab
 vim.opt_local.shiftwidth = 2 -- Size of indent

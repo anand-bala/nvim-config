@@ -38,15 +38,15 @@ function M.format(opts)
 
   local buf = vim.api.nvim_get_current_buf()
   local formatters = M.get_formatters(buf)
-  local client_ids = vim.tbl_map(function(client)
-    return client.id
-  end, formatters.available)
 
   if M.opts.format_notify then
     M.notify(formatters)
   end
 
   if not vim.tbl_isempty(formatters.null_ls) then
+    if M.opts.format_notify then
+      vim.notify "Formatting with null-ls"
+    end
     vim.lsp.buf.format(vim.tbl_deep_extend("force", {
       bufnr = buf,
       filter = function(client)
@@ -55,12 +55,12 @@ function M.format(opts)
     }, M.opts.format or {}))
   -- elseif not vim.tbl_isempty(formatters.formatter_nvim) then
   --   vim.cmd [[Format]]
-  elseif #client_ids > 0 then
+  else
+    if M.opts.format_notify then
+      vim.notify "Formatting with LSP"
+    end
     vim.lsp.buf.format(vim.tbl_deep_extend("force", {
       bufnr = buf,
-      filter = function(client)
-        return vim.tbl_contains(client_ids, client.id)
-      end,
     }, M.opts.format or {}))
   end
 end
@@ -179,6 +179,10 @@ function M.setup(opts)
   end, {
     desc = "Format the document",
   })
+  command("Format", function()
+    M.format { force = true }
+  end, { desc = "Format the document", force = true })
+
   command("FormatToggle", function()
     M.toggle()
   end, { desc = "Toggle auto-format", force = true })
