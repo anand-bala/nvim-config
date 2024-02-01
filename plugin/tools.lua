@@ -159,8 +159,13 @@ local function configure_cmp()
   })
 end
 
-configure_treesitter()
-
-configure_luasnip()
-configure_cmp()
-require("mini.comment").setup()
+autocmd({ "BufWinEnter" }, {
+  once = true,
+  callback = function()
+    configure_luasnip()
+    configure_treesitter()
+    configure_cmp()
+    require("mini.comment").setup()
+  end,
+  pattern = "*",
+})

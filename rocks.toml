@@ -55,6 +55,7 @@ cmp-path = { git = "hrsh7th/cmp-path" }
 cmp-treesitter = { git = "ray-x/cmp-treesitter" }
 cmp-latex-symbols = { git = "kdheepak/cmp-latex-symbols", opt = true }
 cmp-pandoc-references = { git = "jmbuhr/cmp-pandoc-references" }
+cmp_luasnip = { git = "saadparwaiz1/cmp_luasnip" }
 
 luasnip = "2.2.0"
 friendly-snippets = { git = "rafamadriz/friendly-snippets" }

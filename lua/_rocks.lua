@@ -1,6 +1,6 @@
 local rocks_config = {
   rocks_path = vim.fn.stdpath "data" .. "/rocks",
-  luarocks_binary = vim.fn.stdpath "data" .. "/rocks/bin/luarocks",
+  luarocks_binary = "luarocks",
 }
 
 vim.g.rocks_nvim = rocks_config

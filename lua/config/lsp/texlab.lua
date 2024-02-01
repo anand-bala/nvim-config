@@ -1,6 +1,6 @@
 local M = {}
 
-M.default_builder = "arara"
+M.default_builder = "latexmk"
 
 if
   vim.fn.has "win32" == 1

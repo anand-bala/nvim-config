@@ -55,7 +55,7 @@ function M.format(opts)
     }, M.opts.format or {}))
   -- elseif not vim.tbl_isempty(formatters.formatter_nvim) then
   --   vim.cmd [[Format]]
-  else
+  elseif #formatters.available > 0 then
     if M.opts.format_notify then
       vim.notify "Formatting with LSP"
     end

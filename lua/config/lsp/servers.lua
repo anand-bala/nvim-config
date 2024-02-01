@@ -156,6 +156,9 @@ M.servers = {
       texlab = {
         bibtexFormatter = "none",
         latexFormatter = "none",
+        latexindent = {
+          modifyLineBreaks = true,
+        },
       },
     },
   },
@@ -171,7 +174,7 @@ M.servers = {
     settings = {
       ltex = {
         enabled = { "latex", "tex", "bib", "markdown" },
-        language = "auto",
+        language = "en",
         diagnosticSeverity = "information",
         sentenceCacheSize = 2000,
         additionalRules = {

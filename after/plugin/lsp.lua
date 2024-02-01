@@ -16,11 +16,11 @@ local mason_opts = {
 local function configure_lsp()
   -- try to load neoconf and mason first
   require("neoconf").setup {
-    import = {
-      vscode = false, -- local .vscode/settings.json
-      coc = false, -- global/local coc-settings.json
-      nlsp = false, -- global/local nlsp-settings.nvim json settings
-    },
+    -- import = {
+    --   vscode = false, -- local .vscode/settings.json
+    --   coc = false, -- global/local coc-settings.json
+    --   nlsp = false, -- global/local nlsp-settings.nvim json settings
+    -- },
   }
 
   require("mason").setup(mason_opts)
@@ -100,6 +100,7 @@ local function configure_lsp()
 
   null_ls.setup {
     sources = sources,
+    debug = true,
   }
 end
 
