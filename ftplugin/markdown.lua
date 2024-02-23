@@ -32,7 +32,9 @@ vim.g.molten_output_win_max_height = 20
 
 -- Load some opt packages deferred
 local function md_notebook()
-  local packadd = require("rocks.runtime").packadd
+  local packadd = function(pkg)
+    vim.cmd("packadd " .. pkg)
+  end
   packadd "image.nvim"
   require("image").setup {
     backend = "kitty",

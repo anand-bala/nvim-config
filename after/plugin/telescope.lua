@@ -60,17 +60,19 @@ local opts = {
   },
 }
 
-local telescope = require "telescope"
-telescope.setup(opts)
--- telescope.load_extension "fzf"
-if pcall(require, "notify") then
-  telescope.load_extension "notify"
+local ok, telescope = pcall(require, "telescope")
+if ok then
+  telescope.setup(opts)
+  -- telescope.load_extension "fzf"
+  if pcall(require, "notify") then
+    telescope.load_extension "notify"
+  end
+  -- telescope.load_extension "ui-select"
+
+  command("Helptags", "Telescope help_tags", { force = true })
+  command("Buffers", "Telescope buffers", { force = true })
+
+  vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>", { remap = false })
+  vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<cr>", { remap = false })
+  vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { remap = false })
 end
--- telescope.load_extension "ui-select"
-
-command("Helptags", "Telescope help_tags", { force = true })
-command("Buffers", "Telescope buffers", { force = true })
-
-vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>", { remap = false })
-vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<cr>", { remap = false })
-vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { remap = false })

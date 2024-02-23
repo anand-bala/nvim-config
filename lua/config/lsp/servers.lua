@@ -235,4 +235,22 @@ M.setup = {
   end,
 }
 
+M.setup_lsp_config = function(server)
+  local server_opts = M.servers[server] or {}
+  local capabilities = require("config.lsp").update_capabilities(M)
+
+  server_opts["capabilities"] =
+    vim.tbl_deep_extend("force", capabilities, server_opts.capabilities or {})
+  if M.setup[server] then
+    if M.setup[server](server, server_opts) then
+      return
+    end
+  elseif M.setup["*"] then
+    if M.setup["*"](server, server_opts) then
+      return
+    end
+  end
+  require("lspconfig")[server].setup(server_opts)
+end
+
 return M

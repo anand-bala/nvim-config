@@ -9,6 +9,9 @@ autocmd({ "InsertEnter" }, {
   group = augroup("MyAbolishConf", {}),
   pattern = "*",
   callback = function()
+    if vim.fn.exists ":Abolish" ~= 2 then
+      return
+    end
     abolish { "desparat{e,es,ed,ing,ely,ion,ions,or}", "desperat{}" }
     abolish { "seperat{e,es,ed,ing,ely,ion,ions,or}", "separat{}" }
     abolish { "reciev{e,es,ed,ing}", "receiv{}" }

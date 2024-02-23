@@ -86,7 +86,24 @@ vim.opt.listchars = {
   precedes = "❮",
   nbsp = "±",
   trail = "·",
+  lead = "▸",
+  leadmultispace = "·",
 }
+-- local function update_lead()
+--   local lcs = vim.opt_local.listchars:get()
+--   local tab = vim.fn.str2list(lcs.tab)
+--   local space = vim.fn.str2list(lcs.multispace or lcs.space)
+--   local lead = { tab[1] }
+--   for i = 1, vim.bo.tabstop - 1 do
+--     lead[#lead + 1] = space[i % #space + 1]
+--   end
+--   vim.opt_local.listchars:append { leadmultispace = vim.fn.list2str(lead) }
+-- end
+-- vim.api.nvim_create_autocmd(
+--   "OptionSet",
+--   { pattern = { "listchars", "tabstop", "filetype" }, callback = update_lead }
+-- )
+-- vim.api.nvim_create_autocmd("VimEnter", { callback = update_lead, once = true })
 
 -- Setup terminal colors correctly
 vim.cmd [[let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"]]
@@ -134,13 +151,9 @@ vim.keymap.set(
   { remap = false, desc = "Move to previous buffer in list" }
 )
 
-local ok, err = pcall(require, "_rocks")
-if ok then
-  require "_rocks"
-  vim.cmd "colorscheme dayfox"
-elseif type(err) == "string" then
-  error(err)
-end
+pcall(require, "_paq")
+pcall(require, "_rocks")
+vim.cmd "colorscheme dayfox"
 
 -- Register some custom behavior via autocmds
 

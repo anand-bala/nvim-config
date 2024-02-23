@@ -1,4 +1,3 @@
-local command = vim.api.nvim_create_user_command
 local map = vim.keymap.set
 
 local M = {}
