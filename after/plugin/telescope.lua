@@ -63,11 +63,8 @@ local opts = {
 local ok, telescope = pcall(require, "telescope")
 if ok then
   telescope.setup(opts)
-  -- telescope.load_extension "fzf"
-  if pcall(require, "notify") then
-    telescope.load_extension "notify"
-  end
-  -- telescope.load_extension "ui-select"
+  pcall(telescope.load_extension, "fzf")
+  pcall(telescope.load_extension, "prosession")
 
   command("Helptags", "Telescope help_tags", { force = true })
   command("Buffers", "Telescope buffers", { force = true })

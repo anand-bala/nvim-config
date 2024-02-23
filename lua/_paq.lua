@@ -34,17 +34,13 @@ bootstrap_paq {
   "nvim-lua/plenary.nvim",
 
   -- Everyday tools
-  { "tpope/vim-obsession" },
   { "tpope/vim-abolish" },
   { "tpope/vim-fugitive" },
   { "andymass/vim-matchup" },
-  { "junegunn/vim-easy-align" },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "tpope/vim-commentary" },
-  { "folke/which-key.nvim" },
-
-  -- Direnv
-  { "direnv/direnv.vim" },
+  { "tpope/vim-obsession" },
+  { "dhruvasagar/vim-prosession" },
 
   -- UI Stuff
   { "nvim-tree/nvim-web-devicons" },
@@ -52,9 +48,7 @@ bootstrap_paq {
   { "lewis6991/gitsigns.nvim" },
   { "stevearc/dressing.nvim" },
   { "nvim-lualine/lualine.nvim" },
-  -- { "echasnovski/mini.statusline" },
-  -- { "echasnovski/mini.tabline" },
-  { "ls-devs/nvim-notify", branch = "fix/fix_index_value" },
+  { "rcarriga/nvim-notify" },
 
   -- Fuzzy finder
   { "nvim-telescope/telescope.nvim", branch = "0.1.x" },
@@ -77,8 +71,6 @@ bootstrap_paq {
 
   { "L3MON4D3/LuaSnip" },
   { "rafamadriz/friendly-snippets" },
-  -- { "mhartington/formatter.nvim" },
-  -- { "mfussenegger/nvim-lint" },
   { "mrcjkb/rustaceanvim" },
   { "vigoux/ltex-ls.nvim" },
   { "nvimtools/none-ls.nvim" },

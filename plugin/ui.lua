@@ -61,12 +61,6 @@ autocmd({ "BufWinEnter" }, {
       end
     end
     do
-      local ok, which_key = pcall(require, "which-key")
-      if ok then
-        which_key.setup()
-      end
-    end
-    do
       local ok, lualine = pcall(require, "lualine")
       if ok then
         lualine.setup {
@@ -86,18 +80,6 @@ autocmd({ "BufWinEnter" }, {
         }
       end
     end
-    -- do
-    --   local ok, mini_statusline = pcall(require, "mini.statusline")
-    --   if ok then
-    --     mini_statusline.setup { set_vim_settings = false }
-    --   end
-    -- end
-    -- do
-    --   local ok, mini_tabline = pcall(require, "mini.tabline")
-    --   if ok then
-    --     mini_tabline.setup { set_vim_settings = true }
-    --   end
-    -- end
   end,
   pattern = "*",
 })

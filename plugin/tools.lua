@@ -163,3 +163,5 @@ end
 configure_luasnip()
 configure_treesitter()
 configure_cmp()
+
+vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
