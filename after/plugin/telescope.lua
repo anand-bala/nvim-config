@@ -64,7 +64,13 @@ local ok, telescope = pcall(require, "telescope")
 if ok then
   telescope.setup(opts)
   pcall(telescope.load_extension, "fzf")
-  pcall(telescope.load_extension, "prosession")
+  if pcall(telescope.load_extension, "prosession") then
+    vim.api.nvim_create_user_command(
+      "Sessions",
+      "Telescope prosession",
+      { force = true }
+    )
+  end
 
   command("Helptags", "Telescope help_tags", { force = true })
   command("Buffers", "Telescope buffers", { force = true })

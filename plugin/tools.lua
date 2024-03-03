@@ -165,3 +165,7 @@ configure_treesitter()
 configure_cmp()
 
 vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
+vim.g.procession_ignore_dirs = {
+  "~",
+}
+vim.g.prosession_on_startup = 0

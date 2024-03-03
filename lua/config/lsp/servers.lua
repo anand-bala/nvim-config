@@ -155,13 +155,14 @@ M.servers = {
     settings = {
       texlab = {
         bibtexFormatter = "none",
-        latexFormatter = "none",
+        latexFormatter = "latexindent",
         latexindent = {
           modifyLineBreaks = true,
         },
       },
     },
   },
+  taplo = {},
   esbonio = {
     init_options = {
       sphinx = {

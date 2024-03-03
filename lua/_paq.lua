@@ -2,6 +2,7 @@ local function clone_paq()
   local path = vim.fn.stdpath "data" .. "/site/pack/paqs/start/paq-nvim"
   local is_installed = vim.fn.empty(vim.fn.glob(path)) == 0
   if not is_installed then
+    vim.cmd 'echo "Installing `paq-nvim`" | redraw'
     vim.fn.system {
       "git",
       "clone",
@@ -9,6 +10,8 @@ local function clone_paq()
       "https://github.com/savq/paq-nvim.git",
       path,
     }
+    vim.cmd "packadd paq-nvim | helptags ALL"
+    vim.cmd 'echo "Installed `paq-nvim`" | redraw'
     return true
   end
 end
@@ -41,6 +44,7 @@ bootstrap_paq {
   { "tpope/vim-commentary" },
   { "tpope/vim-obsession" },
   { "dhruvasagar/vim-prosession" },
+  { "direnv/direnv.vim" },
 
   -- UI Stuff
   { "nvim-tree/nvim-web-devicons" },

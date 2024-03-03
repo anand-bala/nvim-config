@@ -32,39 +32,6 @@ function M.toggle()
   end
 end
 
----@param opts? {force?:boolean}
-function M.format(opts)
-  opts = opts or {}
-
-  local buf = vim.api.nvim_get_current_buf()
-  local formatters = M.get_formatters(buf)
-
-  if M.opts.format_notify then
-    M.notify(formatters)
-  end
-
-  if not vim.tbl_isempty(formatters.null_ls) then
-    if M.opts.format_notify then
-      vim.notify "Formatting with null-ls"
-    end
-    vim.lsp.buf.format(vim.tbl_deep_extend("force", {
-      bufnr = buf,
-      filter = function(client)
-        return client.name == "null-ls"
-      end,
-    }, M.opts.format or {}))
-  -- elseif not vim.tbl_isempty(formatters.formatter_nvim) then
-  --   vim.cmd [[Format]]
-  elseif #formatters.available > 0 then
-    if M.opts.format_notify then
-      vim.notify "Formatting with LSP"
-    end
-    vim.lsp.buf.format(vim.tbl_deep_extend("force", {
-      bufnr = buf,
-    }, M.opts.format or {}))
-  end
-end
-
 ---@param formatters LazyVimFormatters
 function M.notify(formatters)
   local lines = { "# Active:" }
@@ -152,14 +119,6 @@ function M.get_formatters(bufnr)
   return ret
 end
 
--- Gets all lsp clients that support formatting
--- and have not disabled it in their client config
----@param client lsp.Client
-function M.supports_format(client)
-  return client.supports_method "textDocument/formatting"
-    or client.supports_method "textDocument/rangeFormatting"
-end
-
 ---@param opts PluginLspOpts
 function M.setup(opts)
   M.opts = opts
@@ -169,18 +128,18 @@ function M.setup(opts)
     pattern = { "*" },
     callback = function()
       if M.opts.autoformat then
-        M.format()
+        vim.lsp.buf.format()
       end
     end,
   })
 
   map("n", "<leader>f", function()
-    M.format { force = true }
+    vim.lsp.buf.format()
   end, {
     desc = "Format the document",
   })
   command("Format", function()
-    M.format { force = true }
+    vim.lsp.buf.format()
   end, { desc = "Format the document", force = true })
 
   command("FormatToggle", function()
