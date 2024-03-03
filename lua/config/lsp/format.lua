@@ -1,5 +1,6 @@
 local map = vim.keymap.set
 local command = vim.api.nvim_create_user_command
+local buf_command = vim.api.nvim_buf_create_user_command
 
 local M = {}
 
@@ -111,7 +112,7 @@ function M.get_formatters(bufnr)
   ---@type lsp.Client[]
   local clients = vim.lsp.get_clients { bufnr = bufnr }
   for _, client in ipairs(clients) do
-    if M.supports_format(client) then
+    if client.supports_method "textDocument/formatting" then
       table.insert(ret.available, client)
     end
   end
@@ -119,28 +120,40 @@ function M.get_formatters(bufnr)
   return ret
 end
 
+local augroup = vim.api.nvim_create_augroup("LspFormatting", {
+  clear = true,
+})
+
+---On attach hook for formatting stuff
+---@param client vim.lsp.Client
+---@param bufnr number
+function M.on_attach(client, bufnr)
+  if client.supports_method "textDocument/formatting" then
+    vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      group = augroup,
+      buffer = bufnr,
+      callback = function()
+        if M.opts.autoformat then
+          vim.lsp.buf.format()
+        end
+      end,
+    })
+
+    map("n", "<leader>f", function()
+      vim.lsp.buf.format()
+    end, {
+      desc = "Format the document",
+    })
+    buf_command(bufnr, "Format", function()
+      vim.lsp.buf.format()
+    end, { desc = "Format the document", force = true })
+  end
+end
+
 ---@param opts PluginLspOpts
 function M.setup(opts)
   M.opts = opts
-
-  vim.api.nvim_create_autocmd("BufWritePre", {
-    group = vim.api.nvim_create_augroup("LspFormatOnWrite", {}),
-    pattern = { "*" },
-    callback = function()
-      if M.opts.autoformat then
-        vim.lsp.buf.format()
-      end
-    end,
-  })
-
-  map("n", "<leader>f", function()
-    vim.lsp.buf.format()
-  end, {
-    desc = "Format the document",
-  })
-  command("Format", function()
-    vim.lsp.buf.format()
-  end, { desc = "Format the document", force = true })
 
   command("FormatToggle", function()
     M.toggle()

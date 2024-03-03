@@ -96,6 +96,7 @@ local function configure_lsp()
       null_ls.setup {
         sources = sources,
         debug = true,
+        on_attach = require("config.lsp.format").on_attach,
       }
     end
   end
@@ -107,4 +108,8 @@ configure_lsp()
 require("config.lsp").on_attach_hook(
   require("config.lsp").keymaps,
   { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
+)
+require("config.lsp").on_attach_hook(
+  require("config.lsp.format").on_attach,
+  { desc = "LSP: setup formatting", group = "LspAttachFormatting" }
 )

@@ -38,7 +38,9 @@ bootstrap_paq {
 
   -- Everyday tools
   { "tpope/vim-abolish" },
-  { "tpope/vim-fugitive" },
+  { "NeogitOrg/neogit" },
+  { "sindrets/diffview.nvim" },
+
   { "andymass/vim-matchup" },
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "tpope/vim-commentary" },
