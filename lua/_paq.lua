@@ -38,7 +38,7 @@ bootstrap_paq {
 
   -- Everyday tools
   { "tpope/vim-abolish" },
-  { "NeogitOrg/neogit" },
+  -- { "NeogitOrg/neogit" },
   { "sindrets/diffview.nvim" },
 
   { "andymass/vim-matchup" },

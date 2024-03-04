@@ -1,3 +1,6 @@
+-- Enable the experimental lua loader
+vim.loader.enable()
+
 -- Set some sane defaults
 vim.opt.secure = true
 vim.opt.modelines = 0 -- Disable Modelines
@@ -151,8 +154,7 @@ vim.keymap.set(
   { remap = false, desc = "Move to previous buffer in list" }
 )
 
-pcall(require, "_paq")
-pcall(require, "_rocks")
+require "_paq"
 vim.cmd "colorscheme dayfox"
 
 -- Register some custom behavior via autocmds
