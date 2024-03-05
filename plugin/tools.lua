@@ -3,13 +3,6 @@ if vim.g.loaded_tools_plugins then
 end
 vim.g.loaded_tools_plugins = true
 
-do
-  local ok, neogit = pcall(require, "neogit")
-  if ok then
-    neogit.setup {}
-  end
-end
-
 local function configure_treesitter()
   local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
   if ok then

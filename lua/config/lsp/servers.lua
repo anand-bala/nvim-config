@@ -28,18 +28,6 @@ local M = {
   ---@type table<string, fun(server:string, opts:lsp.ClientConfig):boolean?>
   setup = {},
 
-  --- Servers to auto install
-  ---@type string[]
-  mason = {
-    "lua-language-server",
-    "jsonls",
-    "pylsp",
-    "ruff-lsp",
-    "codelldb",
-    "rust-analyzer",
-    "markdownlint",
-  },
-
   --- options for vim.diagnostic.config()
   diagnostics = {
     underline = true,
