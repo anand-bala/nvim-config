@@ -3,52 +3,43 @@ if vim.g.loaded_tools_plugins then
 end
 vim.g.loaded_tools_plugins = true
 
-local function configure_treesitter()
-  local ok, nvim_treesitter = pcall(require, "nvim-treesitter.configs")
-  if ok then
-    nvim_treesitter.setup {
-      ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
-        "html",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "regex",
-        "rust",
-        "vim",
-        "vimdoc",
-        "zig",
-      },
-      highlight = { enable = true },
-      indent = { enable = true },
-      matchup = { enable = true },
-    }
-  end
-end
+---@diagnostic disable-next-line missing-fields
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "html",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "regex",
+    "rust",
+    "vim",
+    "vimdoc",
+    "zig",
+  },
+  highlight = { enable = true },
+  indent = { enable = true },
+  matchup = { enable = true },
+}
 
-local function configure_luasnip()
-  local ok, luasnip = pcall(require, "luasnip")
-  if ok then
-    luasnip.filetype_extend("cpp", { "c" })
-    luasnip.filetype_extend("tex", { "latex" })
-    luasnip.filetype_set("latex", { "latex", "tex" })
-    luasnip.filetype_extend("markdown", { "latex", "tex" })
-    luasnip.filetype_extend("pandoc", { "markdown", "latex", "tex" })
-    luasnip.filetype_extend("quarto", { "markdown", "latex", "tex" })
+do
+  local luasnip = require "luasnip"
+  luasnip.filetype_extend("cpp", { "c" })
+  luasnip.filetype_extend("tex", { "latex" })
+  luasnip.filetype_set("latex", { "latex", "tex" })
+  luasnip.filetype_extend("markdown", { "latex", "tex" })
+  luasnip.filetype_extend("pandoc", { "markdown", "latex", "tex" })
+  luasnip.filetype_extend("quarto", { "markdown", "latex", "tex" })
 
-    require("luasnip.loaders.from_vscode").lazy_load()
-    require("luasnip.loaders.from_lua").lazy_load()
-  end
+  require("luasnip.loaders.from_vscode").lazy_load()
+  require("luasnip.loaders.from_lua").lazy_load()
 end
 
 local function configure_cmp()
-  local ok, cmp = pcall(require, "cmp")
-  if not ok then
-    return
-  end
+  local cmp = require "cmp"
 
   --- Mappings for nvim-cmp
   local function cmp_mappings()
@@ -160,8 +151,6 @@ local function configure_cmp()
   })
 end
 
-configure_luasnip()
-configure_treesitter()
 configure_cmp()
 
 vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"

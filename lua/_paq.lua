@@ -45,7 +45,7 @@ bootstrap_paq {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   { "tpope/vim-commentary" },
   { "tpope/vim-obsession" },
-  { "dhruvasagar/vim-prosession" },
+  -- { "dhruvasagar/vim-prosession" },
   { "direnv/direnv.vim" },
 
   -- UI Stuff
@@ -85,5 +85,5 @@ bootstrap_paq {
   { "lervag/vimtex" },
 
   -- { "3rd/image.nvim", opt = true },
-  { "benlubas/molten-nvim", build = ":UpdateRemotePlugins", opt = true },
+  -- { "benlubas/molten-nvim", build = ":UpdateRemotePlugins", opt = true },
 }
