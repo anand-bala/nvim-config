@@ -6,7 +6,9 @@ do
   local notify = require "notify"
   ---@diagnostic disable-next-line: missing-fields
   notify.setup {
-    -- top_down = false,
+    top_down = false,
+    max_width = 50,
+    render = "wrapped-compact",
   }
   vim.notify = notify
 end
