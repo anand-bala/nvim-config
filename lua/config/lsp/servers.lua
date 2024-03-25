@@ -147,6 +147,9 @@ M.servers = {
         latexindent = {
           modifyLineBreaks = true,
         },
+        inlayHints = {
+          labelReferences = false,
+        },
       },
     },
   },
