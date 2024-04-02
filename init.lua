@@ -154,7 +154,7 @@ vim.keymap.set(
   { remap = false, desc = "Move to previous buffer in list" }
 )
 
-require "_paq"
+require "_mini_deps"
 vim.cmd "colorscheme dayfox"
 
 -- Register some custom behavior via autocmds
