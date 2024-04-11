@@ -83,7 +83,19 @@ M.servers = {
       },
     },
   },
-  pyright = {
+  -- pyright = {
+  --   settings = {
+  --     pyright = {
+  --       disableOrganizeImports = true,
+  --     },
+  --     python = {
+  --       analysis = {
+  --         diagnosticMode = "workspace",
+  --       },
+  --     },
+  --   },
+  -- },
+  basedpyright = {
     settings = {
       pyright = {
         disableOrganizeImports = true,
