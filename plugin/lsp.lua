@@ -74,6 +74,7 @@ local function configure_lsp()
       -- },
       null_ls.builtins.diagnostics.mypy,
       -- null_ls.builtins.diagnostics.shellcheck,
+      null_ls.builtins.formatting.shellharden,
       null_ls.builtins.diagnostics.cmake_lint,
     }
 
