@@ -66,6 +66,8 @@ pcall(telescope.load_extension, "fzf")
 if pcall(telescope.load_extension, "prosession") then
   vim.api.nvim_create_user_command("Sessions", "Telescope prosession", { force = true })
 end
+telescope.load_extension "zotero"
+vim.api.nvim_create_user_command("Zotero", "Telescope zotero", { force = true })
 
 command("Helptags", "Telescope help_tags", { force = true })
 command("Buffers", "Telescope buffers", { force = true })

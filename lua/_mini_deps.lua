@@ -25,6 +25,8 @@ add "nvim-lua/plenary.nvim"
 
 -- Everyday tools
 add "tpope/vim-abolish"
+add "tpope/vim-commentary"
+add "tpope/vim-obsession"
 --add("NeogitOrg/neogit")
 add "sindrets/diffview.nvim"
 
@@ -37,8 +39,6 @@ add {
     end,
   },
 }
-add "tpope/vim-commentary"
-add "tpope/vim-obsession"
 --add("dhruvasagar/vim-prosession")
 add "direnv/direnv.vim"
 
@@ -51,7 +51,14 @@ add "nvim-lualine/lualine.nvim"
 add "rcarriga/nvim-notify"
 
 -- Fuzzy finder
-add { source = "nvim-telescope/telescope.nvim", checkout = "0.1.x" }
+add {
+  source = "nvim-telescope/telescope.nvim",
+  checkout = "0.1.x",
+  monitor = "0.1.x",
+  depends = {
+    { source = "jmbuhr/telescope-zotero.nvim", depends = { "kkharji/sqlite.lua" } },
+  },
+}
 
 -- LSP and tools stuff
 add "neovim/nvim-lspconfig"
