@@ -83,6 +83,50 @@ add {
 add {
   source = "L3MON4D3/LuaSnip",
   depends = { "rafamadriz/friendly-snippets" },
+  hooks = {
+    ---@class MiniDepsHookParams
+    ---@field path string Absolute path to plugin's directory
+    ---@field source string resolved <source> from spc
+    ---@field name string resolved <name> from spec
+
+    ---@param opts MiniDepsHookParams
+    post_install = function(opts)
+      vim.notify(
+        string.format("Running make install_jsregexp for LuaSnip (%s)", opts.path)
+      )
+      vim.system({ "make", "install_jsregexp" }, {
+        cwd = opts.path,
+        text = true,
+        detach = true,
+      }, function(obj)
+        if obj.code ~= 0 then
+          local lines = {
+            "Unable to install LuaSnip with jsregexp",
+            "",
+            "Exit Code: " .. obj.code .. " (" .. obj.signal .. ")",
+            "```",
+            obj.stderr,
+            "```",
+          }
+          vim.notify(table.concat(lines, "\n"), vim.log.levels.ERROR, {
+            title = "LuaSnip installation",
+            on_open = function(win)
+              vim.api.nvim_set_option_value("conceallevel", 3, {
+                win = win,
+              })
+              vim.api.nvim_set_option_value("spell", false, {
+                win = win,
+              })
+              local buf = vim.api.nvim_win_get_buf(win)
+              vim.treesitter.start(buf, "markdown")
+            end,
+          })
+        else
+          vim.notify "Successfully built LuaSnip with jsregexp"
+        end
+      end)
+    end,
+  },
 }
 add "mrcjkb/rustaceanvim"
 add "vigoux/ltex-ls.nvim"

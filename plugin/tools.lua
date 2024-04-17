@@ -17,11 +17,12 @@ require("nvim-treesitter.configs").setup {
     "regex",
     "rust",
     "vim",
-    "vimdoc",
     "zig",
   },
-  highlight = { enable = true },
+  highlight = { enable = true, disable = { "latex" } },
   indent = { enable = true },
+  incremental_selection = { enable = true },
+  textobjects = { enable = true },
   matchup = { enable = true },
 }
 

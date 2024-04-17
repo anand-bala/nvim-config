@@ -120,6 +120,13 @@ function M.get_formatters(bufnr)
   return ret
 end
 
+local function lsp_format()
+  local formatters = M.get_formatters(0)
+  if #formatters.available > 0 then
+    vim.lsp.buf.format()
+  end
+end
+
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {
   clear = true,
 })
@@ -135,18 +142,18 @@ function M.on_attach(client, bufnr)
       buffer = bufnr,
       callback = function()
         if M.opts.autoformat then
-          vim.lsp.buf.format()
+          lsp_format()
         end
       end,
     })
 
     map("n", "<leader>f", function()
-      vim.lsp.buf.format()
+      lsp_format()
     end, {
       desc = "Format the document",
     })
     buf_command(bufnr, "Format", function()
-      vim.lsp.buf.format()
+      lsp_format()
     end, { desc = "Format the document", force = true })
   end
 end

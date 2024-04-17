@@ -154,6 +154,12 @@ vim.keymap.set(
   { remap = false, desc = "Move to previous buffer in list" }
 )
 
+-- Disable some providers I generally don't use
+vim.g.loaded_ruby_provider = 0
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_node_provider = 0
+
+-- Load/install plugins
 require "_mini_deps"
 vim.cmd "colorscheme dayfox"
 
