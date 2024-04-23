@@ -77,6 +77,7 @@ add {
     "hrsh7th/cmp-omni",
     "hrsh7th/cmp-path",
     "saadparwaiz1/cmp_luasnip",
+    "micangl/cmp-vimtex",
   },
 }
 
