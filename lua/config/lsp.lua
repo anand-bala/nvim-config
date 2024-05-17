@@ -1,6 +1,34 @@
 local map = vim.keymap.set
 
-local M = {}
+local M = {
+  opts = {
+    --- options for vim.diagnostic.config()
+    diagnostics = {
+      underline = true,
+      update_in_insert = false,
+      virtual_text = {
+        severity = vim.diagnostic.severity.ERROR,
+        spacing = 4,
+        source = "true",
+        -- prefix = "●",
+        -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
+        -- this only works on a recent 0.10.0 build. Will be set to "?" when not supported
+        prefix = "icons",
+      },
+      float = {
+        source = true,
+      },
+      severity_sort = true,
+    },
+
+    --- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
+    --- Be aware that you also will need to properly configure your LSP server to
+    --- provide the inlay hints.
+    inlay_hints = {
+      enabled = true,
+    },
+  },
+}
 
 --- Wrapper to add `on_attach` hooks for LSP
 ---@param on_attach fun(client:lsp.Client, buffer:integer)
@@ -22,40 +50,6 @@ function M.on_attach_hook(on_attach, opts)
       end,
     })
   )
-end
-
---- Setup LSP-based diagnostics
----@param opts PluginLspOpts
-function M.diagnostics(opts)
-  for name, icon in pairs(require("config.icons").diagnostics) do
-    name = "DiagnosticSign" .. name
-    vim.fn.sign_define(name, { text = icon, texthl = name, numhl = "" })
-  end
-
-  if opts.inlay_hints.enabled then
-    M.on_attach_hook(function(client, buffer)
-      if client.server_capabilities.inlayHintProvider then
-        vim.lsp.inlay_hint.enable(true, { bufnr = buffer })
-      end
-    end, { desc = "LSP: Enable inlay hints" })
-  end
-
-  if
-    type(opts.diagnostics.virtual_text) == "table"
-    and opts.diagnostics.virtual_text.prefix == "icons"
-  then
-    opts.diagnostics.virtual_text.prefix = vim.fn.has "nvim-0.10.0" == 0 and "●"
-      or function(diagnostic)
-        local icons = require("config.icons").diagnostics
-        for d, icon in pairs(icons) do
-          if diagnostic.severity == vim.diagnostic.severity[d:upper()] then
-            return icon
-          end
-        end
-      end
-  end
-
-  vim.diagnostic.config(opts.diagnostics)
 end
 
 function M.update_capabilities(opts)

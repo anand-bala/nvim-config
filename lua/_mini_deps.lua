@@ -129,9 +129,10 @@ add {
     end,
   },
 }
+add "stevearc/conform.nvim"
+
 add "mrcjkb/rustaceanvim"
 add "vigoux/ltex-ls.nvim"
-add "nvimtools/none-ls.nvim"
 add "preservim/vim-markdown"
 add "lervag/vimtex"
 

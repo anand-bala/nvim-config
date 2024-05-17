@@ -28,38 +28,8 @@ local M = {
   ---@type table<string, fun(server:string, opts:lsp.ClientConfig):boolean?>
   setup = {},
 
-  --- options for vim.diagnostic.config()
-  diagnostics = {
-    underline = true,
-    update_in_insert = false,
-    virtual_text = {
-      severity = vim.diagnostic.severity.ERROR,
-      spacing = 4,
-      source = "true",
-      -- prefix = "●",
-      -- this will set set the prefix to a function that returns the diagnostics icon based on the severity
-      -- this only works on a recent 0.10.0 build. Will be set to "?" when not supported
-      prefix = "icons",
-    },
-    float = {
-      source = true,
-    },
-    severity_sort = true,
-  },
-
-  --- Enable this to enable the builtin LSP inlay hints on Neovim >= 0.10.0
-  --- Be aware that you also will need to properly configure your LSP server to
-  --- provide the inlay hints.
-  inlay_hints = {
-    enabled = true,
-  },
   --- add any global capabilities here
   capabilities = {},
-  --- Automatically format on save
-  autoformat = true,
-  --- Enable this to show formatters used in a notification
-  --- Useful for debugging formatter issues
-  format_notify = false,
   --- options for vim.lsp.buf.format
   --- `bufnr` and `filter` is handled by the LazyVim formatter,
   --- but can be also overridden when specified
@@ -234,8 +204,8 @@ M.setup = {
       use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
       window_border = "single", -- How the border should be rendered
     })
-    require("ltex-ls").setup(opts)
-    return true
+    -- require("ltex-ls").setup(opts)
+    -- return true
   end,
 }
 
