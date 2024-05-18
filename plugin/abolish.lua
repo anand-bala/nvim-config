@@ -1,3 +1,4 @@
+local add = MiniDeps.add
 local augroup = vim.api.nvim_create_augroup
 local autocmd = vim.api.nvim_create_autocmd
 
@@ -9,6 +10,7 @@ autocmd({ "InsertEnter" }, {
   group = augroup("MyAbolishConf", {}),
   pattern = "*",
   callback = function()
+    add "tpope/vim-abolish"
     if vim.fn.exists ":Abolish" ~= 2 then
       return
     end

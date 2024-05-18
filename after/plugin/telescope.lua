@@ -5,7 +5,18 @@ vim.g.loaded_telescope_settings = true
 
 local command = vim.api.nvim_create_user_command
 
---- Fuzzy search
+local add = MiniDeps.add
+local later = MiniDeps.later
+
+-- Fuzzy finder
+add {
+  source = "nvim-telescope/telescope.nvim",
+  checkout = "0.1.x",
+  monitor = "0.1.x",
+  depends = {
+    { source = "jmbuhr/telescope-zotero.nvim", depends = { "kkharji/sqlite.lua" } },
+  },
+}
 
 --- Mappings for telescope.nvim
 local function telescope_mappings()
@@ -60,18 +71,24 @@ local opts = {
   },
 }
 
-local telescope = require "telescope"
-telescope.setup(opts)
-pcall(telescope.load_extension, "fzf")
-if pcall(telescope.load_extension, "prosession") then
-  vim.api.nvim_create_user_command("Sessions", "Telescope prosession", { force = true })
-end
-telescope.load_extension "zotero"
-vim.api.nvim_create_user_command("Zotero", "Telescope zotero", { force = true })
+later(function()
+  local telescope = require "telescope"
+  telescope.setup(opts)
+  pcall(telescope.load_extension, "fzf")
+  if pcall(telescope.load_extension, "prosession") then
+    vim.api.nvim_create_user_command(
+      "Sessions",
+      "Telescope prosession",
+      { force = true }
+    )
+  end
+  telescope.load_extension "zotero"
+  vim.api.nvim_create_user_command("Zotero", "Telescope zotero", { force = true })
 
-command("Helptags", "Telescope help_tags", { force = true })
-command("Buffers", "Telescope buffers", { force = true })
+  command("Helptags", "Telescope help_tags", { force = true })
+  command("Buffers", "Telescope buffers", { force = true })
 
-vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>", { remap = false })
-vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<cr>", { remap = false })
-vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { remap = false })
+  vim.keymap.set("n", "<C-f>", "<cmd>Telescope find_files<cr>", { remap = false })
+  vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<cr>", { remap = false })
+  vim.keymap.set("n", "<C-b>", "<cmd>Telescope buffers<cr>", { remap = false })
+end)

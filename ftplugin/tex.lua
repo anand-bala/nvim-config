@@ -11,6 +11,8 @@ vim.opt_local.formatlistpat = [[^\s*\(\d\+[\]:.)}\t ]\)\|\(\\item \)\s*]]
 -- Use builtin formatexpr for Markdown and Tex
 vim.opt_local.formatexpr = nil
 
+MiniDeps.add "lervag/vimtex"
+
 vim.g.vimtex_mappings_enabled = 0
 vim.g.vimtex_complete_enabled = 1
 vim.g.vimtex_view_enabled = 0

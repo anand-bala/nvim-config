@@ -3,30 +3,51 @@ if vim.g.loaded_tools_plugins then
 end
 vim.g.loaded_tools_plugins = true
 
----@diagnostic disable-next-line missing-fields
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "c",
-    "cpp",
-    "html",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "regex",
-    "rust",
-    "vim",
-    "zig",
+local add = MiniDeps.add
+local later = MiniDeps.later
+
+add "andymass/vim-matchup"
+
+add {
+  source = "nvim-treesitter/nvim-treesitter",
+  hooks = {
+    post_checkout = function()
+      vim.cmd ":TSUpdate"
+    end,
   },
-  highlight = { enable = true, disable = { "latex" } },
-  indent = { enable = true },
-  incremental_selection = { enable = true },
-  textobjects = { enable = true },
-  matchup = { enable = true },
 }
 
-do
+later(function()
+  ---@diagnostic disable-next-line missing-fields
+  require("nvim-treesitter.configs").setup {
+    ensure_installed = {
+      "bash",
+      "c",
+      "cpp",
+      "html",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "regex",
+      "rust",
+      "vim",
+      "zig",
+    },
+    highlight = { enable = true, disable = { "latex" } },
+    indent = { enable = true },
+    incremental_selection = { enable = true },
+    textobjects = { enable = true },
+    matchup = { enable = true },
+  }
+end)
+
+add {
+  source = "L3MON4D3/LuaSnip",
+  depends = { "rafamadriz/friendly-snippets" },
+}
+
+later(function()
   local luasnip = require "luasnip"
   luasnip.filetype_extend("cpp", { "c" })
   luasnip.filetype_extend("tex", { "latex" })
@@ -37,61 +58,70 @@ do
 
   require("luasnip.loaders.from_vscode").lazy_load()
   require("luasnip.loaders.from_lua").lazy_load()
-end
+end)
 
-local function configure_cmp()
+add {
+  source = "hrsh7th/nvim-cmp",
+  depends = {
+    "hrsh7th/cmp-buffer",
+    "hrsh7th/cmp-nvim-lsp",
+    "hrsh7th/cmp-nvim-lua",
+    "hrsh7th/cmp-omni",
+    "hrsh7th/cmp-path",
+    "saadparwaiz1/cmp_luasnip",
+    "micangl/cmp-vimtex",
+    "onsails/lspkind-nvim",
+  },
+}
+later(function()
   local cmp = require "cmp"
 
   --- Mappings for nvim-cmp
-  local function cmp_mappings()
-    local luasnip = require "luasnip"
-    local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
+  local luasnip = require "luasnip"
+  local cmp_select_opts = { behavior = cmp.SelectBehavior.Select }
 
-    local mapping = cmp.mapping {
-      ["<CR>"] = cmp.mapping.confirm { select = false },
-      ["<C-y>"] = cmp.mapping.confirm { select = true },
-      ["<C-e>"] = cmp.mapping.abort(),
-      ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-      ["<C-d>"] = cmp.mapping.scroll_docs(4),
-      ["<Up>"] = cmp.mapping.select_prev_item(cmp_select_opts),
-      ["<Down>"] = cmp.mapping.select_next_item(cmp_select_opts),
-      ["<C-p>"] = cmp.mapping(function()
-        if cmp.visible() then
-          cmp.select_prev_item(cmp_select_opts)
-        else
-          cmp.complete()
-        end
-      end),
-      ["<C-n>"] = cmp.mapping(function()
-        if cmp.visible() then
-          cmp.select_next_item(cmp_select_opts)
-        else
-          cmp.complete()
-        end
-      end),
-      ["<C-k>"] = cmp.mapping(function(fallback)
-        -- Backward
-        if luasnip.jumpable(-1) then
-          luasnip.jump(-1)
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
-      ["<C-j>"] = cmp.mapping(function(fallback)
-        -- Forward
-        if luasnip.jumpable(1) then
-          luasnip.jump(1)
-        else
-          fallback()
-        end
-      end, { "i", "s" }),
-    }
-
-    return mapping
-  end
+  local mapping = cmp.mapping {
+    ["<CR>"] = cmp.mapping.confirm { select = false },
+    ["<C-y>"] = cmp.mapping.confirm { select = true },
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-d>"] = cmp.mapping.scroll_docs(4),
+    ["<Up>"] = cmp.mapping.select_prev_item(cmp_select_opts),
+    ["<Down>"] = cmp.mapping.select_next_item(cmp_select_opts),
+    ["<C-p>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_prev_item(cmp_select_opts)
+      else
+        cmp.complete()
+      end
+    end),
+    ["<C-n>"] = cmp.mapping(function()
+      if cmp.visible() then
+        cmp.select_next_item(cmp_select_opts)
+      else
+        cmp.complete()
+      end
+    end),
+    ["<C-k>"] = cmp.mapping(function(fallback)
+      -- Backward
+      if luasnip.jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+    ["<C-j>"] = cmp.mapping(function(fallback)
+      -- Forward
+      if luasnip.jumpable(1) then
+        luasnip.jump(1)
+      else
+        fallback()
+      end
+    end, { "i", "s" }),
+  }
 
   local opts = {
-    mapping = cmp_mappings(),
+    mapping = mapping,
     snippet = {
       expand = function(args)
         require("luasnip").lsp_expand(args.body)
@@ -151,9 +181,7 @@ local function configure_cmp()
       { name = "luasnip" },
     },
   })
-end
-
-configure_cmp()
+end)
 
 vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
 vim.g.procession_ignore_dirs = {

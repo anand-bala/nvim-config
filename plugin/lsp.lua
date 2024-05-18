@@ -3,39 +3,48 @@ if vim.g.loaded_lsp_plugins then
 end
 vim.g.loaded_lsp_plugins = true
 
-local mason_opts = {
-  ensure_installed = {
-    "stylua",
-    "lua-language-server",
-    "shellcheck",
-    "shfmt",
-    "shellharden",
-  },
-}
+local add = MiniDeps.add
+local later = MiniDeps.later
 
-local function configure_lsp()
-  local _ = require "lspconfig"
-  -- try to load mason first
-  do
-    local mason = require "mason"
-    mason.setup(mason_opts)
-    local mr = require "mason-registry"
-    mr.refresh(function()
-      for _, tool in ipairs(mason_opts.ensure_installed) do
-        local p = mr.get_package(tool)
-        if not p:is_installed() then
-          p:install()
-        end
+add "williamboman/mason.nvim"
+add "williamboman/mason-lspconfig.nvim"
+later(function()
+  local mason_opts = {
+    ensure_installed = {
+      "stylua",
+      "lua-language-server",
+      "shellcheck",
+      "shfmt",
+      "shellharden",
+    },
+  }
+  local mason = require "mason"
+  mason.setup(mason_opts)
+  local mr = require "mason-registry"
+  mr.refresh(function()
+    for _, tool in ipairs(mason_opts.ensure_installed) do
+      local p = mr.get_package(tool)
+      if not p:is_installed() then
+        p:install()
       end
-    end)
-  end
+    end
+  end)
 
+  local setup = require("config.lsp.servers").setup_lsp_config
+  require("mason-lspconfig").setup_handlers { setup }
+end)
+
+add "folke/neodev.nvim"
+later(function()
   require("neodev").setup {
     experimental = { pathStrict = true },
     plugins = { "nvim-dap-ui" },
     types = true,
   }
+end)
 
+add "neovim/nvim-lspconfig"
+later(function()
   local opts = require "config.lsp.servers" or {}
 
   local servers = opts.servers
@@ -46,11 +55,7 @@ local function configure_lsp()
       setup(server)
     end
   end
-
-  require("mason-lspconfig").setup_handlers { setup }
-end
-
-configure_lsp()
+end)
 
 -- LSP default on_attach hooks
 require("config.lsp").on_attach_hook(

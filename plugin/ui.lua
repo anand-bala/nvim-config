@@ -1,19 +1,32 @@
 if vim.g.loaded_ui_plugins then
   return
 end
+local add = MiniDeps.add
+local now = MiniDeps.now
+local later = MiniDeps.later
 
-do
-  local notify = require "notify"
-  ---@diagnostic disable-next-line: missing-fields
-  notify.setup {
-    top_down = false,
-    max_width = 50,
-    render = "wrapped-compact",
-  }
-  vim.notify = notify
-end
+add "nvim-tree/nvim-web-devicons"
 
-do
+add "echasnovski/mini.notify"
+later(function()
+  require("mini.notify").setup()
+  vim.notify = require("mini.notify").make_notify()
+end)
+
+--add "rcarriga/nvim-notify"
+--now(function()
+--  local notify = require "notify"
+--  ---@diagnostic disable-next-line: missing-fields
+--  notify.setup {
+--    top_down = false,
+--    max_width = 50,
+--    render = "wrapped-compact",
+--  }
+--  vim.notify = notify
+--end)
+
+add "EdenEast/nightfox.nvim"
+now(function()
   local nightfox = require "nightfox"
   --- Colorscheme
   ---
@@ -39,13 +52,17 @@ do
       },
     },
   }
-end
+  vim.cmd "colorscheme dayfox"
+end)
 
 local autocmd = vim.api.nvim_create_autocmd
 
 autocmd({ "BufWinEnter" }, {
   once = true,
   callback = function()
+    add "lewis6991/gitsigns.nvim"
+    add "stevearc/dressing.nvim"
+    add "nvim-lualine/lualine.nvim"
     require("gitsigns").setup()
     require("dressing").setup()
     require("lualine").setup {

@@ -50,6 +50,9 @@ M.servers = {
         completion = {
           callSnippet = "Replace",
         },
+        window = {
+          progressBar = false,
+        },
       },
     },
   },
@@ -190,6 +193,7 @@ M.servers = {
 
 M.setup = {
   rust_analyzer = function(_, _)
+    MiniDeps.add "mrcjkb/rustaceanvim"
     return true
   end,
   texlab = function(_, opts)
@@ -200,6 +204,7 @@ M.setup = {
   end,
 
   ltex = function(_, opts)
+    MiniDeps.add "vigoux/ltex-ls.nvim"
     opts = vim.tbl_deep_extend("force", opts or {}, {
       use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
       window_border = "single", -- How the border should be rendered
