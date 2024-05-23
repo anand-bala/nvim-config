@@ -60,20 +60,20 @@ later(function()
   require("luasnip.loaders.from_lua").lazy_load()
 end)
 
-add {
-  source = "hrsh7th/nvim-cmp",
-  depends = {
-    "hrsh7th/cmp-buffer",
-    "hrsh7th/cmp-nvim-lsp",
-    "hrsh7th/cmp-nvim-lua",
-    "hrsh7th/cmp-omni",
-    "hrsh7th/cmp-path",
-    "saadparwaiz1/cmp_luasnip",
-    "micangl/cmp-vimtex",
-    "onsails/lspkind-nvim",
-  },
-}
 later(function()
+  add {
+    source = "hrsh7th/nvim-cmp",
+    depends = {
+      "hrsh7th/cmp-buffer",
+      "hrsh7th/cmp-nvim-lsp",
+      "hrsh7th/cmp-nvim-lua",
+      "hrsh7th/cmp-omni",
+      "hrsh7th/cmp-path",
+      "saadparwaiz1/cmp_luasnip",
+      "micangl/cmp-vimtex",
+      "onsails/lspkind-nvim",
+    },
+  }
   local cmp = require "cmp"
 
   --- Mappings for nvim-cmp
