@@ -88,6 +88,3 @@ end
 
 local command = vim.api.nvim_create_user_command
 command("LoadMdNotebook", md_notebook, { force = true })
-
-local add = MiniDeps.add
-add "preservim/vim-markdown"

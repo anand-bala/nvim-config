@@ -193,7 +193,6 @@ M.servers = {
 
 M.setup = {
   rust_analyzer = function(_, _)
-    MiniDeps.add "mrcjkb/rustaceanvim"
     return true
   end,
   texlab = function(_, opts)

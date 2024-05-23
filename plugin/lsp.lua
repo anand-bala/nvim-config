@@ -44,6 +44,7 @@ later(function()
 end)
 
 add "neovim/nvim-lspconfig"
+add "mrcjkb/rustaceanvim"
 later(function()
   local opts = require "config.lsp.servers" or {}
 
@@ -62,3 +63,6 @@ require("config.lsp").on_attach_hook(
   require("config.lsp").keymaps,
   { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
 )
+
+add "lervag/vimtex"
+add "preservim/vim-markdown"
