@@ -154,6 +154,7 @@ M.servers = {
         language = "en",
         diagnosticSeverity = "information",
         sentenceCacheSize = 2000,
+        checkFrequency = "save",
         additionalRules = {
           enablePickyRules = true,
           motherTongue = "en",
