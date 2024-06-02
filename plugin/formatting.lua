@@ -19,6 +19,10 @@ later(function()
     prepend_args = { "-i", "2" },
   }
 
+  conform.formatters.latexindent = {
+    prepend_args = { "-l", "-m" },
+  }
+
   local default_format_opts = {
     timeout_ms = 1000,
     async = false, -- not recommended to change
@@ -47,6 +51,8 @@ later(function()
       yaml = { "yamlfmt" },
       bash = { "shfmt", "shellharden" },
       cmake = { "gersemi" },
+      tex = { "latexindent" },
+      markdown = { "mdformat" },
     },
     format_on_save = function(bufnr)
       -- Disable with a global or buffer-local variable

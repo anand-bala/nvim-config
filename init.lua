@@ -43,6 +43,9 @@ vim.opt.spell = false
 -- Conceal text completely and substiture with custom character
 vim.opt.conceallevel = 2 -- Hide * markup for bold and italic
 
+vim.g.tex_conceal = "abdgm"
+vim.g.tex_flavor = "latex"
+
 -- Use smarter complete options
 -- vim.opt.completeopt to have a better completion experience
 vim.opt.completeopt = {

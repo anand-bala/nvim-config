@@ -11,7 +11,7 @@ add "echasnovski/mini.notify"
 later(function()
   require("mini.notify").setup {
     lsp_progress = {
-      enable = false,
+      -- enable = false,
     },
   }
   vim.notify = require("mini.notify").make_notify()

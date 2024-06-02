@@ -20,7 +20,7 @@ return {
   s({ trig = "lr(", name = "left( right)" }, { t "\\left( ", i(0), t " \\right)" }),
   s({ trig = "lr[", name = "left[ right]" }, { t "\\left[ ", i(0), t " \\right]" }),
   s({ trig = "lr|", name = "left| right|" }, { t "\\left| ", i(0), t " \\right|" }),
-  s({ trig = "lr{", name = "left{ right}" }, { t "\\left{ ", i(0), t " \\right}" }),
+  s({ trig = "lr{", name = "left{ right}" }, { t "\\left\\{ ", i(0), t " \\right\\}" }),
   s({ trig = "lra", name = "langle rangle" }, { t "\\langle ", i(0), t " \\rangle" }),
   -- Emphasis
   s({ trig = "emp", name = "emphasis" }, { t "\\emph{", i(0), t "}" }),

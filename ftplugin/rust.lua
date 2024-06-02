@@ -28,6 +28,10 @@ vim.g.rustaceanvim = {
     },
   },
 }
+MiniDeps.add "mrcjkb/rustaceanvim"
+MiniDeps.later(function()
+  vim.cmd [[:RustAnalyzer restart]]
+end)
 
 onattach(function(client, buffer)
   vim.lsp.inlay_hint.enable(false, { bufnr = buffer })

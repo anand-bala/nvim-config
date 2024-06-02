@@ -32,10 +32,17 @@ vim.g.molten_output_win_max_height = 20
 
 -- Load some opt packages deferred
 local function md_notebook()
-  local packadd = function(pkg)
-    vim.cmd("packadd " .. pkg)
-  end
-  packadd "image.nvim"
+  MiniDeps.add {
+    source = "benlubas/molten-nvim",
+    hooks = {
+      post_checkout = function()
+        vim.cmd ":UpdateRemotePlugins"
+      end,
+    },
+    depends = {
+      "3rd/image.nvim",
+    },
+  }
   require("image").setup {
     backend = "kitty",
     tmux_show_only_in_active_window = true, -- auto show/hide images in the correct Tmux window (needs visual-activity off)
@@ -46,8 +53,6 @@ local function md_notebook()
     window_overlap_clear_enabled = true,
     window_overlap_clear_ft_ignore = { "cmp_menu", "cmp_docs", "" },
   }
-
-  packadd "molten-nvim"
 
   -- Setup runner
   local runner = require "quarto.runner"

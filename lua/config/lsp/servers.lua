@@ -6,7 +6,7 @@ local lspconfig_util = require "lspconfig.util"
 ---@class PluginLspOpts
 local M = {
   --- LSP Server Settings
-  ---@type table<string,lsp.ClientConfig>
+  ---@type table<string,vim.lsp.ClientConfig>
   servers = {},
 
   --- Additional custom setup for LSP servers.
@@ -25,7 +25,7 @@ local M = {
   --- ["*"] = function(server, opts) end,
   --- ```
   ---
-  ---@type table<string, fun(server:string, opts:lsp.ClientConfig):boolean?>
+  ---@type table<string, fun(server:string, opts:vim.lsp.ClientConfig):boolean?>
   setup = {},
 
   --- add any global capabilities here
@@ -44,9 +44,18 @@ M.servers = {
   lua_ls = {
     settings = {
       Lua = {
-        workspace = {
-          checkThirdParty = false,
-        },
+        -- runtime = {
+        --   version = "LuaJIT",
+        --   path = vim.split(package.path, ";"),
+        -- },
+        -- workspace = {
+        --   -- Make the server aware of Neovim runtime files and plugins
+        --   library = { vim.env.VIMRUNTIME },
+        --   checkThirdParty = false,
+        -- },
+        -- telemetry = {
+        --   enable = false,
+        -- },
         completion = {
           callSnippet = "Replace",
         },
@@ -127,8 +136,8 @@ M.servers = {
     end,
     settings = {
       texlab = {
-        bibtexFormatter = "none",
-        latexFormatter = "latexindent",
+        bibtexFormatter = "texlab",
+        latexFormatter = "texlab",
         latexindent = {
           modifyLineBreaks = true,
         },
@@ -204,13 +213,13 @@ M.setup = {
   end,
 
   ltex = function(_, opts)
-    MiniDeps.add "vigoux/ltex-ls.nvim"
     opts = vim.tbl_deep_extend("force", opts or {}, {
       use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
       window_border = "single", -- How the border should be rendered
+      commands = {}, -- TODO: there is an error here
     })
-    -- require("ltex-ls").setup(opts)
-    -- return true
+    require("config.lsp.ltex").setup(opts)
+    return true
   end,
 }
 

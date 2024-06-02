@@ -1,7 +1,10 @@
 {
   "$schema": "https://raw.githubusercontent.com/sumneko/vscode-lua/master/setting/schema.json",
-  "Lua.diagnostics.globals": [
+  "workspace": {
+    "checkThirdParty": false
+  },
+  "diagnostics.globals": [
     "vim",
-        "MiniDeps"
+    "MiniDeps"
   ]
 }

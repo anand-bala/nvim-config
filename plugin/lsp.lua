@@ -34,17 +34,7 @@ later(function()
   require("mason-lspconfig").setup_handlers { setup }
 end)
 
-add "folke/neodev.nvim"
-later(function()
-  require("neodev").setup {
-    experimental = { pathStrict = true },
-    plugins = { "nvim-dap-ui" },
-    types = true,
-  }
-end)
-
 add "neovim/nvim-lspconfig"
-add "mrcjkb/rustaceanvim"
 later(function()
   local opts = require "config.lsp.servers" or {}
 

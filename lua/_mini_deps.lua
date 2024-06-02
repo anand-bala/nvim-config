@@ -24,18 +24,8 @@ add "nvim-lua/plenary.nvim"
 add "tpope/vim-obsession"
 --add("dhruvasagar/vim-prosession")
 add "direnv/direnv.vim"
-
--- add {
---   source = "benlubas/molten-nvim",
---   hooks = {
---     post_checkout = function()
---       vim.cmd ":UpdateRemotePlugins"
---     end,
---   },
---   depends = {
---     "3rd/image.nvim",
---   },
--- }
+add "stevearc/oil.nvim"
+require("oil").setup()
 
 --
 local later_plugins = {

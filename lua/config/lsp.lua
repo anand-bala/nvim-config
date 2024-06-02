@@ -3,7 +3,7 @@ local map = vim.keymap.set
 local M = {}
 
 --- Wrapper to add `on_attach` hooks for LSP
----@param on_attach fun(client:lsp.Client, buffer:integer)
+---@param on_attach fun(client:vim.lsp.Client, buffer:integer)
 ---@param opts? {desc?:string,once?:boolean,group?:integer|string}
 function M.on_attach_hook(on_attach, opts)
   opts = opts or {}
@@ -40,7 +40,7 @@ function M.update_capabilities(opts)
 end
 
 --- Mappings for built-in LSP client
---- @param _ lsp.Client
+--- @param _ vim.lsp.Client
 --- @param bufnr integer
 function M.keymaps(_, bufnr)
   ---@param lhs string
@@ -72,16 +72,24 @@ function M.keymaps(_, bufnr)
     }
   end)
   lspmap("[d", function()
-    vim.diagnostic.goto_prev { float = true }
+    vim.diagnostic.jump { float = true, count = -1 }
   end)
   lspmap("]d", function()
-    vim.diagnostic.goto_next { float = true }
+    vim.diagnostic.jump { float = true, count = 1 }
   end)
   lspmap("[D", function()
-    vim.diagnostic.goto_prev { float = true, severity = vim.diagnostic.severity.ERROR }
+    vim.diagnostic.jump {
+      float = true,
+      count = -1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
   end)
   lspmap("]D", function()
-    vim.diagnostic.goto_next { float = true, severity = vim.diagnostic.severity.ERROR }
+    vim.diagnostic.jump {
+      float = true,
+      count = 1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
   end)
 end
 
