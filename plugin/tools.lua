@@ -8,6 +8,11 @@ local later = MiniDeps.later
 
 add "andymass/vim-matchup"
 
+add "echasnovski/mini.align"
+later(function()
+  require("mini.align").setup()
+end)
+
 add {
   source = "nvim-treesitter/nvim-treesitter",
   hooks = {

@@ -165,3 +165,16 @@ autocmd("TermOpen", {
     vim.opt_local.statuscolumn = ""
   end,
 })
+
+---@class NvimUserCommmand
+---@field name string
+---@field args string?
+---@field fargs string[]?
+---@field nargs string
+---@field bang boolean
+---@field line1 number
+---@field line2 number
+---@field range number
+---@field count number
+---@field reg string?
+---@field mods string?

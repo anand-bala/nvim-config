@@ -60,24 +60,12 @@ M.servers = {
           callSnippet = "Replace",
         },
         window = {
-          progressBar = false,
+          -- progressBar = false,
         },
       },
     },
   },
-  -- pyright = {
-  --   settings = {
-  --     pyright = {
-  --       disableOrganizeImports = true,
-  --     },
-  --     python = {
-  --       analysis = {
-  --         diagnosticMode = "workspace",
-  --       },
-  --     },
-  --   },
-  -- },
-  basedpyright = {
+  pyright = {
     settings = {
       pyright = {
         disableOrganizeImports = true,
@@ -89,6 +77,18 @@ M.servers = {
       },
     },
   },
+  -- basedpyright = {
+  --   settings = {
+  --     pyright = {
+  --       disableOrganizeImports = true,
+  --     },
+  --     python = {
+  --       analysis = {
+  --         diagnosticMode = "workspace",
+  --       },
+  --     },
+  --   },
+  -- },
   -- pylyzer = {},
   -- pylsp = {
   --   settings = {
@@ -136,8 +136,8 @@ M.servers = {
     end,
     settings = {
       texlab = {
-        bibtexFormatter = "texlab",
-        latexFormatter = "texlab",
+        bibtexFormatter = "none",
+        latexFormatter = "none",
         latexindent = {
           modifyLineBreaks = true,
         },
@@ -171,31 +171,31 @@ M.servers = {
         disabledRules = {
           en = { "EN_QUOTES" },
         },
-        dictionary = (function()
-          -- For dictionary, search for files in the runtime to have
-          -- and include them as externals the format for them is
-          -- dict/{LANG}.txt
-          --
-          -- Also add dict/default.txt to all of them
-          local files = {}
-          for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
-            local lang = vim.fn.fnamemodify(file, ":t:r")
-            local fullpath = vim.fs.normalize(file)
-            if lang ~= nil then
-              files[lang] = { ":" .. fullpath }
-            end
-          end
+        --dictionary = (function()
+        --  -- For dictionary, search for files in the runtime to have
+        --  -- and include them as externals the format for them is
+        --  -- dict/{LANG}.txt
+        --  --
+        --  -- Also add dict/default.txt to all of them
+        --  local files = {}
+        --  for _, file in ipairs(vim.api.nvim_get_runtime_file("dict/*", true)) do
+        --    local lang = vim.fn.fnamemodify(file, ":t:r")
+        --    local fullpath = vim.fs.normalize(file)
+        --    if lang ~= nil then
+        --      files[lang] = { ":" .. fullpath }
+        --    end
+        --  end
 
-          if files.default then
-            for lang, _ in pairs(files) do
-              if lang ~= "default" then
-                vim.list_extend(files[lang], files.default)
-              end
-            end
-            files.default = nil
-          end
-          return files
-        end)(),
+        --  if files.default then
+        --    for lang, _ in pairs(files) do
+        --      if lang ~= "default" then
+        --        vim.list_extend(files[lang], files.default)
+        --      end
+        --    end
+        --    files.default = nil
+        --  end
+        --  return files
+        --end)(),
       },
     },
   },
@@ -212,15 +212,15 @@ M.setup = {
     opts.settings.texlab.forwardSearch = texlab_helpers.forward_search()
   end,
 
-  ltex = function(_, opts)
-    opts = vim.tbl_deep_extend("force", opts or {}, {
-      use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
-      window_border = "single", -- How the border should be rendered
-      commands = {}, -- TODO: there is an error here
-    })
-    require("config.lsp.ltex").setup(opts)
-    return true
-  end,
+  -- ltex = function(_, opts)
+  --   opts = vim.tbl_deep_extend("force", opts or {}, {
+  --     use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
+  --     window_border = "single", -- How the border should be rendered
+  --     commands = {}, -- TODO: there is an error here
+  --   })
+  --   require("config.lsp.ltex").setup(opts)
+  --   return true
+  -- end,
 }
 
 M.setup_lsp_config = function(server)

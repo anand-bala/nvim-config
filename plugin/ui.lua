@@ -7,14 +7,26 @@ local later = MiniDeps.later
 
 add "nvim-tree/nvim-web-devicons"
 
+add "j-hui/fidget.nvim"
+later(function()
+  require("fidget").setup {
+    -- notification = {
+    --   override_vim_notify = true,
+    -- },
+  }
+end)
+
 add "echasnovski/mini.notify"
 later(function()
   require("mini.notify").setup {
     lsp_progress = {
-      -- enable = false,
+      enable = false,
     },
   }
   vim.notify = require("mini.notify").make_notify()
+  vim.api.nvim_create_user_command("Notifications", function()
+    require("mini.notify").show_history()
+  end, {})
 end)
 
 --add "rcarriga/nvim-notify"
