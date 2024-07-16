@@ -41,6 +41,11 @@ local M = {
 
 M.servers = {
   jsonls = {},
+  yamlls = {
+    settings = {
+      redhat = { telemetry = { enabled = false } },
+    },
+  },
   lua_ls = {
     settings = {
       Lua = {
