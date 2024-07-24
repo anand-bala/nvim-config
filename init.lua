@@ -6,7 +6,9 @@ vim.opt.secure = true
 vim.opt.modelines = 0 -- Disable Modelines
 vim.opt.number = true -- Show line numbers
 vim.opt.visualbell = true -- Blink cursor on error instead of beeping (grr)
+vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.undofile = true -- Save undo history
+vim.opt.clipboard = "unnamedplus" -- Sync OS and Neovim clipboard
 
 -- Fixes for fish shell
 if string.match(vim.o.shell, "fish$") then
@@ -30,11 +32,15 @@ vim.opt.tabstop = 2 -- Size of a hard tab (which will be expanded)
 vim.opt.softtabstop = 2 -- Size of a soft tab
 vim.opt.shiftround = true -- Round indent
 vim.opt.shiftwidth = 2 -- Size of indent
+vim.opt.breakindent = true -- Indent visually wrapped lines
 
 -- Sane searching
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.showmatch = true
+
+-- Preview substitutions live
+vim.opt.inccommand = "split"
 
 -- Default spelling settings
 vim.opt.spelllang = "en_us"
@@ -82,7 +88,8 @@ vim.opt.splitright = true
 
 -- Sane timeout limits
 vim.opt.timeout = true
-vim.opt.timeoutlen = 300
+vim.opt.timeoutlen = 300 -- decreate mapped sequence wait time
+vim.opt.updatetime = 250 -- decrease update time
 
 -- Show non-printable characters.
 vim.opt.list = true
