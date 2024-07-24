@@ -65,32 +65,6 @@ function M.keymaps(_, bufnr)
   lspmap("<C-s>", require("telescope.builtin").lsp_document_symbols)
   lspmap("<leader><Space>", vim.lsp.buf.code_action, { "n", "v" })
   lspmap("<leader>rn", vim.lsp.buf.rename, { "n" })
-  lspmap("<leader>ld", function()
-    vim.diagnostic.open_float {
-      bufnr = bufnr,
-      scope = "line",
-    }
-  end)
-  lspmap("[d", function()
-    vim.diagnostic.jump { float = true, count = -1 }
-  end)
-  lspmap("]d", function()
-    vim.diagnostic.jump { float = true, count = 1 }
-  end)
-  lspmap("[D", function()
-    vim.diagnostic.jump {
-      float = true,
-      count = -1,
-      severity = vim.diagnostic.severity.ERROR,
-    }
-  end)
-  lspmap("]D", function()
-    vim.diagnostic.jump {
-      float = true,
-      count = 1,
-      severity = vim.diagnostic.severity.ERROR,
-    }
-  end)
 end
 
 return M

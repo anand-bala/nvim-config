@@ -149,6 +149,28 @@ vim.keymap.set(
   { remap = false, desc = "Move to previous buffer in list" }
 )
 
+vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float)
+vim.keymap.set("n", "[d", function()
+  vim.diagnostic.jump { float = true, count = -1 }
+end)
+vim.keymap.set("n", "]d", function()
+  vim.diagnostic.jump { float = true, count = 1 }
+end)
+vim.keymap.set("n", "[D", function()
+  vim.diagnostic.jump {
+    float = true,
+    count = -1,
+    severity = vim.diagnostic.severity.ERROR,
+  }
+end)
+vim.keymap.set("n", "]D", function()
+  vim.diagnostic.jump {
+    float = true,
+    count = 1,
+    severity = vim.diagnostic.severity.ERROR,
+  }
+end)
+
 -- Disable some providers I generally don't use
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
