@@ -47,11 +47,6 @@ later(function()
   }
 end)
 
-add "echasnovski/mini.ai"
-later(function()
-  require("mini.ai").setup()
-end)
-
 add {
   source = "L3MON4D3/LuaSnip",
   depends = { "rafamadriz/friendly-snippets" },
