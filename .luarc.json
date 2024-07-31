@@ -4,7 +4,6 @@
     "checkThirdParty": false
   },
   "diagnostics.globals": [
-    "vim",
-    "MiniDeps"
+    "vim"
   ]
 }

@@ -229,7 +229,8 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
 -- Load/install plugins
-require "_mini_deps"
+-- require "_mini_deps"
+require "_paq"
 -- vim.cmd "colorscheme dayfox"
 
 -- Register some custom behavior via autocmds

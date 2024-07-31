@@ -1,6 +1,3 @@
-MiniDeps.add "neovim/nvim-lspconfig"
-MiniDeps.add "vigoux/ltex-ls.nvim"
-
 local M = {}
 local utils = require "ltex-ls.utils"
 local handlers = require "ltex-ls.handlers"

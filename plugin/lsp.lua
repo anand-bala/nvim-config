@@ -1,14 +1,4 @@
-if vim.g.loaded_lsp_plugins then
-  return
-end
-vim.g.loaded_lsp_plugins = true
-
-local add = MiniDeps.add
-local later = MiniDeps.later
-
-add "williamboman/mason.nvim"
-add "williamboman/mason-lspconfig.nvim"
-later(function()
+vim.schedule(function()
   local mason_opts = {
     ensure_installed = {
       "stylua",
@@ -34,8 +24,7 @@ later(function()
   require("mason-lspconfig").setup_handlers { setup }
 end)
 
-add "neovim/nvim-lspconfig"
-later(function()
+vim.schedule(function()
   local opts = require "config.lsp.servers" or {}
 
   local servers = opts.servers
@@ -53,6 +42,3 @@ require("config.lsp").on_attach_hook(
   require("config.lsp").keymaps,
   { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
 )
-
-add "lervag/vimtex"
-add "preservim/vim-markdown"
