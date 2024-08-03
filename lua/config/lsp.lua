@@ -26,11 +26,13 @@ end
 
 function M.update_capabilities(opts)
   local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  local has_compl, compl = pcall(require, "lsp_compl")
   local capabilities = vim.tbl_deep_extend(
     "force",
     {},
     vim.lsp.protocol.make_client_capabilities(),
     has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+    has_compl and compl.capabilities() or {},
     opts.capabilities or {}
   )
   assert(capabilities ~= nil)
