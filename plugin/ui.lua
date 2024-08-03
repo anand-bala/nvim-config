@@ -38,7 +38,7 @@ end)
 
 local autocmd = vim.api.nvim_create_autocmd
 
-autocmd({ "BufWinEnter" }, {
+autocmd({ "VimEnter" }, {
   once = true,
   callback = function()
     vim.cmd [[packadd gitsigns.nvim ]]

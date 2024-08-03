@@ -28,7 +28,7 @@ require("nvim-treesitter.configs").setup {
   matchup = { enable = true },
 }
 
-vim.api.nvim_create_autocmd({ "BufWinEnter" }, {
+vim.api.nvim_create_autocmd({ "VimEnter" }, {
   once = true,
   callback = function()
     local luasnip = require "luasnip"
