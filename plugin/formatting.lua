@@ -37,12 +37,15 @@ local default_conform_opts = {
 vim.g.enable_autoformat = vim.g.enable_autoformat or true
 
 conform.setup {
+  default_format_opts = {
+    lsp_timeout = "fallback",
+  },
   formatters_by_ft = {
     lua = { "stylua" },
     -- Conform will run multiple formatters sequentially
     python = { "isort", "black" },
     -- Use a sub-list to run only the first available formatter
-    javascript = { { "prettierd", "prettier" } },
+    javascript = { "prettierd", "prettier", stop_after_first = true },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
     cmake = { "gersemi" },
