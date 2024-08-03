@@ -63,6 +63,7 @@ paq {
   { "vigoux/ltex-ls.nvim", opt = true },
   { "lervag/vimtex" },
   { "preservim/vim-markdown" },
+  { "folke/lazydev.nvim", opt = true },
 
   -- Helpers
   "williamboman/mason.nvim",
