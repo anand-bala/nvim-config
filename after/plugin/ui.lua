@@ -41,10 +41,6 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd({ "VimEnter" }, {
   once = true,
   callback = function()
-    vim.cmd [[packadd gitsigns.nvim ]]
-    vim.cmd [[packadd dressing.nvim ]]
-    vim.cmd [[packadd lualine.nvim ]]
-
     require("gitsigns").setup()
     require("dressing").setup()
     require("lualine").setup {
@@ -78,12 +74,6 @@ autocmd({ "VimEnter" }, {
         lualine_y = {},
         lualine_z = { "tabs" },
       },
-    }
-
-    require("fidget").setup {
-      -- notification = {
-      --   override_vim_notify = true,
-      -- },
     }
   end,
   pattern = "*",

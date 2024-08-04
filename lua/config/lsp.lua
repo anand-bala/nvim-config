@@ -56,7 +56,6 @@ function M.keymaps(_, bufnr)
   local telescope = require "telescope.builtin"
 
   lspmap("K", vim.lsp.buf.hover)
-  lspmap("<C-k>", vim.lsp.buf.signature_help)
   lspmap("<C-]>", function()
     telescope.lsp_references {
       show_line = false,

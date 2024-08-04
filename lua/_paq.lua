@@ -31,12 +31,11 @@ paq {
   { "nvim-telescope/telescope.nvim", branch = "0.1.x", opt = true },
 
   -- UI stuff
-  "j-hui/fidget.nvim",
   "echasnovski/mini.notify",
   "EdenEast/nightfox.nvim",
-  { "lewis6991/gitsigns.nvim", opt = true },
-  { "stevearc/dressing.nvim", opt = true },
-  { "nvim-lualine/lualine.nvim", opt = true },
+  { "lewis6991/gitsigns.nvim" },
+  { "stevearc/dressing.nvim" },
+  { "nvim-lualine/lualine.nvim" },
 
   -- Coding tools
   "neovim/nvim-lspconfig",
@@ -45,18 +44,7 @@ paq {
 
   "L3MON4D3/LuaSnip",
   "rafamadriz/friendly-snippets",
-
   "mfussenegger/nvim-lsp-compl",
-
-  -- { "hrsh7th/nvim-cmp" },
-  -- "hrsh7th/cmp-buffer",
-  -- "hrsh7th/cmp-nvim-lsp",
-  -- "hrsh7th/cmp-nvim-lua",
-  -- "hrsh7th/cmp-omni",
-  -- "hrsh7th/cmp-path",
-  -- "saadparwaiz1/cmp_luasnip",
-  -- "micangl/cmp-vimtex",
-  -- "onsails/lspkind-nvim",
 
   -- Language specific stuff
   { "mrcjkb/rustaceanvim" },

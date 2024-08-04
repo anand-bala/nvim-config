@@ -42,31 +42,3 @@ require("config.lsp").on_attach_hook(
   require("config.lsp").keymaps,
   { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
 )
-
-local has_compl, compl = pcall(require, "lsp_compl")
-if has_compl then
-  local luasnip = require "luasnip"
-  compl.expand_snippet = luasnip.lsp_expand
-  require("config.lsp").on_attach_hook(compl.attach)
-  vim.keymap.set("i", "<CR>", function()
-    return compl.accept_pum() and "<c-y>" or "<CR>"
-  end, { expr = true })
-  vim.keymap.set("i", "<C-p>", function()
-    return compl.accept_pum() and "<C-p>" or compl.trigger_completion()
-  end)
-  vim.keymap.set("i", "<C-n>", function()
-    return compl.accept_pum() and "<C-n>" or compl.trigger_completion()
-  end)
-  vim.keymap.set({ "i", "s" }, "<C-j>", function()
-    -- Backward
-    if luasnip.jumpable(-1) then
-      luasnip.jump(-1)
-    end
-  end)
-  vim.keymap.set({ "i", "s" }, "<C-k>", function()
-    -- Forward
-    if luasnip.jumpable(1) then
-      luasnip.jump(1)
-    end
-  end)
-end

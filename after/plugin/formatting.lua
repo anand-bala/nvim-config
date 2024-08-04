@@ -1,8 +1,3 @@
-if vim.g.loaded_formatting_plugins then
-  return
-end
-vim.g.loaded_formatting_plugins = true
-
 local conform = require "conform"
 conform.formatters.yamlfmt = {
   prepend_args = {
