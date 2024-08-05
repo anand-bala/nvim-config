@@ -6,7 +6,7 @@ vim.opt.secure = true
 vim.opt.modelines = 0 -- Disable Modelines
 vim.opt.number = true -- Show line numbers
 vim.opt.visualbell = true -- Blink cursor on error instead of beeping (grr)
-vim.opt.cursorline = true -- Show which line your cursor is on
+-- vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.undofile = true -- Save undo history
 vim.opt.clipboard = "unnamedplus" -- Sync OS and Neovim clipboard
 
