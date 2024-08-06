@@ -119,7 +119,7 @@ M.servers = {
   --     formattingProvider = false,
   --   },
   -- },
-  ruff_lsp = {
+  ruff = {
     capabilities = {
       hoverProvider = false,
     },
