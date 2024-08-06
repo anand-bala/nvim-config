@@ -35,30 +35,32 @@ luasnip.filetype_extend("quarto", { "markdown", "latex", "tex" })
 require("luasnip.loaders.from_vscode").lazy_load()
 require("luasnip.loaders.from_lua").lazy_load()
 
-local compl = require "lsp_compl"
--- compl.expand_snippet = luasnip.lsp_expand
-require("config.lsp").on_attach_hook(compl.attach)
-vim.keymap.set("i", "<CR>", function()
-  return compl.accept_pum() and "<c-y>" or "<CR>"
-end, { expr = true })
-vim.keymap.set("i", "<C-p>", function()
-  compl.trigger_completion()
-end)
-vim.keymap.set("i", "<C-n>", function()
-  compl.trigger_completion()
-end)
-vim.keymap.set({ "i", "s" }, "<C-j>", function()
-  -- Backward
-  if luasnip.jumpable(-1) then
-    luasnip.jump(-1)
-  end
-end)
-vim.keymap.set({ "i", "s" }, "<C-k>", function()
-  -- Forward
-  if luasnip.jumpable(1) then
-    luasnip.jump(1)
-  end
-end)
+local has_compl, compl = pcall(require, "lsp_compl")
+if has_compl then
+  -- compl.expand_snippet = luasnip.lsp_expand
+  require("config.lsp").on_attach_hook(compl.attach)
+  vim.keymap.set("i", "<CR>", function()
+    return compl.accept_pum() and "<c-y>" or "<CR>"
+  end, { expr = true })
+  vim.keymap.set("i", "<C-p>", function()
+    compl.trigger_completion()
+  end)
+  vim.keymap.set("i", "<C-n>", function()
+    compl.trigger_completion()
+  end)
+  vim.keymap.set({ "i", "s" }, "<C-j>", function()
+    -- Backward
+    if luasnip.jumpable(-1) then
+      luasnip.jump(-1)
+    end
+  end)
+  vim.keymap.set({ "i", "s" }, "<C-k>", function()
+    -- Forward
+    if luasnip.jumpable(1) then
+      luasnip.jump(1)
+    end
+  end)
+end
 
 vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
 vim.g.procession_ignore_dirs = {
