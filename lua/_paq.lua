@@ -31,7 +31,8 @@ paq {
   { "nvim-telescope/telescope.nvim", branch = "0.1.x", opt = true },
 
   -- UI stuff
-  "echasnovski/mini.notify",
+  -- "echasnovski/mini.notify",
+  "rcarriga/nvim-notify",
   "EdenEast/nightfox.nvim",
   { "lewis6991/gitsigns.nvim" },
   { "stevearc/dressing.nvim" },
