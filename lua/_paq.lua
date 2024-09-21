@@ -77,9 +77,18 @@ paq {
   "nvim-tree/nvim-web-devicons",
 }
 
-local pkgs_count = #require("paq").query "to_install"
+---@type Package[]
+local to_install = require("paq").query "to_install"
+local pkgs_count = #to_install
 if pkgs_count >= 1 then
   vim.notify(string.format("There are %d to install", pkgs_count))
   paq.install()
   vim.cmd [[helptags ALL]]
+
+  -- Disable plugins and ask user to restart
+  vim.opt.loadplugins = false
+  vim.notify(
+    "New plugins installed, you may want to restart your session after paq completes installing things",
+    vim.log.levels.WARN
+  )
 end

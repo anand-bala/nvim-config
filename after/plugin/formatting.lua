@@ -1,3 +1,4 @@
+vim.cmd [[packadd! conform.nvim]]
 local conform = require "conform"
 conform.formatters.yamlfmt = {
   prepend_args = {
