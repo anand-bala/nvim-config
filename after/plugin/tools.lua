@@ -14,7 +14,6 @@ require("nvim-treesitter.configs").setup {
     "regex",
     "rust",
     "vim",
-    "zig",
   },
   highlight = { enable = true, disable = { "latex" } },
   indent = { enable = true },

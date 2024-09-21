@@ -45,4 +45,74 @@ return {
       "\\end{align$1}",
     }, "\n")
   ),
+  parse(
+    { trig = "preamble", name = "Anand's preamble" },
+    [[
+\documentclass{article}
+
+\usepackage[utf8]{inputenc}
+
+% numbers option provides compact numerical references in the text. 
+% \usepackage[numbers]{natbib}
+
+\usepackage{microtype}
+% Nice images, figures
+\usepackage{graphicx}
+\usepackage{epstopdf}
+\graphicspath{{figures/}}
+\DeclareGraphicsExtensions{.eps,.pdf,.jpeg,.png}
+
+% Nice tables and floats
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{booktabs}
+\usepackage[caption=false]{subfig}
+% \usepackage{floatflt} % Put figures aside a text
+\usepackage{array}
+\usepackage{multirow}
+\newcolumntype{L}{>{$}l<{$}} % math-mode version of "l" column type
+  \newcolumntype{R}{>{$}r<{$}} % math-mode version of "r" column type
+\newcolumntype{C}{>{$}c<{$}} % math-mode version of "r" column type
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+% Nice lists
+\let\labelindent\relax
+\usepackage[inline]{enumitem}
+% Colors
+\usepackage{xcolor}
+
+% Algorithms
+\usepackage[ruled, lined, linesnumbered, commentsnumbered, longend]{algorithm2e}
+
+% Notational helpers
+\usepackage{notation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% For the draft
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\usepackage{ifdraft}
+\usepackage{comment}
+\usepackage[obeyFinal]{todonotes}
+
+\newenvironment{todocomment}[1][]{% start
+  \par\textcolor{red}{\bfseries To-Do\ifblank{#1}{}{ (#1)}:} \color{red}\ignorespaces%
+}{% end
+  \par
+}
+
+\ifoptionfinal{%
+  \excludecomment{todocomment}
+}{%
+  \usepackage[columnwise,switch]{lineno}
+  \linenumbers
+
+  \newcommand\todotext[1]{\textcolor{red}{To-Do: #1}}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Main document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+    ]]
+  ),
 }

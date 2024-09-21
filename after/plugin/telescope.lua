@@ -66,9 +66,6 @@ vim.schedule(function()
       { force = true }
     )
   end
-  if pcall(telescope.load_extension, "zotero") then
-    vim.api.nvim_create_user_command("Zotero", "Telescope zotero", { force = true })
-  end
 
   command("Helptags", "Telescope help_tags", { force = true })
   command("Buffers", "Telescope buffers", { force = true })
