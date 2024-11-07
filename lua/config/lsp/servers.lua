@@ -156,7 +156,13 @@ M.servers = {
       },
     },
   },
-  taplo = {},
+  taplo = {
+    filetypes = { "toml" },
+    -- IMPORTANT: this is required for taplo LSP to work in non-git repositories
+    ---@diagnostic disable-next-line: assign-type-mismatch
+    root_dir = require("lspconfig.util").root_pattern("*.toml", ".git"),
+    single_file_support = true,
+  },
   esbonio = {
     init_options = {
       sphinx = {

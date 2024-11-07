@@ -28,6 +28,7 @@ paq {
   "stevearc/oil.nvim",
   "andymass/vim-matchup",
   -- "echasnovski/mini.align",
+  "echasnovski/mini.ai",
   { "nvim-telescope/telescope.nvim", branch = "0.1.x", opt = true },
 
   -- UI stuff
@@ -64,6 +65,7 @@ paq {
   { "lervag/vimtex" },
   { "preservim/vim-markdown" },
   { "folke/lazydev.nvim", opt = true },
+  "lark-parser/vim-lark-syntax",
 
   -- Helpers
   "williamboman/mason.nvim",
