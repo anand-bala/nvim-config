@@ -95,12 +95,18 @@ vim.api.nvim_create_user_command("Format", function(args)
     vim.tbl_deep_extend("keep", vim.g.formatting_opts or {}, default_conform_opts, {
       range = range,
     })
+  if vim.bo.filetype == "matlab" then
+    opts.timeout_ms = 5000
+  end
   require("conform").format(opts)
 end, { range = true })
 
 vim.keymap.set("n", "<leader>f", function()
   local opts =
     vim.tbl_deep_extend("keep", vim.g.formatting_opts or {}, default_conform_opts)
+  if vim.bo.filetype == "matlab" then
+    opts.timeout_ms = 5000
+  end
   require("conform").format(opts)
 end, {
   desc = "Format the document",
