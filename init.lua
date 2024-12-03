@@ -209,19 +209,19 @@ end, {
 })
 
 -- Populate quickfix list when diagnostics change
-vim.api.nvim_create_autocmd("DiagnosticChanged", {
-  callback = function()
-    vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
-  end,
-})
+-- vim.api.nvim_create_autocmd("DiagnosticChanged", {
+--   callback = function()
+--     vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
+--   end,
+-- })
 
 -- LSP debug
 -- vim.lsp.set_log_level "DEBUG"
-vim.api.nvim_create_autocmd("DiagnosticChanged", {
-  callback = function()
-    vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
-  end,
-})
+-- vim.api.nvim_create_autocmd("DiagnosticChanged", {
+--   callback = function()
+--     vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
+--   end,
+-- })
 
 -- Disable some providers I generally don't use
 vim.g.loaded_ruby_provider = 0
