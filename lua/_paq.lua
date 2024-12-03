@@ -36,9 +36,9 @@ paq {
   -- "echasnovski/mini.notify",
   "rcarriga/nvim-notify",
   "EdenEast/nightfox.nvim",
-  { "lewis6991/gitsigns.nvim" },
-  { "stevearc/dressing.nvim" },
-  { "nvim-lualine/lualine.nvim" },
+  "lewis6991/gitsigns.nvim",
+  "stevearc/dressing.nvim",
+  "nvim-lualine/lualine.nvim",
 
   -- Coding tools
   "neovim/nvim-lspconfig",
@@ -50,7 +50,7 @@ paq {
 
   -- "mfussenegger/nvim-lsp-compl",
 
-  { "hrsh7th/nvim-cmp" },
+  "hrsh7th/nvim-cmp",
   "hrsh7th/cmp-buffer",
   "hrsh7th/cmp-nvim-lsp",
   "hrsh7th/cmp-nvim-lua",
@@ -61,13 +61,13 @@ paq {
   "onsails/lspkind-nvim",
 
   -- Language specific stuff
-  { "mrcjkb/rustaceanvim" },
-  { "vigoux/ltex-ls.nvim", opt = true },
-  { "lervag/vimtex" },
-  { "preservim/vim-markdown" },
-  { "folke/lazydev.nvim", opt = true },
+  "mrcjkb/rustaceanvim",
+  "lervag/vimtex",
+  "preservim/vim-markdown",
   "lark-parser/vim-lark-syntax",
   "avm99963/vim-jjdescription",
+  { "vigoux/ltex-ls.nvim", opt = true },
+  { "folke/lazydev.nvim", opt = true },
 
   -- Helpers
   "williamboman/mason.nvim",
