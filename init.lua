@@ -233,8 +233,14 @@ vim.g.loaded_node_provider = 0
 require "_paq"
 -- vim.cmd "colorscheme dayfox"
 
--- Register some custom behavior via autocmds
+vim.schedule(require("config.lsp").setup)
+-- LSP default on_attach hooks
+require("config.lsp").on_attach_hook(
+  require("config.lsp").keymaps,
+  { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
+)
 
+-- Register some custom behavior via autocmds
 local autocmd = vim.api.nvim_create_autocmd
 
 -- Terminal
@@ -245,6 +251,21 @@ autocmd("TermOpen", {
     vim.opt_local.relativenumber = false
     vim.opt_local.signcolumn = "no"
     vim.opt_local.statuscolumn = ""
+  end,
+})
+
+-- Filetype specific things
+autocmd("FileType", {
+  pattern = { "tex", "latex" },
+  callback = function()
+    require("_utils").mason_install { "ltex-ls", "texlab" }
+  end,
+})
+
+autocmd("FileType", {
+  pattern = { "toml" },
+  callback = function()
+    require("_utils").mason_install { "taplo" }
   end,
 })
 

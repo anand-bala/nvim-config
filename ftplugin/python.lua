@@ -6,3 +6,8 @@ vim.opt_local.textwidth = 127
 if vim.fn.exists ":VTerm" then
   vim.cmd [[command! -buffer -nargs=0 Repl VTerm ipython]]
 end
+
+vim.schedule(function()
+  -- Install pyright when we first open
+  require("_utils").mason_install "pyright"
+end)

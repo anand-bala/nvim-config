@@ -68,4 +68,23 @@ function M.keymaps(_, bufnr)
   lspmap("<leader>rn", vim.lsp.buf.rename, { "n" })
 end
 
+function M.setup()
+  local mason_opts = {
+    ensure_installed = {},
+  }
+  local mason = require "mason"
+  mason.setup(mason_opts)
+
+  local setup = require("config.lsp.servers").setup_lsp_config
+  local opts = require "config.lsp.servers" or {}
+  local servers = opts.servers
+
+  require("mason-lspconfig").setup_handlers { setup }
+  for server, server_opts in pairs(servers) do
+    if server_opts then
+      setup(server)
+    end
+  end
+end
+
 return M

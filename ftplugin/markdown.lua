@@ -26,3 +26,7 @@ vim.g.vim_markdown_toc_autofit = 1
 vim.g.vim_markdown_toml_frontmatter = 1
 
 vim.g.markdown_fenced_languages = { "html", "python", "bash=sh", "R=r" }
+
+vim.schedule(function()
+  require("_utils").mason_install { "marksman" }
+end)
