@@ -1,4 +1,4 @@
-local onattach = require("config.lsp").on_attach_hook
+local onattach = require("_utils").on_attach_hook
 
 vim.opt.textwidth = 88
 
@@ -29,7 +29,7 @@ vim.g.rustaceanvim = {
   },
 }
 
-onattach(function(client, buffer)
+onattach(function(_, buffer)
   vim.lsp.inlay_hint.enable(false, { bufnr = buffer })
 end, {
   desc = "disable LSP inlay hints for Rust. Use rust-tools.",

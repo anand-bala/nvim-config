@@ -238,9 +238,27 @@ M.setup = {
   -- end,
 }
 
+function M.update_capabilities()
+  local opts = M
+  local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
+  local has_compl, compl = pcall(require, "lsp_compl")
+  local capabilities = vim.tbl_deep_extend(
+    "force",
+    {},
+    vim.lsp.protocol.make_client_capabilities(),
+    has_cmp and cmp_nvim_lsp.default_capabilities() or {},
+    has_compl and compl.capabilities() or {},
+    opts.capabilities or {}
+  )
+  assert(capabilities ~= nil)
+  -- https://github.com/neovim/neovim/issues/23291
+  capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
+  return capabilities
+end
+
 M.setup_lsp_config = function(server)
   local server_opts = M.servers[server] or {}
-  local capabilities = require("config.lsp").update_capabilities(M)
+  local capabilities = M.update_capabilities()
 
   server_opts["capabilities"] =
     vim.tbl_deep_extend("force", capabilities, server_opts.capabilities or {})
@@ -254,6 +272,14 @@ M.setup_lsp_config = function(server)
     end
   end
   require("lspconfig")[server].setup(server_opts)
+end
+
+M.setup_configured = function()
+  for server, server_opts in pairs(M.servers) do
+    if server_opts then
+      M.setup_lsp_config(server)
+    end
+  end
 end
 
 return M

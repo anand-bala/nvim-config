@@ -151,6 +151,12 @@ vim.keymap.set(
 
 --- Diagnostics
 vim.lsp.inlay_hint.enable(true)
+local diagnostic_icons = {
+  [vim.diagnostic.severity.ERROR] = " ",
+  [vim.diagnostic.severity.WARN] = " ",
+  [vim.diagnostic.severity.HINT] = " ",
+  [vim.diagnostic.severity.INFO] = " ",
+}
 vim.diagnostic.config {
   underline = true,
   update_in_insert = false,
@@ -159,12 +165,11 @@ vim.diagnostic.config {
     spacing = 4,
     source = true,
     prefix = function(diagnostic)
-      local icons = require("config.icons").diagnostics
-      return icons[diagnostic.severity]
+      return diagnostic_icons[diagnostic.severity]
     end,
   },
   signs = {
-    text = require("config.icons").diagnostics,
+    text = diagnostic_icons,
   },
   float = {
     source = true,
@@ -208,21 +213,6 @@ end, {
   force = true,
 })
 
--- Populate quickfix list when diagnostics change
--- vim.api.nvim_create_autocmd("DiagnosticChanged", {
---   callback = function()
---     vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
---   end,
--- })
-
--- LSP debug
--- vim.lsp.set_log_level "DEBUG"
--- vim.api.nvim_create_autocmd("DiagnosticChanged", {
---   callback = function()
---     vim.diagnostic.setqflist { title = "WorkspaceDiagnostics", open = false }
---   end,
--- })
-
 -- Disable some providers I generally don't use
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -233,12 +223,38 @@ vim.g.loaded_node_provider = 0
 require "_paq"
 -- vim.cmd "colorscheme dayfox"
 
-vim.schedule(require("config.lsp").setup)
--- LSP default on_attach hooks
-require("config.lsp").on_attach_hook(
-  require("config.lsp").keymaps,
-  { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" }
-)
+-- LSP Setup
+vim.schedule(function()
+  local servers = require "config.lsp.servers"
+  local setup = servers.setup_lsp_config
+
+  require("mason").setup()
+  require("mason-lspconfig").setup_handlers { setup }
+  servers.setup_configured()
+end)
+require("_utils").on_attach_hook(function(_, bufnr)
+  ---@param lhs string
+  ---@param rhs string|function
+  ---@param modes string|table|nil
+  local lspmap = function(lhs, rhs, modes)
+    modes = modes or { "n" }
+    local lsp_map_opts = { buffer = bufnr, silent = true }
+    vim.keymap.set(modes, lhs, rhs, lsp_map_opts)
+  end
+  local telescope = require "telescope.builtin"
+
+  lspmap("K", vim.lsp.buf.hover)
+  lspmap("<C-]>", function()
+    telescope.lsp_references {
+      show_line = false,
+      fname_width = 50,
+    }
+  end)
+  lspmap("gd", telescope.lsp_definitions)
+  lspmap("<C-s>", require("telescope.builtin").lsp_document_symbols)
+  lspmap("<leader><Space>", vim.lsp.buf.code_action, { "n", "v" })
+  lspmap("<leader>rn", vim.lsp.buf.rename, { "n" })
+end, { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" })
 
 -- Register some custom behavior via autocmds
 local autocmd = vim.api.nvim_create_autocmd
@@ -269,15 +285,24 @@ autocmd("FileType", {
   end,
 })
 
----@class NvimUserCommmand
----@field name string
----@field args string?
----@field fargs string[]?
----@field nargs string
----@field bang boolean
----@field line1 number
----@field line2 number
----@field range number
----@field count number
----@field reg string?
----@field mods string?
+autocmd("FileType", {
+  pattern = { "sh", "bash" },
+  callback = function()
+    require("_utils").mason_install {
+      "shellcheck",
+      "shfmt",
+      "shellharden",
+      "bash-language-server",
+    }
+  end,
+})
+
+-- Smaller configs
+vim.g.matchup_matchparen_offscreen = { method = "status" }
+vim.g.matchup_override_vimtex = 1
+vim.g.matchup_surround_enabled = 1
+vim.g.abolish_save_file = vim.fn.stdpath "config" .. "/after/plugin/abolish.vim"
+
+vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
+vim.g.procession_ignore_dirs = { "~" }
+vim.g.prosession_on_startup = 0

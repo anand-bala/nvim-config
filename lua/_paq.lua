@@ -44,6 +44,7 @@ paq {
   "neovim/nvim-lspconfig",
   "stevearc/conform.nvim",
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  "nvim-treesitter/nvim-treesitter-context",
 
   "L3MON4D3/LuaSnip",
   "rafamadriz/friendly-snippets",
