@@ -59,7 +59,7 @@ vim.opt.completeopt = {
   "menuone",
   "preview",
   "noinsert",
-  -- "noselect",
+  "noselect",
 }
 
 -- Avoid showing message extra message when using completion

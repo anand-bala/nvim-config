@@ -1,0 +1,12 @@
+{
+  "Header guard": {
+    "prefix": "#once",
+    "body": [
+      "#pragma once",
+      "#ifndef ${1}",
+      "#define $1",
+      "$0",
+      "#endif // $1"
+    ]
+  }
+}

@@ -46,20 +46,21 @@ paq {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
 
-  "L3MON4D3/LuaSnip",
+  "saghen/blink.compat",
+  { "saghen/blink.cmp", build = "cargo build --release" },
   "rafamadriz/friendly-snippets",
 
   -- "mfussenegger/nvim-lsp-compl",
 
-  "hrsh7th/nvim-cmp",
-  "hrsh7th/cmp-buffer",
-  "hrsh7th/cmp-nvim-lsp",
-  "hrsh7th/cmp-nvim-lua",
-  "hrsh7th/cmp-omni",
-  "hrsh7th/cmp-path",
-  "saadparwaiz1/cmp_luasnip",
+  -- "hrsh7th/nvim-cmp",
+  -- "hrsh7th/cmp-buffer",
+  -- "hrsh7th/cmp-nvim-lsp",
+  -- "hrsh7th/cmp-nvim-lua",
+  -- "hrsh7th/cmp-omni",
+  -- "hrsh7th/cmp-path",
+  -- "saadparwaiz1/cmp_luasnip",
   "micangl/cmp-vimtex",
-  "onsails/lspkind-nvim",
+  -- "onsails/lspkind-nvim",
 
   -- Language specific stuff
   "mrcjkb/rustaceanvim",
@@ -68,7 +69,7 @@ paq {
   "lark-parser/vim-lark-syntax",
   "avm99963/vim-jjdescription",
   { "vigoux/ltex-ls.nvim", opt = true },
-  { "folke/lazydev.nvim", opt = true },
+  "folke/lazydev.nvim",
 
   -- Helpers
   "williamboman/mason.nvim",

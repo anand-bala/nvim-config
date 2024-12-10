@@ -240,16 +240,8 @@ M.setup = {
 
 function M.update_capabilities()
   local opts = M
-  local has_cmp, cmp_nvim_lsp = pcall(require, "cmp_nvim_lsp")
-  local has_compl, compl = pcall(require, "lsp_compl")
-  local capabilities = vim.tbl_deep_extend(
-    "force",
-    {},
-    vim.lsp.protocol.make_client_capabilities(),
-    has_cmp and cmp_nvim_lsp.default_capabilities() or {},
-    has_compl and compl.capabilities() or {},
-    opts.capabilities or {}
-  )
+  local capabilities =
+    require("blink.cmp").get_lsp_capabilities(opts.capabilities, true)
   assert(capabilities ~= nil)
   -- https://github.com/neovim/neovim/issues/23291
   capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = false
