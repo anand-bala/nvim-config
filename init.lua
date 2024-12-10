@@ -199,20 +199,6 @@ vim.keymap.set("n", "]D", function()
   }
 end)
 
--- Commands to set the quickfix buffer/loclist buffer
-vim.api.nvim_create_user_command("Diagnostics", function()
-  vim.diagnostic.setloclist { title = "Buffer Diagnostics" }
-end, {
-  desc = "Populate location list for this buffer with diagnostics",
-  force = true,
-})
-vim.api.nvim_create_user_command("WorkspaceDiagnostics", function()
-  vim.diagnostic.setqflist { title = "Workspace Diagnostics" }
-end, {
-  desc = "Populate quickfix list for with workspace diagnostics",
-  force = true,
-})
-
 -- Disable some providers I generally don't use
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
@@ -230,6 +216,7 @@ vim.schedule(function()
 
   require("mason").setup()
   require("mason-lspconfig").setup_handlers { setup }
+  require("mason-registry").refresh(function() end)
   servers.setup_configured()
 end)
 require("_utils").on_attach_hook(function(_, bufnr)
@@ -269,40 +256,3 @@ autocmd("TermOpen", {
     vim.opt_local.statuscolumn = ""
   end,
 })
-
--- Filetype specific things
-autocmd("FileType", {
-  pattern = { "tex", "latex" },
-  callback = function()
-    require("_utils").mason_install { "ltex-ls", "texlab" }
-  end,
-})
-
-autocmd("FileType", {
-  pattern = { "toml" },
-  callback = function()
-    require("_utils").mason_install { "taplo" }
-  end,
-})
-
-autocmd("FileType", {
-  pattern = { "sh", "bash" },
-  callback = function()
-    require("_utils").mason_install {
-      "shellcheck",
-      "shfmt",
-      "shellharden",
-      "bash-language-server",
-    }
-  end,
-})
-
--- Smaller configs
-vim.g.matchup_matchparen_offscreen = { method = "status" }
-vim.g.matchup_override_vimtex = 1
-vim.g.matchup_surround_enabled = 1
-vim.g.abolish_save_file = vim.fn.stdpath "config" .. "/after/plugin/abolish.vim"
-
-vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
-vim.g.procession_ignore_dirs = { "~" }
-vim.g.prosession_on_startup = 0

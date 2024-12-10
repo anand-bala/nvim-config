@@ -31,18 +31,6 @@ vim.schedule(function()
     stages = "static",
   }
   vim.notify = require "notify"
-  -- require("mini.notify").setup {
-  --   lsp_progress = {
-  --     enable = false,
-  --   },
-  --   window = {
-  --     winblend = 0,
-  --   },
-  -- }
-  -- vim.notify = require("mini.notify").make_notify()
-  -- vim.api.nvim_create_user_command("Notifications", function()
-  --   require("mini.notify").show_history()
-  -- end, {})
 end)
 
 local autocmd = vim.api.nvim_create_autocmd

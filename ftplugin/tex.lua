@@ -17,3 +17,7 @@ vim.g.vimtex_toc_config = {
   fold_enable = 1,
 }
 vim.g.vimtex_toc_show_preamble = 0
+
+vim.schedule(function()
+  require("_utils").mason_install { "texlab", "ltex-ls" }
+end)
