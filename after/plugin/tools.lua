@@ -25,7 +25,13 @@ require("nvim-treesitter.configs").setup {
   textobjects = { enable = true },
   matchup = { enable = true },
 }
+require("treesitter-context").setup {
+  max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+}
 
+-- require("blink.compat").setup {
+--   debug = true,
+-- }
 require("blink.cmp").setup {
   keymap = {
     preset = "enter",
@@ -35,13 +41,13 @@ require("blink.cmp").setup {
   sources = {
     -- add lazydev to your completion providers
     per_filetype = {
-      lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
-      tex = { "lsp", "path", "snippets", "buffer", "vimtex" },
+      lua = { "lazydev", "lsp", "snippets", "path", "buffer" },
+      -- tex = { "vimtex", "lsp", "snippets", "path", "buffer" },
     },
-    default = { "lsp", "path", "snippets", "buffer" },
+    default = { "lsp", "snippets", "path", "buffer" },
     providers = {
       lsp = {
-        min_keyword_length = 1,
+        min_keyword_length = 0,
       },
       snippets = {
         extended_filetypes = {
@@ -50,6 +56,7 @@ require("blink.cmp").setup {
           pandoc = { "markdown", "tex" },
           quarto = { "markdown", "tex" },
         },
+        score_offset = -5,
       },
       lazydev = {
         name = "LazyDev",
@@ -59,16 +66,40 @@ require("blink.cmp").setup {
       },
       vimtex = {
         name = "vimtex",
-        module = "blink.compat.source",
+        module = "integrations.blink.vimtex",
+        -- module = "blink.compat.source",
         fallbacks = { "lsp" },
+        override = {
+          get_trigger_characters = function()
+            return { "{", "[", "\\" }
+          end,
+        },
+        transform_items = function(ctx, items)
+          for i, _ in ipairs(items) do
+            items[i].kind = items[i].kind or vim.lsp.protocol.CompletionItemKind.Text
+          end
+          return items
+        end,
       },
     },
   },
   fuzzy = { use_typo_resistance = false },
   -- menu = { draw = { align_to_component = "none" } },
   list = { selection = "manual" },
-  -- completion = { accept = { auto_brackets = { enabled = true } } },
   signature = { enabled = true },
+  -- completion = { accept = { auto_brackets = { enabled = true } } },
+  completion = {
+    menu = {
+      draw = {
+        columns = {
+          { "label", "label_description", gap = 1 },
+          { "kind_icon", "kind", gap = 1 },
+        },
+      },
+    },
+    -- documentation = { auto_show = true },
+    signature = { enabled = true },
+  },
 }
 
 -- Smaller configs
