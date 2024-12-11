@@ -27,7 +27,11 @@ require("nvim-treesitter.configs").setup {
 }
 
 require("blink.cmp").setup {
-  keymap = { preset = "enter" },
+  keymap = {
+    preset = "default",
+    ["<C-j>"] = { "snippet_forward" },
+    -- ["<CR>"] = { "accept", "fallback" },
+  },
   sources = {
     -- add lazydev to your completion providers
     per_filetype = {
