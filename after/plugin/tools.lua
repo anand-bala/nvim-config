@@ -28,7 +28,7 @@ require("nvim-treesitter.configs").setup {
 
 require("blink.cmp").setup {
   keymap = {
-    preset = "default",
+    preset = "enter",
     ["<C-j>"] = { "snippet_forward" },
     -- ["<CR>"] = { "accept", "fallback" },
   },
