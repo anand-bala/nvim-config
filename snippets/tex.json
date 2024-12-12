@@ -63,6 +63,14 @@
       "\\end{frame}"
     ]
   },
+  "begin/end environments": {
+    "prefix": "begin",
+    "body": [
+      "\\begin{${1:env}}${2:[]}",
+      "$0",
+      "\\end{$1}"
+    ]
+  },
   "align environments": {
     "prefix": "aln",
     "body": [
@@ -92,9 +100,9 @@
       "% \\usepackage{floatflt} % Put figures aside a text",
       "\\usepackage{array}",
       "\\usepackage{multirow}",
-      "\\newcolumntype{L}{>{$}l<{$}} % math-mode version of l column type",
-      "\\newcolumntype{R}{>{$}r<{$}} % math-mode version of r column type",
-      "\\newcolumntype{C}{>{$}c<{$}} % math-mode version of r column type",
+      "\\newcolumntype{L}{>{\\$}l<{\\$}} % math-mode version of l column type",
+      "\\newcolumntype{R}{>{\\$}r<{\\$}} % math-mode version of r column type",
+      "\\newcolumntype{C}{>{\\$}c<{\\$}} % math-mode version of r column type",
       "\\newcolumntype{P}[1]{>{\\centering\\arraybackslash}p{#1}}",
       "% Nice lists",
       "\\let\\labelindent\\relax",
