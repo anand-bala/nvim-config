@@ -130,19 +130,6 @@ M.servers = {
       return lspconfig_util.root_pattern(".latexmkrc", "latexindent.yaml")(fname)
         or lspconfig_util.find_git_ancestor(fname)
     end,
-    on_attach = function(_, bufnr)
-      -- Setup Texlab keymaps
-      vim.keymap.set("n", "<leader>lv", "<cmd>TexlabForward<CR>", {
-        silent = false,
-        buffer = bufnr,
-        remap = false,
-      })
-      vim.keymap.set("n", "<leader>ll", "<cmd>TexlabBuild<CR>", {
-        silent = false,
-        buffer = bufnr,
-        remap = false,
-      })
-    end,
     settings = {
       texlab = {
         bibtexFormatter = "none",
@@ -220,13 +207,6 @@ M.setup = {
   rust_analyzer = function(_, _)
     return true
   end,
-  texlab = function(_, opts)
-    local texlab_helpers = require "config.lsp.texlab"
-
-    opts.settings.texlab.build = texlab_helpers.build_config()
-    opts.settings.texlab.forwardSearch = texlab_helpers.forward_search()
-  end,
-
   -- ltex = function(_, opts)
   --   opts = vim.tbl_deep_extend("force", opts or {}, {
   --     use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
