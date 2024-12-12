@@ -209,6 +209,20 @@ vim.g.loaded_node_provider = 0
 require "_paq"
 -- vim.cmd "colorscheme dayfox"
 
+-- Register some custom behavior via autocmds
+local autocmd = vim.api.nvim_create_autocmd
+
+-- Terminal
+autocmd("TermOpen", {
+  pattern = "*",
+  callback = function()
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+    vim.opt_local.signcolumn = "no"
+    vim.opt_local.statuscolumn = ""
+  end,
+})
+
 -- LSP Setup
 vim.schedule(function()
   local servers = require "config.lsp.servers"
@@ -242,17 +256,3 @@ require("_utils").on_attach_hook(function(_, bufnr)
   lspmap("<leader><Space>", vim.lsp.buf.code_action, { "n", "v" })
   lspmap("<leader>rn", vim.lsp.buf.rename, { "n" })
 end, { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" })
-
--- Register some custom behavior via autocmds
-local autocmd = vim.api.nvim_create_autocmd
-
--- Terminal
-autocmd("TermOpen", {
-  pattern = "*",
-  callback = function()
-    vim.opt_local.number = false
-    vim.opt_local.relativenumber = false
-    vim.opt_local.signcolumn = "no"
-    vim.opt_local.statuscolumn = ""
-  end,
-})

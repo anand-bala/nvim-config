@@ -207,15 +207,6 @@ M.setup = {
   rust_analyzer = function(_, _)
     return true
   end,
-  -- ltex = function(_, opts)
-  --   opts = vim.tbl_deep_extend("force", opts or {}, {
-  --     use_spellfile = true, -- Uses the value of 'spellfile' as an external file when checking the document
-  --     window_border = "single", -- How the border should be rendered
-  --     commands = {}, -- TODO: there is an error here
-  --   })
-  --   require("config.lsp.ltex").setup(opts)
-  --   return true
-  -- end,
 }
 
 function M.update_capabilities()
