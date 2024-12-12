@@ -36,13 +36,14 @@ require("blink.cmp").setup {
   keymap = {
     preset = "enter",
     ["<C-j>"] = { "snippet_forward" },
-    -- ["<CR>"] = { "accept", "fallback" },
+    ["<C-p>"] = { "show", "select_prev", "fallback" },
+    ["<C-n>"] = { "show", "select_next", "fallback" },
   },
   sources = {
     -- add lazydev to your completion providers
     per_filetype = {
       lua = { "lazydev", "lsp", "snippets", "path", "buffer" },
-      -- tex = { "vimtex", "lsp", "snippets", "path", "buffer" },
+      tex = { "vimtex", "lsp", "snippets", "path", "buffer" },
     },
     default = { "lsp", "snippets", "path", "buffer" },
     providers = {
@@ -50,13 +51,15 @@ require("blink.cmp").setup {
         min_keyword_length = 0,
       },
       snippets = {
-        extended_filetypes = {
-          cpp = { "c" },
-          markdown = { "tex" },
-          pandoc = { "markdown", "tex" },
-          quarto = { "markdown", "tex" },
+        opts = {
+          extended_filetypes = {
+            cpp = { "c" },
+            markdown = { "tex" },
+            pandoc = { "markdown", "tex" },
+            quarto = { "markdown", "tex" },
+          },
         },
-        score_offset = -5,
+        -- score_offset = -5,
       },
       lazydev = {
         name = "LazyDev",
@@ -66,29 +69,21 @@ require("blink.cmp").setup {
       },
       vimtex = {
         name = "vimtex",
-        module = "integrations.blink.vimtex",
-        -- module = "blink.compat.source",
-        fallbacks = { "lsp" },
+        module = "blink.compat.source",
         override = {
           get_trigger_characters = function()
-            return { "{", "[", "\\" }
+            return { "{", ",", "[", "\\" }
           end,
         },
-        transform_items = function(ctx, items)
-          for i, _ in ipairs(items) do
-            items[i].kind = items[i].kind or vim.lsp.protocol.CompletionItemKind.Text
-          end
-          return items
-        end,
       },
     },
+    cmdline = {},
   },
   fuzzy = { use_typo_resistance = false },
-  -- menu = { draw = { align_to_component = "none" } },
-  list = { selection = "manual" },
   signature = { enabled = true },
   -- completion = { accept = { auto_brackets = { enabled = true } } },
   completion = {
+    list = { selection = "manual" },
     menu = {
       draw = {
         columns = {
@@ -98,12 +93,11 @@ require("blink.cmp").setup {
       },
     },
     -- documentation = { auto_show = true },
-    signature = { enabled = true },
   },
 }
 
 -- Smaller configs
-vim.g.matchup_matchparen_offscreen = { method = "status" }
+vim.g.matchup_matchparen_offscreen = { method = "popup" }
 vim.g.matchup_override_vimtex = 1
 vim.g.matchup_surround_enabled = 1
 vim.g.abolish_save_file = vim.fn.stdpath "config" .. "/after/plugin/abolish.vim"
