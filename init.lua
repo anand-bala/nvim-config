@@ -224,35 +224,52 @@ autocmd("TermOpen", {
 })
 
 -- LSP Setup
-vim.schedule(function()
-  local servers = require "config.lsp.servers"
-  local setup = servers.setup_lsp_config
+require("mason").setup()
+require("mason-lspconfig").setup_handlers {
+  require("config.lsp.servers").setup_lsp_config,
+}
+require("mason-registry").refresh(function() end)
+require("config.lsp.servers").setup_configured()
 
-  require("mason").setup()
-  require("mason-lspconfig").setup_handlers { setup }
-  require("mason-registry").refresh(function() end)
-  servers.setup_configured()
-end)
 require("_utils").on_attach_hook(function(_, bufnr)
-  ---@param lhs string
-  ---@param rhs string|function
-  ---@param modes string|table|nil
-  local lspmap = function(lhs, rhs, modes)
-    modes = modes or { "n" }
-    local lsp_map_opts = { buffer = bufnr, silent = true }
-    vim.keymap.set(modes, lhs, rhs, lsp_map_opts)
-  end
-  local telescope = require "telescope.builtin"
+  vim.keymap.set(
+    { "n", "v" },
+    "<leader><Space>",
+    vim.lsp.buf.code_action,
+    { desc = "Code actions", buffer = bufnr }
+  )
+  vim.keymap.set(
+    { "n" },
+    "<leader>rn",
+    vim.lsp.buf.rename,
+    { desc = "Rename symbol", buffer = bufnr }
+  )
 
-  lspmap("K", vim.lsp.buf.hover)
-  lspmap("<C-]>", function()
-    telescope.lsp_references {
-      show_line = false,
-      fname_width = 50,
-    }
-  end)
-  lspmap("gd", telescope.lsp_definitions)
-  lspmap("<C-s>", require("telescope.builtin").lsp_document_symbols)
-  lspmap("<leader><Space>", vim.lsp.buf.code_action, { "n", "v" })
-  lspmap("<leader>rn", vim.lsp.buf.rename, { "n" })
+  local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
+  if has_fzf_lua then
+    vim.keymap.set(
+      "n",
+      "<C-]>",
+      fzf_lua.lsp_definitions,
+      { desc = "Go to definitions", buffer = bufnr }
+    )
+    vim.keymap.set(
+      "n",
+      "gr",
+      fzf_lua.lsp_references,
+      { desc = "[G]o to [R]eferences", buffer = bufnr }
+    )
+    vim.keymap.set(
+      "n",
+      "gd",
+      fzf_lua.lsp_references,
+      { desc = "[G]o to References (compat)", buffer = bufnr }
+    )
+    vim.keymap.set(
+      "n",
+      "<C-s>",
+      fzf_lua.lsp_document_symbols,
+      { desc = "Search document symbols", buffer = bufnr }
+    )
+  end
 end, { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" })

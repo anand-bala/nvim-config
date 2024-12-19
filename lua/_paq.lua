@@ -30,7 +30,12 @@ paq {
   -- "echasnovski/mini.align",
   "junegunn/vim-easy-align",
   "echasnovski/mini.ai",
-  { "nvim-telescope/telescope.nvim", branch = "0.1.x", opt = true },
+
+  -- Fuzzy finders
+  { "junegunn/fzf", build = "./install --bin" },
+  { "ibhagwan/fzf-lua", branch = "main" },
+
+  -- { "nvim-telescope/telescope.nvim", branch = "0.1.x", opt = true },
 
   -- UI stuff
   -- "echasnovski/mini.notify",

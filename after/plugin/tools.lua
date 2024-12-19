@@ -4,30 +4,31 @@ require("oil").setup()
 -- require("mini.align").setup()
 require("mini.ai").setup()
 
----@diagnostic disable-next-line missing-fields
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "c",
-    "cpp",
-    "html",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "regex",
-    "rust",
-    "vim",
-  },
-  highlight = { enable = true, disable = { "latex" } },
-  indent = { enable = true },
-  incremental_selection = { enable = true },
-  textobjects = { enable = true },
-  matchup = { enable = true },
-}
-require("treesitter-context").setup {
-  max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
-}
+vim.schedule(function()
+  require("nvim-treesitter.configs").setup {
+    ensure_installed = {
+      "bash",
+      "c",
+      "cpp",
+      "html",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "regex",
+      "rust",
+      "vim",
+    },
+    highlight = { enable = true, disable = { "latex" } },
+    indent = { enable = true },
+    incremental_selection = { enable = true },
+    textobjects = { enable = true },
+    matchup = { enable = true },
+  }
+  require("treesitter-context").setup {
+    max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+  }
+end)
 
 -- require("blink.compat").setup {
 --   debug = true,
