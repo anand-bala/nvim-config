@@ -41,9 +41,7 @@ require("blink.cmp").setup {
     ["<C-n>"] = { "show", "select_next", "fallback" },
   },
   sources = {
-    -- add lazydev to your completion providers
     per_filetype = {
-      lua = { "lazydev", "lsp", "snippets", "path", "buffer" },
       tex = { "vimtex", "lsp", "snippets", "path", "buffer" },
     },
     default = { "lsp", "snippets", "path", "buffer" },
@@ -61,12 +59,6 @@ require("blink.cmp").setup {
           },
         },
         -- score_offset = -5,
-      },
-      lazydev = {
-        name = "LazyDev",
-        module = "lazydev.integrations.blink",
-        -- dont show LuaLS require statements when lazydev has items
-        fallbacks = { "lsp" },
       },
       vimtex = {
         name = "vimtex",

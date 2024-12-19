@@ -73,8 +73,8 @@ paq {
   "preservim/vim-markdown",
   "lark-parser/vim-lark-syntax",
   "avm99963/vim-jjdescription",
-  { "vigoux/ltex-ls.nvim", opt = true },
-  "folke/lazydev.nvim",
+  -- { "vigoux/ltex-ls.nvim", opt = true },
+  -- "folke/lazydev.nvim",
 
   -- Helpers
   "williamboman/mason.nvim",

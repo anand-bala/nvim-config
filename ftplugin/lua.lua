@@ -3,6 +3,4 @@ vim.schedule(function()
     "stylua",
     "lua-language-server",
   }
-  vim.cmd [[:packadd lazydev.nvim]]
-  require("lazydev").setup()
 end)
