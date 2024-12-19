@@ -3,11 +3,13 @@ local actions = require "fzf-lua.actions"
 
 vim.schedule(function()
   vim.cmd [[:packadd fzf-lua]]
+  local actions = require "fzf-lua.actions"
   require("fzf-lua").setup {
     "borderless_full",
     defaults = {
       -- formatter = "path.filename_first",
       formatter = "path.dirname_first",
+      git_icons = false,
     },
     winopts = {
       width = 0.8,
@@ -51,6 +53,12 @@ end)
 command("Helptags", "FzfLua helptags", { force = true })
 command("Buffers", "FzfLua buffers", { force = true })
 
-vim.keymap.set("n", "<C-f>", "<cmd>FzfLua files<cr>", { remap = false })
+vim.keymap.set(
+  "n",
+  "<C-f>",
+  "<cmd>FzfLua files<cr>",
+  ---@type vim.keymap.set.Opts
+  { remap = false }
+)
 vim.keymap.set("n", "<C-g>", "<cmd>FzfLua live_grep<cr>", { remap = false })
 vim.keymap.set("n", "<C-b>", "<cmd>FzfLua buffers<cr>", { remap = false })

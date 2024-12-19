@@ -41,4 +41,14 @@ function M.on_attach_hook(on_attach, opts)
   )
 end
 
+---@param name string
+---@param override? vim.lsp.Config
+function M.lsp_config(name, override)
+  return vim.tbl_deep_extend(
+    "keep",
+    override or {},
+    require("lspconfig.configs." .. name).default_config
+  )
+end
+
 return M

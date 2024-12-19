@@ -6,9 +6,9 @@ vim.opt.secure = true
 vim.opt.modelines = 0 -- Disable Modelines
 vim.opt.number = true -- Show line numbers
 vim.opt.visualbell = true -- Blink cursor on error instead of beeping (grr)
--- vim.opt.cursorline = true -- Show which line your cursor is on
+vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.undofile = true -- Save undo history
-vim.opt.clipboard = "unnamedplus" -- Sync OS and Neovim clipboard
+-- vim.opt.clipboard = "unnamedplus" -- Sync OS and Neovim clipboard
 
 -- Fixes for fish shell
 if string.match(vim.o.shell, "fish$") then
@@ -225,11 +225,23 @@ autocmd("TermOpen", {
 
 -- LSP Setup
 require("mason").setup()
-require("mason-lspconfig").setup_handlers {
-  require("config.lsp.servers").setup_lsp_config,
+require("mason-lspconfig").setup()
+
+vim.lsp.config("*", {
+  root_markers = { ".jj", ".git" },
+  capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
+})
+
+vim.lsp.enable {
+  "lua_ls",
+  "texlab",
+  "pyright",
+  "ruff",
+  "clangd",
+  "taplo",
+  "yamlls",
+  "jsonls",
 }
-require("mason-registry").refresh(function() end)
-require("config.lsp.servers").setup_configured()
 
 require("_utils").on_attach_hook(function(_, bufnr)
   vim.keymap.set(
