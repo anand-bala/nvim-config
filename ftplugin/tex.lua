@@ -12,9 +12,9 @@ vim.g.vimtex_quickfix_mode = 0
 vim.g.vimtex_mappings_enabled = 1
 vim.g.vimtex_complete_enabled = 1
 vim.g.vimtex_compiler_enabled = 1
-vim.g.vimtex_compiler_silent = 0
+vim.g.vimtex_compiler_silent = 1
 vim.g.vimtex_compiler_latexmk = {
-  continuous = 1,
+  continuous = 0,
 }
 vim.g.vimtex_compiler_method = function(mainfile)
   if vim.fn.filereadable(mainfile) == 1 then
@@ -42,3 +42,39 @@ vim.g.vimtex_toc_show_preamble = 0
 vim.schedule(function()
   require("_utils").mason_install { "texlab", "ltex-ls" }
 end)
+
+vim.api.nvim_create_autocmd("BufWritePost", {
+  pattern = { "*.tex" },
+  desc = "Use vimtex to compile document on save",
+  command = "VimtexCompileSS",
+})
+
+local vimtex_compile_user_augroup =
+  vim.api.nvim_create_augroup("CustomVimtexCompile", { clear = true })
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VimtexEventCompileSuccess",
+  group = vimtex_compile_user_augroup,
+  desc = "Custom callback for successful vimtex compilation",
+  callback = function()
+    vim.notify("Compilation completed", vim.log.levels.INFO)
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VimtexEventCompileFail",
+  group = vimtex_compile_user_augroup,
+  desc = "Custom callback for failed vimtex compilation",
+  callback = function()
+    vim.notify("Compilation failed!", vim.log.levels.WARN)
+  end,
+})
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "VimtexEventCompiling",
+  group = vimtex_compile_user_augroup,
+  desc = "Custom callback for when vimtex starts compilation",
+  callback = function()
+    vim.notify("Compilation started", vim.log.levels.INFO)
+  end,
+})
