@@ -1,3 +1,8 @@
+if vim.g.loaded_formatting_plugins ~= nil then
+  return
+end
+vim.g.loaded_formatting_plugins = 1
+
 vim.cmd [[packadd! conform.nvim]]
 local conform = require "conform"
 conform.formatters.yamlfmt = {

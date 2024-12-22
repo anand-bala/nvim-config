@@ -1,3 +1,8 @@
+if vim.g.loaded_fzf_plugin ~= nil then
+  return
+end
+vim.g.loaded_fzf_plugin = 1
+
 local command = vim.api.nvim_create_user_command
 local actions = require "fzf-lua.actions"
 

@@ -1,5 +1,10 @@
 ---@diagnostic disable: missing-fields
 
+if vim.g.loaded_tool_plugins ~= nil then
+  return
+end
+vim.g.loaded_tool_plugins = 1
+
 require("oil").setup()
 -- require("mini.align").setup()
 require("mini.ai").setup()

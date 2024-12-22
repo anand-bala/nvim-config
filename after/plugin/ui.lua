@@ -1,3 +1,8 @@
+if vim.g.loaded_ui_plugins ~= nil then
+  return
+end
+vim.g.loaded_ui_plugins = 1
+
 local nightfox = require "nightfox"
 --- Colorscheme
 ---
