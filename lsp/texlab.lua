@@ -10,7 +10,6 @@ return {
     ".jj",
     ".git",
   },
-  single_file_support = true,
   settings = {
     texlab = {
       rootDirectory = nil,

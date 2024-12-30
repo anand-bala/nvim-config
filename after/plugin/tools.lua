@@ -60,7 +60,6 @@ require("blink.cmp").setup {
             cpp = { "c" },
             markdown = { "tex" },
             pandoc = { "markdown", "tex" },
-            quarto = { "markdown", "tex" },
           },
         },
         -- score_offset = -5,

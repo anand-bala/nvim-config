@@ -11,7 +11,6 @@ return {
     ".jj",
     ".git",
   },
-  single_file_support = true,
   capabilities = {
     textDocument = {
       completion = {

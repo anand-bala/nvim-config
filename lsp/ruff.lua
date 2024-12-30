@@ -17,6 +17,5 @@ return {
   capabilities = {
     hoverProvider = false,
   },
-  single_file_support = true,
   settings = {},
 }
