@@ -39,10 +39,6 @@ vim.g.vimtex_toc_config = {
 }
 vim.g.vimtex_toc_show_preamble = 0
 
-vim.schedule(function()
-  require("_utils").mason_install { "texlab", "ltex-ls" }
-end)
-
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.tex" },
   desc = "Use vimtex to compile document on save",

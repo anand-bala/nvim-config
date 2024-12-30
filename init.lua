@@ -211,6 +211,7 @@ require "_paq"
 
 -- Register some custom behavior via autocmds
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup
 
 -- Terminal
 autocmd("TermOpen", {
@@ -233,14 +234,15 @@ vim.lsp.config("*", {
 })
 
 vim.lsp.enable {
+  "bashls",
+  "clangd",
+  "jsonls",
   "lua_ls",
-  "texlab",
   "pyright",
   "ruff",
-  "clangd",
   "taplo",
+  "texlab",
   "yamlls",
-  "jsonls",
 }
 
 require("_utils").on_attach_hook(function(_, bufnr)
@@ -358,4 +360,19 @@ vim.keymap.set("n", "<leader>f", function()
   require("conform").format { async = true }
 end, {
   desc = "Format the document",
+})
+
+autocmd({ "FileType" }, {
+  group = augroup("Auto-install tools", { clear = true }),
+  pattern = "*",
+  callback = function(ctx)
+    local tools = require("_utils").get_configured_tools(ctx.buf)
+    local to_install = {}
+    for name, info in pairs(tools) do
+      if not info.available then
+        table.insert(to_install, name)
+      end
+    end
+    require("_utils").mason_install(to_install)
+  end,
 })
