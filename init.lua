@@ -285,3 +285,77 @@ require("_utils").on_attach_hook(function(_, bufnr)
     )
   end
 end, { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" })
+
+vim.g.formatting_opts = vim.g.formatting_opts or {}
+vim.g.enable_autoformat = vim.g.enable_autoformat or true
+
+require("conform").setup {
+  default_format_opts = { lsp_format = "fallback" },
+  formatters_by_ft = {
+    lua = { "stylua" },
+    python = { "isort", "black" },
+    javascript = { "biome", stop_after_first = true },
+    yaml = { "yamlfmt" },
+    bash = { "shfmt", "shellharden" },
+    cmake = { "gersemi" },
+    tex = { "latexindent" },
+    markdown = { "mdformat" },
+    matlab = { timeout_ms = 5000 },
+  },
+  formatters = {
+    yamlfmt = { prepend_args = { "-formatter", "indent=2,retain_line_breaks=true" } },
+    shfmt = { prepend_args = { "-i", "2" } },
+    latexindent = { prepend_args = { "-l", "-m" } },
+  },
+  format_on_save = function(bufnr)
+    -- Disable with a global or buffer-local variable
+    if
+      vim.b[bufnr].enable_autoformat
+      or (vim.b[bufnr].enable_autoformat == nil and vim.g.enable_autoformat)
+    then
+      return vim.g.formatting_opts or {}
+    end
+  end,
+}
+
+---@param set boolean
+---@param buf_only boolean
+local function set_autoformat(set, buf_only)
+  if buf_only then
+    -- enable formatting just for this buffer
+    vim.b.enable_autoformat = set
+  else
+    vim.g.enable_autoformat = set
+  end
+end
+
+vim.api.nvim_create_user_command("FormatDisable", function(args)
+  set_autoformat(false, args.bang)
+end, {
+  desc = "Disable autoformat-on-save (use ! for buffer only)",
+  bang = true,
+})
+vim.api.nvim_create_user_command("FormatEnable", function(args)
+  set_autoformat(true, args.bang)
+end, {
+  desc = "Re-enable autoformat-on-save (use ! for buffer only)",
+  bang = true,
+})
+
+vim.api.nvim_create_user_command("Format", function(args)
+  local range = nil
+  if args.count ~= -1 then
+    local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+    range = {
+      start = { args.line1, 0 },
+      ["end"] = { args.line2, end_line:len() },
+    }
+  end
+  require("conform").format { async = true, range = range }
+end, { range = true })
+
+vim.keymap.set("n", "<leader>f", function()
+  require("conform").format { async = true }
+end, {
+  desc = "Format the document",
+})
