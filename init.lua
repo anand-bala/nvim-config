@@ -10,6 +10,21 @@ vim.opt.cursorline = true -- Show which line your cursor is on
 vim.opt.undofile = true -- Save undo history
 -- vim.opt.clipboard = "unnamedplus" -- Sync OS and Neovim clipboard
 
+-- Create per-project shada files
+vim.opt.shadafile = (function()
+  local data = vim.fn.stdpath "state"
+  assert(type(data) == "string")
+
+  local cwd = vim.fn.getcwd()
+  local project_root = require("_utils").get_vcs_root() or cwd
+  local project_b64 = vim.base64.encode(project_root)
+
+  local file = vim.fs.joinpath(data, "shada", project_b64 .. ".shada")
+  vim.fn.mkdir(vim.fs.dirname(file), "p")
+
+  return file
+end)()
+
 -- Fixes for fish shell
 if string.match(vim.o.shell, "fish$") then
   vim.g.terminal_shell = "fish"
