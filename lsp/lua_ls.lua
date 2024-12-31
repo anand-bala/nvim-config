@@ -26,9 +26,12 @@ return {
       workspace = {
         checkThirdParty = false,
         library = vim.list_extend(
-          { vim.env.VIMRUNTIME },
+          { vim.env.VIMRUNTIME, "${3rd}/luv/library" },
           vim.api.nvim_get_runtime_file("lua/", true)
         ),
+      },
+      telemetry = {
+        enable = false,
       },
     },
   },
