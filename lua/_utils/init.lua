@@ -66,7 +66,8 @@ function M.get_configured_tools(bufnr)
 
   -- check lsp stuff
   for name in vim.spairs(vim.lsp._enabled_configs) do
-    local config = vim.lsp._resolve_config(name)
+    local config = (vim.lsp._resolve_config and vim.lsp._resolve_config(name))
+      or vim.lsp.config[name]
     if
       vim.tbl_contains(config.filetypes or {}, ft)
       and type(config.cmd) == "table"
