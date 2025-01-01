@@ -96,7 +96,7 @@ end, {
 })
 
 -- Launch terminal at bottom of window
-map("n", "`", "<cmd>Term<CR>", { silent = true, remap = false })
+-- map("n", "`", "<cmd>Term<CR>", { silent = true, remap = false })
 -- Create new terminal vsplit
 map("n", "<C-w>|", "<cmd>VTerm<CR>", { silent = true, remap = false })
 
