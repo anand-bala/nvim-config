@@ -224,15 +224,7 @@ vim.g.loaded_node_provider = 0
 require "_paq"
 -- vim.cmd "colorscheme dayfox"
 
--- Register some custom behavior via autocmds
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-
-
 -- LSP Setup
-require("mason").setup()
-require("mason-lspconfig").setup()
-
 vim.lsp.config("*", {
   root_markers = { ".jj", ".git" },
   capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
@@ -347,19 +339,4 @@ vim.api.nvim_create_user_command("FormatEnable", function(args)
 end, {
   desc = "Re-enable autoformat-on-save (use ! for buffer only)",
   bang = true,
-})
-
-autocmd({ "FileType" }, {
-  group = augroup("Auto-install tools", { clear = true }),
-  pattern = "*",
-  callback = function(ctx)
-    local tools = require("_utils").get_configured_tools(ctx.buf)
-    local to_install = {}
-    for name, info in pairs(tools) do
-      if not info.available then
-        table.insert(to_install, name)
-      end
-    end
-    require("_utils").mason_install(to_install)
-  end,
 })

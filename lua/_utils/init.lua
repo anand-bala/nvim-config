@@ -9,12 +9,13 @@ function M.mason_install(tools)
   if not has_mason then
     return
   end
+  local notify = require "mason-core.notify"
   local show = vim.schedule_wrap(function(msg)
-    vim.notify(msg, vim.log.levels.INFO, { title = "Mason" })
+    notify(msg, vim.log.levels.INFO)
   end)
 
   local show_error = vim.schedule_wrap(function(msg)
-    vim.notify(msg, vim.log.levels.ERROR, { title = "Mason" })
+    notify(msg, vim.log.levels.ERROR)
   end)
 
   mason_registry.refresh(function()
