@@ -42,7 +42,19 @@ vim.g.vimtex_toc_show_preamble = 0
 vim.api.nvim_create_autocmd("BufWritePost", {
   pattern = { "*.tex" },
   desc = "Use vimtex to compile document on save",
-  command = "VimtexCompileSS",
+  callback = function(ctx)
+    -- vim.cmd [[echo b:vimtex.compiler]]
+    local compiler_is_running =
+      vim.api.nvim_call_dict_function("b:vimtex.compiler", "is_running", {})
+    if compiler_is_running then
+      -- vim.notify(
+      --   string.format("Compiler already running for buf %s", ctx.file),
+      --   vim.log.levels.INFO
+      -- )
+      return
+    end
+    vim.cmd [[:VimtexCompileSS]]
+  end,
 })
 
 local vimtex_compile_user_augroup =
