@@ -12,10 +12,10 @@ vim.g.vimtex_quickfix_mode = 0
 vim.g.vimtex_mappings_enabled = 1
 vim.g.vimtex_complete_enabled = 1
 vim.g.vimtex_compiler_enabled = 1
-vim.g.vimtex_compiler_silent = 1
-vim.g.vimtex_compiler_latexmk = {
-  continuous = 0,
-}
+vim.g.vimtex_compiler_silent = 0
+-- vim.g.vimtex_compiler_latexmk = {
+--   continuous = 1,
+-- }
 vim.g.vimtex_compiler_method = function(mainfile)
   if vim.fn.filereadable(mainfile) == 1 then
     local lines = vim.fn.readfile(mainfile, "", 5)
@@ -39,23 +39,23 @@ vim.g.vimtex_toc_config = {
 }
 vim.g.vimtex_toc_show_preamble = 0
 
-vim.api.nvim_create_autocmd("BufWritePost", {
-  pattern = { "*.tex" },
-  desc = "Use vimtex to compile document on save",
-  callback = function(ctx)
-    -- vim.cmd [[echo b:vimtex.compiler]]
-    local compiler_is_running =
-      vim.api.nvim_call_dict_function("b:vimtex.compiler", "is_running", {})
-    if compiler_is_running then
-      -- vim.notify(
-      --   string.format("Compiler already running for buf %s", ctx.file),
-      --   vim.log.levels.INFO
-      -- )
-      return
-    end
-    vim.cmd [[:VimtexCompileSS]]
-  end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePost", {
+--   pattern = { "*.tex" },
+--   desc = "Use vimtex to compile document on save",
+--   callback = function(ctx)
+--     -- vim.cmd [[echo b:vimtex.compiler]]
+--     local compiler_is_running =
+--       vim.api.nvim_call_dict_function("b:vimtex.compiler", "is_running", {})
+--     if compiler_is_running then
+--       -- vim.notify(
+--       --   string.format("Compiler already running for buf %s", ctx.file),
+--       --   vim.log.levels.INFO
+--       -- )
+--       return
+--     end
+--     vim.cmd [[:VimtexCompileSS]]
+--   end,
+-- })
 
 local vimtex_compile_user_augroup =
   vim.api.nvim_create_augroup("CustomVimtexCompile", { clear = true })
@@ -65,16 +65,16 @@ vim.api.nvim_create_autocmd("User", {
   group = vimtex_compile_user_augroup,
   desc = "Custom callback for successful vimtex compilation",
   callback = function()
-    vim.notify("Compilation completed", vim.log.levels.INFO)
+    vim.notify("Compilation completed", vim.log.levels.INFO, { title = "VimTeX" })
   end,
 })
 
 vim.api.nvim_create_autocmd("User", {
-  pattern = "VimtexEventCompileFail",
+  pattern = "VimtexEventCompileFailed",
   group = vimtex_compile_user_augroup,
   desc = "Custom callback for failed vimtex compilation",
   callback = function()
-    vim.notify("Compilation failed!", vim.log.levels.WARN)
+    vim.notify("Compilation failed!", vim.log.levels.WARN, { title = "VimTeX" })
   end,
 })
 
@@ -83,6 +83,6 @@ vim.api.nvim_create_autocmd("User", {
   group = vimtex_compile_user_augroup,
   desc = "Custom callback for when vimtex starts compilation",
   callback = function()
-    vim.notify("Compilation started", vim.log.levels.INFO)
+    vim.notify("Compilation started", vim.log.levels.INFO, { title = "VimTeX" })
   end,
 })
