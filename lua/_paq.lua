@@ -76,6 +76,7 @@ paq {
   "avm99963/vim-jjdescription",
   -- { "vigoux/ltex-ls.nvim", opt = true },
   -- "folke/lazydev.nvim",
+  "b0o/schemastore.nvim",
 
   -- Helpers
   "williamboman/mason.nvim",
