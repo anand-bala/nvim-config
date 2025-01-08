@@ -83,7 +83,19 @@ autocmd({ "BufReadPost" }, {
       signature = { enabled = true },
       -- completion = { accept = { auto_brackets = { enabled = true } } },
       completion = {
-        list = { selection = "manual" },
+        list = {
+          selection = {
+            preselect = false,
+            auto_insert = false,
+          },
+        },
+        accept = {
+          auto_brackets = {
+            override_brackets_for_filetypes = {
+              tex = { "{", "}" },
+            },
+          },
+        },
         menu = {
           draw = {
             columns = {
