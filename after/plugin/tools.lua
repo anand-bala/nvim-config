@@ -9,7 +9,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
 require("oil").setup()
--- require("mini.align").setup()
+require("mini.align").setup()
 
 autocmd({ "BufReadPost" }, {
   group = augroup("Lazy loaded tools", { clear = true }),

@@ -23,12 +23,12 @@ paq {
   "tpope/vim-commentary",
   "tpope/vim-obsession",
   "tpope/vim-abolish",
-  --"dhruvasagar/vim-prosession",
+  "arthurxavierx/vim-caser", -- Another casing plugin. Supports visual mode and text objects
   "direnv/direnv.vim",
   "stevearc/oil.nvim",
   "andymass/vim-matchup",
-  -- "echasnovski/mini.align",
-  "junegunn/vim-easy-align",
+  "echasnovski/mini.align",
+  -- "junegunn/vim-easy-align",
   "echasnovski/mini.ai",
   "rafikdraoui/jj-diffconflicts",
 
@@ -89,7 +89,8 @@ paq {
 
   -- Common Dependencies
   "nvim-lua/plenary.nvim",
-  "nvim-tree/nvim-web-devicons",
+  -- "nvim-tree/nvim-web-devicons",
+  "echasnovski/mini.icons",
 }
 
 ---@type Package[]
