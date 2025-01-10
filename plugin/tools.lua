@@ -55,80 +55,94 @@ autocmd({ "BufReadPost" }, {
   end,
 })
 
+-- vim.lsp.config("*", {
+--   capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
+-- })
+-- require("blink.cmp").setup {
+--   keymap = {
+--     preset = "enter",
+--     ["<C-j>"] = { "snippet_forward" },
+--     ["<C-p>"] = { "show", "select_prev", "fallback" },
+--     ["<C-n>"] = { "show", "select_next", "fallback" },
+--   },
+--   sources = {
+--     per_filetype = {
+--       tex = { "vimtex", "snippets", "path", "buffer" },
+--     },
+--     default = { "lsp", "snippets", "path", "buffer" },
+--     providers = {
+--       lsp = {
+--         min_keyword_length = 0,
+--       },
+--       snippets = {
+--         opts = {
+--           extended_filetypes = {
+--             cpp = { "c" },
+--             markdown = { "tex" },
+--             pandoc = { "markdown", "tex" },
+--           },
+--         },
+--         score_offset = -5,
+--       },
+--       vimtex = {
+--         name = "vimtex",
+--         module = "blink.compat.source",
+--         override = {
+--           get_trigger_characters = function()
+--             return { "{", ",", "[", "\\" }
+--           end,
+--         },
+--       },
+--     },
+--     cmdline = {},
+--   },
+--   fuzzy = { use_typo_resistance = false },
+--   signature = { enabled = true },
+--   -- completion = { accept = { auto_brackets = { enabled = true } } },
+--   completion = {
+--     list = {
+--       selection = "manual",
+--       -- selection = {
+--       --   preselect = false,
+--       --   auto_insert = false,
+--       -- },
+--     },
+--     accept = {
+--       auto_brackets = {
+--         override_brackets_for_filetypes = {
+--           tex = { "{", "}" },
+--         },
+--       },
+--     },
+--     menu = {
+--       draw = {
+--         columns = {
+--           { "label", "label_description", gap = 1 },
+--           { "kind_icon", "kind", gap = 1 },
+--         },
+--       },
+--     },
+--     -- documentation = { auto_show = true },
+--   },
+-- }
 vim.lsp.config("*", {
-  capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
+  capabilities = vim.lsp.protocol.make_client_capabilities(),
 })
-require("blink.cmp").setup {
-  keymap = {
-    preset = "enter",
-    ["<C-j>"] = { "snippet_forward" },
-    ["<C-p>"] = { "show", "select_prev", "fallback" },
-    ["<C-n>"] = { "show", "select_next", "fallback" },
-  },
-  sources = {
-    per_filetype = {
-      tex = { "vimtex", "snippets", "path", "buffer" },
-      lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
-    },
-    default = { "lsp", "snippets", "path", "buffer" },
-    providers = {
-      lsp = {
-        min_keyword_length = 0,
-      },
-      snippets = {
-        opts = {
-          extended_filetypes = {
-            cpp = { "c" },
-            markdown = { "tex" },
-            pandoc = { "markdown", "tex" },
-          },
-        },
-        score_offset = -5,
-      },
-      lazydev = {
-        name = "LazyDev",
-        module = "lazydev.integrations.blink",
-        -- make lazydev completions top priority (see `:h blink.cmp`)
-        score_offset = 100,
-      },
-      vimtex = {
-        name = "vimtex",
-        module = "blink.compat.source",
-        override = {
-          get_trigger_characters = function() return { "{", ",", "[", "\\" } end,
-        },
-      },
-    },
-    cmdline = {},
-  },
-  fuzzy = { use_typo_resistance = false },
-  signature = { enabled = true },
-  -- completion = { accept = { auto_brackets = { enabled = true } } },
-  completion = {
-    list = {
-      selection = "manual",
-      -- selection = {
-      --   preselect = false,
-      --   auto_insert = false,
-      -- },
-    },
-    accept = {
-      auto_brackets = {
-        override_brackets_for_filetypes = {
-          tex = { "{", "}" },
-        },
-      },
-    },
-    menu = {
-      draw = {
-        columns = {
-          { "label", "label_description", gap = 1 },
-          { "kind_icon", "kind", gap = 1 },
-        },
-      },
-    },
-    -- documentation = { auto_show = true },
-  },
+require("mini.completion").setup {
+  set_vim_settings = false,
+  lsp_completion = { auto_setup = true },
+  mappings = { force_twostep = "" },
+  fallback_action = function()
+    if vim.bo.filetype == "tex" or vim.bo.filetype == "bib" then
+      -- use omnifunc coz we have vimtex
+      local omnifunc = vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true)
+      vim.api.nvim_feedkeys(omnifunc, "n", false)
+      -- else
+      --   local ctrl_n =
+      --     vim.api.nvim_replace_termcodes("<C-g><C-g><C-n>", true, false, true)
+      --   vim.api.nvim_feedkeys(ctrl_n, "n", false)
+    end
+  end,
 }
 
 require("mason").setup()

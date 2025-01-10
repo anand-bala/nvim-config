@@ -81,3 +81,6 @@ vim.api.nvim_create_autocmd("User", {
   desc = "Custom callback for when vimtex starts compilation",
   callback = function() vim.notify("Compilation started", vim.log.levels.INFO, { title = "VimTeX" }) end,
 })
+
+-- Disable mini.completion
+vim.b.minicompletion_disable = true

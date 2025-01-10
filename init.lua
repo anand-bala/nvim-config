@@ -234,9 +234,11 @@ require "_paq"
 -- LSP Setup
 vim.lsp.config("*", {
   root_markers = { ".jj", ".git" },
+  -- capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
 })
 
 vim.lsp.enable {
+  "basics_ls",
   "bashls",
   "clangd",
   "jsonls",
@@ -260,6 +262,52 @@ require("lazydev").setup {
     coq = false,
   },
 }
+
+do
+  local keycode = vim.keycode or function(x) return vim.api.nvim_replace_termcodes(x, true, true, true) end
+  local keys = {
+    ["cr"] = keycode "<CR>",
+    ["ctrl-y"] = keycode "<C-y>",
+    ["ctrl-y_cr"] = keycode "<C-y><CR>",
+    ["crtl-n"] = vim.api.nvim_replace_termcodes("<C-n>", true, false, true),
+    ["completefunc"] = vim.api.nvim_replace_termcodes("<C-x><C-u>", true, false, true),
+    ["omnifunc"] = vim.api.nvim_replace_termcodes("<C-x><C-o>", true, false, true),
+  }
+
+  --- Use <CR> to select items
+  local function cr_action()
+    if vim.fn.pumvisible() ~= 0 then
+      -- If popup is visible, confirm selected item or add new line otherwise
+      local item_selected = vim.fn.complete_info()["selected"] ~= -1
+      return item_selected and keys["ctrl-y"] or keys["ctrl-y_cr"]
+    else
+      -- If popup is not visible, use plain `<CR>`. You might want to customize
+      -- according to other plugins. For example, to use 'mini.pairs', replace
+      -- next line with `return require('mini.pairs').cr()`
+      return keys["cr"]
+    end
+  end
+  vim.keymap.set("i", "<CR>", cr_action, { expr = true })
+
+  --- Use <C-n> to launch completefunc or omnifunc as needed
+  local function c_n_action()
+    if vim.fn.pumvisible() ~= 0 then
+      -- If popup is visible, just use the standard C-n action
+      return keys["crtl-n"]
+    else
+      -- If popup is not visible, trigger completion
+      -- completefunc if MiniCompletion is present and enabled, else omnifunc
+      if
+        _G.MiniCompletion ~= nil and not (vim.g.minicompletion_disable == true or vim.b.minicompletion_disable == true)
+      then
+        return keys["completefunc"]
+      else
+        return keys["omnifunc"]
+      end
+    end
+  end
+  vim.keymap.set("i", "<C-n>", c_n_action, { expr = true, desc = "Trigger autocompletion" })
+end
 
 require("_utils").on_attach_hook(function(_, bufnr)
   vim.keymap.set({ "n", "v" }, "<leader><Space>", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
