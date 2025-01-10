@@ -45,6 +45,8 @@ autocmd({ "VimEnter" }, {
   callback = function()
     require("gitsigns").setup()
     require("dressing").setup()
+    require("bqf").setup()
+    require("quicker").setup()
     require("lualine").setup {
       options = {
         section_separators = "",

@@ -45,6 +45,8 @@ paq {
   "lewis6991/gitsigns.nvim",
   "stevearc/dressing.nvim",
   "nvim-lualine/lualine.nvim",
+  "kevinhwang91/nvim-bqf",
+  "stevearc/quicker.nvim",
 
   -- Coding tools
   "neovim/nvim-lspconfig",

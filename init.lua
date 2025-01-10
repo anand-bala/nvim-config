@@ -214,6 +214,26 @@ vim.keymap.set("n", "]D", function()
   }
 end)
 
+vim.api.nvim_create_user_command("Diagnostics", function(args)
+  if args.args == "ERROR" then
+    vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
+  elseif args.args == "WARN" then
+    vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
+  elseif args.args == "HINT" then
+    vim.diagnostic.setqflist { severity = vim.diagnostic.severity.HINT }
+  elseif args.args == "INFO" then
+    vim.diagnostic.setqflist { severity = vim.diagnostic.severity.INFO }
+  else
+    vim.diagnostic.setqflist {}
+  end
+end, {
+  desc = "Adds LSP diagnostic to the Quickfix list",
+  complete = function()
+    return { "ERROR", "WARN", "HINT", "INFO" }
+  end,
+  nargs = "?",
+})
+
 -- Disable some providers I generally don't use
 vim.g.loaded_ruby_provider = 0
 vim.g.loaded_perl_provider = 0
