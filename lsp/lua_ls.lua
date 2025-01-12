@@ -78,14 +78,16 @@ return {
             -- lua language server is super confused when editing lua files in the config
             -- and raises a lot of [duplicate-doc-field] warnings
             if
-              lib:find(vim.fn.stdpath "config" --[[@as string]], 1, true) > 1
+              lib:find(vim.fn.stdpath "config" --[[@as string]], 1, true) == 1
             then
-              local libs = client.settings.Lua.workspace.library
-              if not vim.tbl_contains(libs, lib) then
-                libs[#libs + 1] = lib
-                do_change = true
-              end
+              goto continue
             end
+            local libs = client.settings.Lua.workspace.library
+            if not vim.tbl_contains(libs, lib) then
+              libs[#libs + 1] = lib
+              do_change = true
+            end
+            ::continue::
           end
         end
       end
