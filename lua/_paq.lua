@@ -55,7 +55,7 @@ paq {
   "nvim-treesitter/nvim-treesitter-context",
 
   "saghen/blink.compat",
-  { "saghen/blink.cmp", build = "cargo build --release" },
+  { "saghen/blink.cmp", build = "cargo build --release", branch = "release" },
   "rafamadriz/friendly-snippets",
 
   -- "mfussenegger/nvim-lsp-compl",

@@ -87,10 +87,11 @@ autocmd({ "BufReadPost" }, {
       -- completion = { accept = { auto_brackets = { enabled = true } } },
       completion = {
         list = {
-          selection = {
-            preselect = false,
-            auto_insert = false,
-          },
+          selection = "manual",
+          -- selection = {
+          --   preselect = false,
+          --   auto_insert = false,
+          -- },
         },
         accept = {
           auto_brackets = {
