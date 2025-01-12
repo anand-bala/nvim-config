@@ -2,7 +2,7 @@
   "Inline Math": {
     "prefix": "im",
     "body": [
-      "\\\\( $0 \\\\)"
+      "\\\\($0\\\\)"
     ]
   },
   "Display Math": {
