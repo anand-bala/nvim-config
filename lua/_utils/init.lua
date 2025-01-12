@@ -110,9 +110,9 @@ end
 ---@param override? vim.lsp.Config
 function M.lsp_config(name, override)
   return vim.tbl_deep_extend(
-    "keep",
-    override or {},
-    require("lspconfig.configs." .. name).default_config
+    "force",
+    require("lspconfig.configs." .. name).default_config,
+    override or {}
   )
 end
 

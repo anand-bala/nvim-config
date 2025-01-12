@@ -25,10 +25,6 @@ return {
       },
       workspace = {
         checkThirdParty = false,
-        library = vim.list_extend(
-          { vim.env.VIMRUNTIME, "${3rd}/luv/library" },
-          vim.api.nvim_get_runtime_file("lua/", true)
-        ),
       },
       telemetry = {
         enable = false,
@@ -79,10 +75,16 @@ return {
         if m then
           for _, mod in ipairs(vim.loader.find(m, { patterns = { "", ".lua" } })) do
             local lib = vim.fs.dirname(mod.modpath)
-            local libs = client.settings.Lua.workspace.library
-            if not vim.tbl_contains(libs, lib) then
-              libs[#libs + 1] = lib
-              do_change = true
+            -- lua language server is super confused when editing lua files in the config
+            -- and raises a lot of [duplicate-doc-field] warnings
+            if
+              lib:find(vim.fn.stdpath "config" --[[@as string]], 1, true) > 1
+            then
+              local libs = client.settings.Lua.workspace.library
+              if not vim.tbl_contains(libs, lib) then
+                libs[#libs + 1] = lib
+                do_change = true
+              end
             end
           end
         end
@@ -107,5 +109,37 @@ return {
 
     -- Initial scan
     on_lines()
+  end,
+  on_init = function(client)
+    if client.workspace_folders then
+      local path = client.workspace_folders[1].name
+      if
+        vim.loop.fs_stat(path .. "/.luarc.json")
+        or vim.loop.fs_stat(path .. "/.luarc.jsonc")
+      then
+        return
+      end
+    end
+
+    local runtime_files = {
+      vim.env.VIMRUNTIME,
+      -- Depending on the usage, you might want to add additional paths here.
+      "${3rd}/luv/library",
+      "${3rd}/busted/library",
+    }
+
+    client.config.settings.Lua =
+      vim.tbl_deep_extend("force", client.config.settings.Lua, {
+        runtime = {
+          -- Tell the language server which version of Lua you're using
+          -- (most likely LuaJIT in the case of Neovim)
+          version = "LuaJIT",
+        },
+        -- Make the server aware of Neovim runtime files
+        workspace = {
+          checkThirdParty = false,
+          library = runtime_files,
+        },
+      })
   end,
 }
