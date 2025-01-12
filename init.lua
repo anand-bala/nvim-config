@@ -70,11 +70,11 @@ vim.g.tex_flavor = "latex"
 -- Use smarter complete options
 -- vim.opt.completeopt to have a better completion experience
 vim.opt.completeopt = {
-  "menu",
   "menuone",
-  "preview",
+  "popup",
   "noinsert",
   "noselect",
+  "fuzzy",
 }
 
 -- Avoid showing message extra message when using completion
