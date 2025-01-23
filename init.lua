@@ -139,29 +139,17 @@ vim.keymap.set("v", "<", "<gv", { remap = false })
 vim.keymap.set("v", ">", ">gv", { remap = false })
 
 -- go up/down on visual line
-vim.keymap.set("n", "<Down>", "gj", { remap = false })
-vim.keymap.set("n", "<Up>", "gk", { remap = false })
-vim.keymap.set("v", "<Down>", "gj", { remap = false })
-vim.keymap.set("v", "<Up>", "gk", { remap = false })
-vim.keymap.set("i", "<Down>", "<C-o>gj", { remap = false })
-vim.keymap.set("i", "<Up>", "<C-o>gk", { remap = false })
+vim.keymap.set({ "n", "v" }, "<Down>", "gj", { remap = false, desc = "Move down on visual line" })
+vim.keymap.set({ "n", "v" }, "<Up>", "gk", { remap = false, desc = "Move up on visual line" })
+vim.keymap.set("i", "<Down>", "<C-o>gj", { remap = false, desc = "Move down on visual line" })
+vim.keymap.set("i", "<Up>", "<C-o>gk", { remap = false, desc = "Move up on visual line" })
 
 -- Yank entire line on Y
 vim.keymap.set("n", "Y", "yy", { remap = false })
 
 -- Navigate buffers
-vim.keymap.set(
-  "n",
-  "]b",
-  "<cmd>bnext<cr>",
-  { remap = false, desc = "Move to next buffer in list" }
-)
-vim.keymap.set(
-  "n",
-  "[b",
-  "<cmd>bprevious<cr>",
-  { remap = false, desc = "Move to previous buffer in list" }
-)
+vim.keymap.set("n", "]b", "<cmd>bnext<cr>", { remap = false, desc = "Move to next buffer in list" })
+vim.keymap.set("n", "[b", "<cmd>bprevious<cr>", { remap = false, desc = "Move to previous buffer in list" })
 
 --- Diagnostics
 vim.lsp.inlay_hint.enable(true)
@@ -261,44 +249,13 @@ vim.lsp.enable {
 }
 
 require("_utils").on_attach_hook(function(_, bufnr)
-  vim.keymap.set(
-    { "n", "v" },
-    "<leader><Space>",
-    vim.lsp.buf.code_action,
-    { desc = "Code actions", buffer = bufnr }
-  )
-  vim.keymap.set(
-    { "n" },
-    "<leader>rn",
-    vim.lsp.buf.rename,
-    { desc = "Rename symbol", buffer = bufnr }
-  )
+  vim.keymap.set({ "n", "v" }, "<leader><Space>", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
+  vim.keymap.set({ "n" }, "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol", buffer = bufnr })
 
   local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
   if has_fzf_lua then
-    vim.keymap.set(
-      "n",
-      "<C-]>",
-      fzf_lua.lsp_definitions,
-      { desc = "Go to definitions", buffer = bufnr }
-    )
-    vim.keymap.set(
-      "n",
-      "gr",
-      fzf_lua.lsp_references,
-      { desc = "[G]o to [R]eferences", buffer = bufnr }
-    )
-    vim.keymap.set(
-      "n",
-      "gd",
-      fzf_lua.lsp_references,
-      { desc = "[G]o to References (compat)", buffer = bufnr }
-    )
-    vim.keymap.set(
-      "n",
-      "<C-s>",
-      fzf_lua.lsp_document_symbols,
-      { desc = "Search document symbols", buffer = bufnr }
-    )
+    vim.keymap.set("n", "<C-]>", fzf_lua.lsp_definitions, { desc = "Go to definitions", buffer = bufnr })
+    vim.keymap.set("n", "gr", fzf_lua.lsp_references, { desc = "[G]o to [R]eferences", buffer = bufnr })
+    vim.keymap.set("n", "gd", fzf_lua.lsp_references, { desc = "[G]o to References (compat)", buffer = bufnr })
   end
 end, { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" })

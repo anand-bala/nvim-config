@@ -1,6 +1,4 @@
-if vim.g.loaded_fzf_plugin ~= nil then
-  return
-end
+if vim.g.loaded_fzf_plugin ~= nil then return end
 vim.g.loaded_fzf_plugin = 1
 
 local command = vim.api.nvim_create_user_command
@@ -58,12 +56,6 @@ end)
 command("Helptags", "FzfLua helptags", { force = true })
 command("Buffers", "FzfLua buffers", { force = true })
 
-vim.keymap.set(
-  "n",
-  "<C-f>",
-  "<cmd>FzfLua files<cr>",
-  ---@type vim.keymap.set.Opts
-  { remap = false }
-)
-vim.keymap.set("n", "<C-g>", "<cmd>FzfLua live_grep<cr>", { remap = false })
-vim.keymap.set("n", "<C-b>", "<cmd>FzfLua buffers<cr>", { remap = false })
+vim.keymap.set("n", "<C-f>", "<cmd>FzfLua files<cr>", { remap = false, desc = "Fuzzy search workspace files" })
+vim.keymap.set("n", "<C-g>", "<cmd>FzfLua live_grep<cr>", { remap = false, desc = "Live grep workspace files" })
+vim.keymap.set("n", "<C-b>", "<cmd>FzfLua buffers<cr>", { remap = false, desc = "Fuzzy search open buffers" })
