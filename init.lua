@@ -247,6 +247,19 @@ vim.lsp.enable {
   "texlab",
   "yamlls",
 }
+---@diagnostic disable-next-line: missing-fields
+require("lazydev").setup {
+  runtime = vim.env.VIMRUNTIME --[[@as string]],
+  library = {
+    -- Only load luvit types when the `vim.uv` word is found
+    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+  },
+  integrations = {
+    lspconfig = false,
+    cmp = false,
+    coq = false,
+  },
+}
 
 require("_utils").on_attach_hook(function(_, bufnr)
   vim.keymap.set({ "n", "v" }, "<leader><Space>", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
@@ -259,3 +272,20 @@ require("_utils").on_attach_hook(function(_, bufnr)
     vim.keymap.set("n", "gd", fzf_lua.lsp_references, { desc = "[G]o to References (compat)", buffer = bufnr })
   end
 end, { desc = "LSP: setup default keymaps", group = "LspDefaultKeymaps" })
+local has_hover, hover = pcall(require, "hover")
+if has_hover then
+  vim.keymap.set("n", "K", function()
+    local hover_win = vim.b.hover_preview
+    if hover_win and vim.api.nvim_win_is_valid(hover_win) then
+      vim.api.nvim_set_current_win(hover_win)
+    else
+      ---@diagnostic disable-next-line: missing-parameter
+      hover.hover()
+    end
+  end, { desc = "hover.nvim" })
+  vim.keymap.set("n", "gK", hover.hover_select, { desc = "hover.nvim (select)" })
+  ---@diagnostic disable-next-line: missing-parameter
+  vim.keymap.set("n", "<C-p>", function() hover.hover_switch "previous" end, { desc = "hover.nvim (previous source)" })
+  ---@diagnostic disable-next-line: missing-parameter
+  vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
+end

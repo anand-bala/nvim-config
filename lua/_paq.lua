@@ -47,6 +47,7 @@ paq {
   "nvim-lualine/lualine.nvim",
   "kevinhwang91/nvim-bqf",
   "stevearc/quicker.nvim",
+  "lewis6991/hover.nvim",
 
   -- Coding tools
   "neovim/nvim-lspconfig",
@@ -57,18 +58,7 @@ paq {
   "saghen/blink.compat",
   { "saghen/blink.cmp", build = "cargo build --release", branch = "release" },
   "rafamadriz/friendly-snippets",
-
-  -- "mfussenegger/nvim-lsp-compl",
-
-  -- "hrsh7th/nvim-cmp",
-  -- "hrsh7th/cmp-buffer",
-  -- "hrsh7th/cmp-nvim-lsp",
-  -- "hrsh7th/cmp-nvim-lua",
-  -- "hrsh7th/cmp-omni",
-  -- "hrsh7th/cmp-path",
-  -- "saadparwaiz1/cmp_luasnip",
   "micangl/cmp-vimtex",
-  -- "onsails/lspkind-nvim",
 
   -- Language specific stuff
   "mrcjkb/rustaceanvim",
@@ -77,7 +67,7 @@ paq {
   "lark-parser/vim-lark-syntax",
   "avm99963/vim-jjdescription",
   -- { "vigoux/ltex-ls.nvim", opt = true },
-  -- "folke/lazydev.nvim",
+  "folke/lazydev.nvim",
   "b0o/schemastore.nvim",
 
   -- Helpers

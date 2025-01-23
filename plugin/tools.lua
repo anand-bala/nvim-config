@@ -10,6 +10,20 @@ local augroup = vim.api.nvim_create_augroup
 
 require("oil").setup()
 require("mini.align").setup()
+require("hover").setup {
+  init = function()
+    -- Require providers
+    require "hover.providers.lsp"
+    -- require('hover.providers.gh')
+    -- require('hover.providers.gh_user')
+    -- require('hover.providers.jira')
+    -- require('hover.providers.dap')
+    require "hover.providers.fold_preview"
+    require "hover.providers.diagnostic"
+    require "hover.providers.man"
+    -- require('hover.providers.dictionary')
+  end,
+}
 
 autocmd({ "BufReadPost" }, {
   group = augroup("Lazy loaded tools", { clear = true }),
@@ -56,6 +70,7 @@ require("blink.cmp").setup {
   sources = {
     per_filetype = {
       tex = { "vimtex", "snippets", "path", "buffer" },
+      lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
     },
     default = { "lsp", "snippets", "path", "buffer" },
     providers = {
@@ -71,6 +86,12 @@ require("blink.cmp").setup {
           },
         },
         score_offset = -5,
+      },
+      lazydev = {
+        name = "LazyDev",
+        module = "lazydev.integrations.blink",
+        -- make lazydev completions top priority (see `:h blink.cmp`)
+        score_offset = 100,
       },
       vimtex = {
         name = "vimtex",
