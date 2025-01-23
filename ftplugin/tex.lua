@@ -24,9 +24,7 @@ vim.g.vimtex_compiler_method = function(mainfile)
   if vim.fn.filereadable(mainfile) == 1 then
     local lines = vim.fn.readfile(mainfile, "", 5)
     for _, line in ipairs(lines) do
-      if string.match(line, "^.*arara") then
-        return "arara"
-      end
+      if string.match(line, "^.*arara") then return "arara" end
     end
   end
 
@@ -61,32 +59,25 @@ vim.g.vimtex_toc_show_preamble = 0
 --   end,
 -- })
 
-local vimtex_compile_user_augroup =
-  vim.api.nvim_create_augroup("CustomVimtexCompile", { clear = true })
+local vimtex_compile_user_augroup = vim.api.nvim_create_augroup("CustomVimtexCompile", { clear = true })
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "VimtexEventCompileSuccess",
   group = vimtex_compile_user_augroup,
   desc = "Custom callback for successful vimtex compilation",
-  callback = function()
-    vim.notify("Compilation completed", vim.log.levels.INFO, { title = "VimTeX" })
-  end,
+  callback = function() vim.notify("Compilation completed", vim.log.levels.INFO, { title = "VimTeX" }) end,
 })
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "VimtexEventCompileFailed",
   group = vimtex_compile_user_augroup,
   desc = "Custom callback for failed vimtex compilation",
-  callback = function()
-    vim.notify("Compilation failed!", vim.log.levels.WARN, { title = "VimTeX" })
-  end,
+  callback = function() vim.notify("Compilation failed!", vim.log.levels.WARN, { title = "VimTeX" }) end,
 })
 
 vim.api.nvim_create_autocmd("User", {
   pattern = "VimtexEventCompiling",
   group = vimtex_compile_user_augroup,
   desc = "Custom callback for when vimtex starts compilation",
-  callback = function()
-    vim.notify("Compilation started", vim.log.levels.INFO, { title = "VimTeX" })
-  end,
+  callback = function() vim.notify("Compilation started", vim.log.levels.INFO, { title = "VimTeX" }) end,
 })

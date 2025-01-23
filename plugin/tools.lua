@@ -1,8 +1,6 @@
 ---@diagnostic disable: missing-fields
 
-if vim.g.loaded_tool_plugins ~= nil then
-  return
-end
+if vim.g.loaded_tool_plugins ~= nil then return end
 vim.g.loaded_tool_plugins = 1
 
 local autocmd = vim.api.nvim_create_autocmd
@@ -97,9 +95,7 @@ require("blink.cmp").setup {
         name = "vimtex",
         module = "blink.compat.source",
         override = {
-          get_trigger_characters = function()
-            return { "{", ",", "[", "\\" }
-          end,
+          get_trigger_characters = function() return { "{", ",", "[", "\\" } end,
         },
       },
     },
@@ -145,9 +141,7 @@ autocmd({ "FileType" }, {
     local tools = require("_utils").get_configured_tools(ctx.buf)
     local to_install = {}
     for name, info in pairs(tools) do
-      if not info.available then
-        table.insert(to_install, name)
-      end
+      if not info.available then table.insert(to_install, name) end
     end
     require("_utils").mason_install(to_install)
   end,
@@ -177,10 +171,7 @@ require("conform").setup {
   },
   format_on_save = function(bufnr)
     -- Disable with a global or buffer-local variable
-    if
-      vim.b[bufnr].enable_autoformat
-      or (vim.b[bufnr].enable_autoformat == nil and vim.g.enable_autoformat)
-    then
+    if vim.b[bufnr].enable_autoformat or (vim.b[bufnr].enable_autoformat == nil and vim.g.enable_autoformat) then
       return vim.g.formatting_opts or {}
     end
   end,
@@ -197,15 +188,11 @@ local function set_autoformat(set, buf_only)
   end
 end
 
-vim.api.nvim_create_user_command("FormatDisable", function(args)
-  set_autoformat(false, args.bang)
-end, {
+vim.api.nvim_create_user_command("FormatDisable", function(args) set_autoformat(false, args.bang) end, {
   desc = "Disable autoformat-on-save (use ! for buffer only)",
   bang = true,
 })
-vim.api.nvim_create_user_command("FormatEnable", function(args)
-  set_autoformat(true, args.bang)
-end, {
+vim.api.nvim_create_user_command("FormatEnable", function(args) set_autoformat(true, args.bang) end, {
   desc = "Re-enable autoformat-on-save (use ! for buffer only)",
   bang = true,
 })

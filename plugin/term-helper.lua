@@ -1,8 +1,6 @@
 -- Minimal helpers for built-in terminal
 
-if vim.g.loaded_term_helper then
-  return
-end
+if vim.g.loaded_term_helper then return end
 
 local cmd = vim.api.nvim_create_user_command
 local map = vim.keymap.set
@@ -23,9 +21,7 @@ function term_helper.open_buffer(opts)
     error "Invalid options for open_buffer. Needs table."
   end
 
-  if opts.tab and opts.vertical then
-    error "Can't have `tab` and `vertical` options both true"
-  end
+  if opts.tab and opts.vertical then error "Can't have `tab` and `vertical` options both true" end
 
   local command = ""
   if opts.tab then
@@ -60,37 +56,25 @@ function term_helper.open_term(args, opts)
   vim.o.shell = prev_shell
 end
 
-function term_helper.split_term(args, count)
-  term_helper.open_term(args, { vertical = false, size = count })
-end
+function term_helper.split_term(args, count) term_helper.open_term(args, { vertical = false, size = count }) end
 
-function term_helper.vsplit_term(args, count)
-  term_helper.open_term(args, { vertical = true, size = count })
-end
+function term_helper.vsplit_term(args, count) term_helper.open_term(args, { vertical = true, size = count }) end
 
-function term_helper.tab_term(args)
-  term_helper.open_term(args, { tab = true, vertical = false })
-end
+function term_helper.tab_term(args) term_helper.open_term(args, { tab = true, vertical = false }) end
 
-cmd("Term", function(args)
-  term_helper.split_term(args.args, args.count)
-end, {
+cmd("Term", function(args) term_helper.split_term(args.args, args.count) end, {
   force = true,
   count = true,
   nargs = "*",
 })
 
-cmd("VTerm", function(args)
-  term_helper.vsplit_term(args.args, args.count)
-end, {
+cmd("VTerm", function(args) term_helper.vsplit_term(args.args, args.count) end, {
   force = true,
   count = true,
   nargs = "*",
 })
 
-cmd("TTerm", function(args)
-  term_helper.tab_term(args.args)
-end, {
+cmd("TTerm", function(args) term_helper.tab_term(args.args) end, {
   force = true,
   nargs = "*",
 })

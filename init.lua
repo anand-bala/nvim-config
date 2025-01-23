@@ -166,9 +166,7 @@ vim.diagnostic.config {
     severity = vim.diagnostic.severity.ERROR,
     spacing = 4,
     source = true,
-    prefix = function(diagnostic)
-      return diagnostic_icons[diagnostic.severity]
-    end,
+    prefix = function(diagnostic) return diagnostic_icons[diagnostic.severity] end,
   },
   signs = {
     text = diagnostic_icons,
@@ -180,26 +178,30 @@ vim.diagnostic.config {
 }
 
 vim.keymap.set("n", "<leader>ld", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", function()
-  vim.diagnostic.jump { float = true, count = -1 }
-end)
-vim.keymap.set("n", "]d", function()
-  vim.diagnostic.jump { float = true, count = 1 }
-end)
-vim.keymap.set("n", "[D", function()
-  vim.diagnostic.jump {
-    float = true,
-    count = -1,
-    severity = vim.diagnostic.severity.ERROR,
-  }
-end)
-vim.keymap.set("n", "]D", function()
-  vim.diagnostic.jump {
-    float = true,
-    count = 1,
-    severity = vim.diagnostic.severity.ERROR,
-  }
-end)
+vim.keymap.set("n", "[d", function() vim.diagnostic.jump { float = true, count = -1 } end)
+vim.keymap.set("n", "]d", function() vim.diagnostic.jump { float = true, count = 1 } end)
+vim.keymap.set(
+  "n",
+  "[D",
+  function()
+    vim.diagnostic.jump {
+      float = true,
+      count = -1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
+  end
+)
+vim.keymap.set(
+  "n",
+  "]D",
+  function()
+    vim.diagnostic.jump {
+      float = true,
+      count = 1,
+      severity = vim.diagnostic.severity.ERROR,
+    }
+  end
+)
 
 vim.api.nvim_create_user_command("Diagnostics", function(args)
   local severity = vim.diagnostic.severity[args.args] or nil
@@ -217,9 +219,7 @@ vim.api.nvim_create_user_command("Diagnostics", function(args)
   -- end
 end, {
   desc = "Adds LSP diagnostic to the Quickfix list",
-  complete = function()
-    return { "ERROR", "WARN", "HINT", "INFO" }
-  end,
+  complete = function() return { "ERROR", "WARN", "HINT", "INFO" } end,
   nargs = "?",
 })
 

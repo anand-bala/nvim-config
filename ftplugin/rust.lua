@@ -29,8 +29,6 @@ vim.g.rustaceanvim = {
   },
 }
 
-onattach(function(_, buffer)
-  vim.lsp.inlay_hint.enable(false, { bufnr = buffer })
-end, {
+onattach(function(_, buffer) vim.lsp.inlay_hint.enable(false, { bufnr = buffer }) end, {
   desc = "disable LSP inlay hints for Rust. Use rust-tools.",
 })
