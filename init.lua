@@ -247,19 +247,22 @@ vim.lsp.enable {
   "texlab",
   "yamlls",
 }
----@diagnostic disable-next-line: missing-fields
-require("lazydev").setup {
-  runtime = vim.env.VIMRUNTIME --[[@as string]],
-  library = {
-    -- Only load luvit types when the `vim.uv` word is found
-    { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-  },
-  integrations = {
-    lspconfig = false,
-    cmp = false,
-    coq = false,
-  },
-}
+local has_lazydev, lazydev = pcall(require, "lazydev")
+if has_lazydev then
+  ---@diagnostic disable-next-line: missing-fields
+  lazydev.setup {
+    runtime = vim.env.VIMRUNTIME --[[@as string]],
+    library = {
+      -- Only load luvit types when the `vim.uv` word is found
+      { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+    },
+    integrations = {
+      lspconfig = false,
+      cmp = false,
+      coq = false,
+    },
+  }
+end
 
 require("_utils").on_attach_hook(function(_, bufnr)
   vim.keymap.set({ "n", "v" }, "<leader><Space>", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
