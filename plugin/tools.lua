@@ -101,16 +101,14 @@ require("blink.cmp").setup {
     },
     cmdline = {},
   },
-  fuzzy = { use_typo_resistance = false },
   signature = { enabled = true },
   -- completion = { accept = { auto_brackets = { enabled = true } } },
   completion = {
     list = {
-      selection = "manual",
-      -- selection = {
-      --   preselect = false,
-      --   auto_insert = false,
-      -- },
+      selection = {
+        preselect = false,
+        auto_insert = false,
+      },
     },
     accept = {
       auto_brackets = {
