@@ -67,8 +67,8 @@ require("blink.cmp").setup {
   },
   sources = {
     per_filetype = {
-      tex = { "vimtex", "snippets", "path", "buffer" },
-      lua = { "lazydev", "lsp", "path", "snippets", "buffer" },
+      tex = { "vimtex", "lsp", "snippets", "path", "buffer" },
+      lua = { "lazydev", "lsp", "snippets", "path" },
     },
     default = { "lsp", "snippets", "path", "buffer" },
     providers = {
@@ -93,10 +93,12 @@ require("blink.cmp").setup {
       },
       vimtex = {
         name = "vimtex",
-        module = "blink.compat.source",
-        override = {
-          get_trigger_characters = function() return { "{", ",", "[", "\\" } end,
-        },
+        module = "integration.blink.vimtex",
+        -- module = "blink.compat.source",
+        -- override = {
+        --   get_trigger_characters = function() return { "{", ",", "[", "\\" } end,
+        -- },
+        fallbacks = { "lsp" },
       },
     },
     cmdline = {},

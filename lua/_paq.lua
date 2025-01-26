@@ -58,7 +58,7 @@ paq {
   "saghen/blink.compat",
   { "saghen/blink.cmp", build = "cargo build --release" },
   "rafamadriz/friendly-snippets",
-  "micangl/cmp-vimtex",
+  -- "micangl/cmp-vimtex",
 
   -- Language specific stuff
   "mrcjkb/rustaceanvim",
