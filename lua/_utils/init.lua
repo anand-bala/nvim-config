@@ -1,11 +1,11 @@
 local M = {}
 
-local has_mason, mason_registry = pcall(require, "mason-registry")
-local has_masonlsp, mason_lspconfig = pcall(require, "mason-lspconfig")
-
 ---Install tool using mason, if mason is present
 ---@param tools string[]
 function M.mason_install(tools)
+  local has_mason, mason_registry = pcall(require, "mason-registry")
+  local has_masonlsp, mason_lspconfig = pcall(require, "mason-lspconfig")
+
   if not has_mason then return end
   local notify = require "mason-core.notify"
   local show = vim.schedule_wrap(function(msg) notify(msg, vim.log.levels.INFO) end)

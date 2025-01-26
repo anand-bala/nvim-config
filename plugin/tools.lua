@@ -147,6 +147,25 @@ autocmd({ "FileType" }, {
   end,
 })
 
+-- Hovering
+local has_hover, hover = pcall(require, "hover")
+if has_hover then
+  vim.keymap.set("n", "K", function()
+    local hover_win = vim.b.hover_preview
+    if hover_win and vim.api.nvim_win_is_valid(hover_win) then
+      vim.api.nvim_set_current_win(hover_win)
+    else
+      ---@diagnostic disable-next-line: missing-parameter
+      hover.hover()
+    end
+  end, { desc = "hover.nvim" })
+  vim.keymap.set("n", "gK", hover.hover_select, { desc = "hover.nvim (select)" })
+  ---@diagnostic disable-next-line: missing-parameter
+  vim.keymap.set("n", "<C-p>", function() hover.hover_switch "previous" end, { desc = "hover.nvim (previous source)" })
+  ---@diagnostic disable-next-line: missing-parameter
+  vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
+end
+
 -- Formatting
 vim.g.formatting_opts = vim.g.formatting_opts or {}
 vim.g.enable_autoformat = vim.g.enable_autoformat or true
