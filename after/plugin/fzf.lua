@@ -42,12 +42,12 @@ vim.schedule(function()
     },
     files = {
       fzf_opts = {
-        ["--history"] = vim.fn.stdpath "data" .. "/fzf-lua-files-history",
+        ["--history"] = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "/fzf-lua-files-history"),
       },
     },
     grep = {
       fzf_opts = {
-        ["--history"] = vim.fn.stdpath "data" .. "/fzf-lua-grep-history",
+        ["--history"] = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "/fzf-lua-grep-history"),
       },
     },
   }

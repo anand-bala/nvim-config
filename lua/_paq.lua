@@ -1,6 +1,6 @@
 do
-  local path_package = vim.fn.stdpath "data" .. "/site/"
-  local paq_path = path_package .. "pack/deps/start/paq-nvim"
+  local path_package = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "site")
+  local paq_path = vim.fs.joinpath(path_package, "pack/deps/start/paq-nvim")
   if not vim.uv.fs_stat(paq_path) then
     vim.cmd 'echo "Installing `paq-nvim`" | redraw'
     local clone_cmd = {

@@ -14,13 +14,10 @@ vim.opt.shadafile = (function()
   local data = vim.fn.stdpath "state"
   assert(type(data) == "string")
 
-  local cwd = vim.fn.getcwd()
-  local project_root = require("_utils").get_vcs_root() or cwd
-  local project_b64 = vim.base64.encode(project_root)
-
+  local project_root = vim.trim(require("_utils").get_vcs_root() or vim.fn.getcwd())
+  local project_b64 = vim.base64.encode(vim.fn.fnamemodify(project_root, ":p"))
   local file = vim.fs.joinpath(data, "shada", project_b64 .. ".shada")
   vim.fn.mkdir(vim.fs.dirname(file), "p")
-
   return file
 end)()
 

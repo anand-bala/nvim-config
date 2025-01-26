@@ -199,8 +199,8 @@ vim.api.nvim_create_user_command("FormatEnable", function(args) set_autoformat(t
 vim.g.matchup_matchparen_offscreen = { method = "popup" }
 vim.g.matchup_override_vimtex = 1
 vim.g.matchup_surround_enabled = 1
-vim.g.abolish_save_file = vim.fn.stdpath "config" .. "/after/plugin/abolish.vim"
+vim.g.abolish_save_file = vim.fs.joinpath(vim.fn.stdpath "config" --[[@as string]], "/after/plugin/abolish.vim")
 
-vim.g.prosession_dir = vim.fn.stdpath "data" .. "/sessions/"
+vim.g.prosession_dir = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "/sessions/")
 vim.g.procession_ignore_dirs = { "~" }
 vim.g.prosession_on_startup = 0
