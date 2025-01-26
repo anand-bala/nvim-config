@@ -206,3 +206,5 @@ vim.g.abolish_save_file = vim.fs.joinpath(vim.fn.stdpath "config" --[[@as string
 vim.g.prosession_dir = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "/sessions/")
 vim.g.procession_ignore_dirs = { "~" }
 vim.g.prosession_on_startup = 0
+
+vim.g.startuptime_event_width = 0
