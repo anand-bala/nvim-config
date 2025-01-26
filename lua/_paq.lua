@@ -28,7 +28,6 @@ paq {
   "stevearc/oil.nvim",
   "andymass/vim-matchup",
   "echasnovski/mini.align",
-  -- "junegunn/vim-easy-align",
   "echasnovski/mini.ai",
   "rafikdraoui/jj-diffconflicts",
 
@@ -36,10 +35,7 @@ paq {
   { "junegunn/fzf", build = "./install --bin" },
   { "ibhagwan/fzf-lua", branch = "main" },
 
-  -- { "nvim-telescope/telescope.nvim", branch = "0.1.x", opt = true },
-
   -- UI stuff
-  -- "echasnovski/mini.notify",
   "rcarriga/nvim-notify",
   "EdenEast/nightfox.nvim",
   "lewis6991/gitsigns.nvim",
@@ -58,7 +54,6 @@ paq {
   "saghen/blink.compat",
   { "saghen/blink.cmp", build = "cargo build --release" },
   "rafamadriz/friendly-snippets",
-  -- "micangl/cmp-vimtex",
 
   -- Language specific stuff
   "mrcjkb/rustaceanvim",
@@ -66,7 +61,6 @@ paq {
   "preservim/vim-markdown",
   "lark-parser/vim-lark-syntax",
   "avm99963/vim-jjdescription",
-  -- { "vigoux/ltex-ls.nvim", opt = true },
   "folke/lazydev.nvim",
   "b0o/schemastore.nvim",
 
@@ -79,7 +73,6 @@ paq {
 
   -- Common Dependencies
   "nvim-lua/plenary.nvim",
-  -- "nvim-tree/nvim-web-devicons",
   "echasnovski/mini.icons",
 }
 

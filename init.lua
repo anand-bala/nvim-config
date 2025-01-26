@@ -203,17 +203,6 @@ vim.keymap.set(
 vim.api.nvim_create_user_command("Diagnostics", function(args)
   local severity = vim.diagnostic.severity[args.args] or nil
   vim.diagnostic.setqflist { severity = severity }
-  -- if args.args == "ERROR" then
-  --   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.ERROR }
-  -- elseif args.args == "WARN" then
-  --   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.WARN }
-  -- elseif args.args == "HINT" then
-  --   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.HINT }
-  -- elseif args.args == "INFO" then
-  --   vim.diagnostic.setqflist { severity = vim.diagnostic.severity.INFO }
-  -- else
-  --   vim.diagnostic.setqflist {}
-  -- end
 end, {
   desc = "Adds LSP diagnostic to the Quickfix list",
   complete = function() return { "ERROR", "WARN", "HINT", "INFO" } end,
