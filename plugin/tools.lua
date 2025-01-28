@@ -22,6 +22,7 @@ require("hover").setup {
     -- require('hover.providers.dictionary')
   end,
 }
+require("overseer").setup()
 
 autocmd({ "BufReadPost" }, {
   group = augroup("Lazy loaded tools", { clear = true }),

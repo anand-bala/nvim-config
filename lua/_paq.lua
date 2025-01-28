@@ -30,6 +30,7 @@ paq {
   "echasnovski/mini.align",
   "echasnovski/mini.ai",
   "rafikdraoui/jj-diffconflicts",
+  "stevearc/overseer.nvim",
 
   -- Fuzzy finders
   { "junegunn/fzf", build = "./install --bin" },
