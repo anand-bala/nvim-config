@@ -47,7 +47,7 @@ paq {
   "lewis6991/hover.nvim",
 
   -- Coding tools
-  "neovim/nvim-lspconfig",
+  -- "neovim/nvim-lspconfig",
   "stevearc/conform.nvim",
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
