@@ -9,9 +9,10 @@ let g:vimtex_format_enabled = 1
 let g:vimtex_compiler_enabled = 1
 
 let g:vimtex_quickfix_mode = 1
-let g:vimtex_complete_bib = {
-      \ "info_fmt": "@author_short (@year), \"@title\""
-      \}
+if !exists("g:vimtex_complete_bib")
+  let g:vimtex_complete_bib  = {}
+endif
+let g:vimtex_complete_bib.info_fmt = "@author_short (@year), \"@title\""
 let g:vimtex_view_method = "zathura"
 let g:vimtex_view_forward_search_on_start = 0
 let g:vimtex_view_automatic = 0
@@ -35,5 +36,4 @@ function! SetCompilerMethod(mainfile)
 endfunction
 let g:vimtex_compiler_method = 'SetCompilerMethod'
 let g:vimtex_compiler_silent = 0
-
 

@@ -42,9 +42,12 @@ function VIMTEX_OMNI_TO_LSP_KIND:_find_lsp_kind(kind_text)
 end
 
 ---Get completion candidates from vimtex#complete#omnifunc
+---@param ctx blink.cmp.Context
+---@param callback fun(response?: blink.cmp.CompletionResponse)
+---@return (fun():nil)?
 function source:get_completions(ctx, callback)
   local offset_0 = vim.fn["vimtex#complete#omnifunc"](1, "")
-  if type(offset_0) ~= "number" then
+  if type(offset_0) ~= "number" or offset_0 <= -2 then
     callback()
     ---@diagnostic disable-next-line: missing-return
     return
