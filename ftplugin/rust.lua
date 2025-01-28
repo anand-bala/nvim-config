@@ -1,5 +1,3 @@
-local onattach = require("_utils").on_attach_hook
-
 vim.opt.textwidth = 88
 
 vim.g.rustaceanvim = {
@@ -29,6 +27,7 @@ vim.g.rustaceanvim = {
   },
 }
 
-onattach(function(_, buffer) vim.lsp.inlay_hint.enable(false, { bufnr = buffer }) end, {
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(event) vim.lsp.inlay_hint.enable(false, { bufnr = event.buf }) end,
   desc = "disable LSP inlay hints for Rust. Use rust-tools.",
 })
