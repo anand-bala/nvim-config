@@ -56,6 +56,25 @@ autocmd({ "BufReadPost" }, {
   end,
 })
 
+require("mini.snippets").setup {
+  snippets = {
+    -- Load snippets based on current language by reading files from
+    -- "snippets/" subdirectories from 'runtimepath' directories.
+    require("mini.snippets").gen_loader.from_lang(),
+  },
+  -- Module mappings. Use `''` (empty string) to disable one.
+  mappings = {
+    -- Expand snippet at cursor position. Created globally in Insert mode.
+    expand = "",
+
+    -- Interact with default `expand.insert` session.
+    -- Created for the duration of active session(s)
+    jump_next = "",
+    jump_prev = "",
+    stop = "",
+  },
+}
+
 vim.lsp.config("*", {
   capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
 })
@@ -104,6 +123,7 @@ require("blink.cmp").setup {
     },
     cmdline = {},
   },
+  snippets = { preset = "mini_snippets" },
   signature = { enabled = true },
   -- completion = { accept = { auto_brackets = { enabled = true } } },
   completion = {

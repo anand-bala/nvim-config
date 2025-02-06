@@ -54,6 +54,7 @@ paq {
 
   "saghen/blink.compat",
   { "saghen/blink.cmp", build = "cargo build --release" },
+  "echasnovski/mini.snippets",
   "rafamadriz/friendly-snippets",
 
   -- Language specific stuff
