@@ -176,12 +176,12 @@ require("conform").setup {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "isort", "black" },
-    javascript = { "biome", stop_after_first = true },
+    -- javascript = { "biome", stop_after_first = true },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
     cmake = { "gersemi" },
     tex = { "latexindent" },
-    markdown = { "injected", "mdformat" },
+    markdown = { "injected" },
     matlab = { timeout_ms = 5000 },
   },
   formatters = {

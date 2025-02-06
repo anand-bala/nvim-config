@@ -224,6 +224,7 @@ vim.lsp.config("*", {
 
 vim.lsp.enable {
   "bashls",
+  "biome",
   "clangd",
   "jsonls",
   "lua_ls",
