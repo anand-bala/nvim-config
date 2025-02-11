@@ -1,7 +1,3 @@
-setlocal spell
-setlocal spellfile="project.utf-8.add"
-setlocal textwidth=80
-
 let g:vimtex_mappings_enabled = 1
 let g:vimtex_complete_enabled = 1
 let g:vimtex_view_enabled = 1
