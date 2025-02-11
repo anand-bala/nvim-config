@@ -45,7 +45,12 @@ autocmd({ "VimEnter" }, {
   callback = function()
     require("gitsigns").setup()
     require("dressing").setup()
-    require("bqf").setup()
+    require("bqf").setup {
+      ---@diagnostic disable-next-line: missing-fields
+      preview = {
+        winblend = 0,
+      },
+    }
     require("quicker").setup()
     require("lualine").setup {
       options = {
