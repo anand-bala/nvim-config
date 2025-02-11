@@ -1,6 +1,7 @@
+local paq_dir = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "/site/pack/paqs/")
+
 do
-  local path_package = vim.fs.joinpath(vim.fn.stdpath "data" --[[@as string]], "site")
-  local paq_path = vim.fs.joinpath(path_package, "pack/deps/start/paq-nvim")
+  local paq_path = vim.fs.joinpath(paq_dir, "/start/paq-nvim")
   if not vim.uv.fs_stat(paq_path) then
     vim.cmd 'echo "Installing `paq-nvim`" | redraw'
     local clone_cmd = {
@@ -16,9 +17,11 @@ do
   end
 end
 
-local paq = require "paq"
+local paq = require("paq"):setup { path = paq_dir }
 
 paq {
+  "savq/paq-nvim", -- Let Paq manage itself
+
   -- Everyday tools
   "tpope/vim-commentary",
   "tpope/vim-obsession",
