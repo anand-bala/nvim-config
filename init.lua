@@ -151,6 +151,12 @@ vim.keymap.set({ "n", "v" }, "<Up>", "gk", { remap = false, desc = "Move up on v
 vim.keymap.set("i", "<Down>", "<C-o>gj", { remap = false, desc = "Move down on visual line" })
 vim.keymap.set("i", "<Up>", "<C-o>gk", { remap = false, desc = "Move up on visual line" })
 
+-- Center text after page up and down
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Half page up" })
+vim.keymap.set("n", "<PageUp>", "<PageUp>zz", { desc = "Page up" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Half page down" })
+vim.keymap.set("n", "<PageDown>", "<PageDown>zz", { desc = "Page down" })
+
 -- Yank entire line on Y
 vim.keymap.set("n", "Y", "yy", { remap = false })
 
