@@ -69,6 +69,12 @@ require("blink.cmp").setup {
     ["<C-j>"] = { "snippet_forward" },
     ["<C-p>"] = { "show", "select_prev", "fallback" },
     ["<C-n>"] = { "show", "select_next", "fallback" },
+    cmdline = {
+      preset = "enter",
+      ["<CR>"] = { "accept_and_enter", "fallback" },
+      ["<Tab>"] = { "show_and_insert", "select_next", "fallback" },
+      ["<S-Tab>"] = { "show", "select_prev", "fallback" },
+    },
   },
   sources = {
     per_filetype = {
@@ -106,15 +112,15 @@ require("blink.cmp").setup {
         fallbacks = { "lsp" },
       },
     },
-    cmdline = {},
+    -- cmdline = {},
   },
   signature = { enabled = true },
   -- completion = { accept = { auto_brackets = { enabled = true } } },
   completion = {
     list = {
       selection = {
-        preselect = false,
-        auto_insert = false,
+        preselect = function(ctx) return ctx.mode == "cmdline" end,
+        auto_insert = function(ctx) return ctx.mode == "cmdline" end,
       },
     },
     accept = {
@@ -125,12 +131,13 @@ require("blink.cmp").setup {
       },
     },
     menu = {
-      draw = {
-        columns = {
-          { "label", "label_description", gap = 1 },
-          { "kind_icon", "kind", gap = 1 },
-        },
-      },
+      auto_show = function(ctx) return ctx.mode ~= "cmdline" end,
+      -- draw = {
+      --   columns = {
+      --     -- { "label", "label_description", gap = 1 },
+      --     -- { "kind_icon", "kind", gap = 1 },
+      --   },
+      -- },
     },
     -- documentation = { auto_show = true },
   },
