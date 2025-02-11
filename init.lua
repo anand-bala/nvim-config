@@ -80,6 +80,16 @@ if vim.fn.has "nvim-0.9.0" == 1 then
   vim.opt.shortmess:append { C = true }
 end
 
+-- Better cmdline menu options
+vim.opt.wildmode = {
+  "longest",
+  "full",
+}
+vim.opt.wildoptions = {
+  "pum",
+  "fuzzy",
+}
+
 -- GUI options
 vim.opt.mouse = "a" -- Enable mouse mode
 vim.opt.showmode = false -- Don't show mode since we are using statusline
