@@ -8,6 +8,9 @@ local augroup = vim.api.nvim_create_augroup
 
 require("oil").setup()
 require("mini.align").setup()
+require("helpview").setup {
+  preview = "mini",
+}
 require("hover").setup {
   init = function()
     -- Require providers
@@ -43,6 +46,7 @@ autocmd({ "BufReadPost" }, {
         "regex",
         "rust",
         "vim",
+        "vimdoc",
       },
       highlight = { enable = true, disable = { "latex" } },
       indent = { enable = true },
