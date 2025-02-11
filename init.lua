@@ -242,6 +242,7 @@ vim.lsp.enable {
   "bashls",
   "biome",
   "clangd",
+  -- "digestif",
   "jsonls",
   "lua_ls",
   "pyright",
