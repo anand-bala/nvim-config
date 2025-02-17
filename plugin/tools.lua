@@ -194,7 +194,7 @@ require("conform").setup {
     bash = { "shfmt", "shellharden" },
     cmake = { "gersemi" },
     tex = { "latexindent" },
-    markdown = { "injected" },
+    markdown = { "injected", "mdformat" },
     matlab = { timeout_ms = 5000 },
   },
   formatters = {
