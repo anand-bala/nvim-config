@@ -69,7 +69,9 @@ require("blink.cmp").setup {
     ["<C-j>"] = { "snippet_forward" },
     ["<C-p>"] = { "show", "select_prev", "fallback" },
     ["<C-n>"] = { "show", "select_next", "fallback" },
-    cmdline = {
+  },
+  cmdline = {
+    keymap = {
       preset = "enter",
       ["<CR>"] = { "accept_and_enter", "fallback" },
       ["<Tab>"] = { "show_and_insert", "select_next", "fallback" },
