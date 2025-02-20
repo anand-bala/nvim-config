@@ -8,7 +8,8 @@ let g:vimtex_view_enabled = 1
 let g:vimtex_format_enabled = 1
 let g:vimtex_compiler_enabled = 1
 
-let g:vimtex_quickfix_mode = 1
+let g:vimtex_quickfix_mode = 0
+
 if !exists("g:vimtex_complete_bib")
   let g:vimtex_complete_bib  = {}
 endif
