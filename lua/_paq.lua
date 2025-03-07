@@ -33,6 +33,7 @@ paq {
   "echasnovski/mini.align",
   "echasnovski/mini.ai",
   "rafikdraoui/jj-diffconflicts",
+  "whiteinge/diffconflicts",
   "stevearc/overseer.nvim",
 
   -- Fuzzy finders
