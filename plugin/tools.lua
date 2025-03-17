@@ -72,10 +72,8 @@ require("blink.cmp").setup {
   },
   cmdline = {
     keymap = {
-      preset = "enter",
+      -- ["<Tab>"] = { "show", "accept" },
       ["<CR>"] = { "accept_and_enter", "fallback" },
-      ["<Tab>"] = { "show_and_insert", "select_next", "fallback" },
-      ["<S-Tab>"] = { "show", "select_prev", "fallback" },
     },
   },
   sources = {
@@ -113,26 +111,32 @@ require("blink.cmp").setup {
         -- },
         fallbacks = { "lsp" },
       },
+      cmdline = {
+        min_keyword_length = function(ctx)
+          -- when typing a command, only show when the keyword is 3 characters or longer
+          if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then return 3 end
+          return 0
+        end,
+      },
     },
     -- cmdline = {},
   },
   signature = { enabled = true },
   -- completion = { accept = { auto_brackets = { enabled = true } } },
   completion = {
-    list = {
-      selection = {
-        preselect = function(ctx) return ctx.mode == "cmdline" end,
-        auto_insert = function(ctx) return ctx.mode == "cmdline" end,
-      },
-    },
-    accept = {
-      auto_brackets = {
-        override_brackets_for_filetypes = {
-          tex = { "{", "}" },
-        },
-      },
-    },
-    menu = { auto_show = function(ctx) return ctx.mode ~= "cmdline" end },
+    -- list = {
+    --   selection = {
+    --     preselect = function(ctx) return ctx.mode == "cmdline" end,
+    --     auto_insert = function(ctx) return ctx.mode == "cmdline" end,
+    --   },
+    -- },
+    -- accept = {
+    --   auto_brackets = {
+    --     override_brackets_for_filetypes = {
+    --       tex = { "{", "}" },
+    --     },
+    --   },
+    -- },
   },
 }
 
