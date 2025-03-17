@@ -242,15 +242,16 @@ vim.lsp.enable {
   "bashls",
   "biome",
   "clangd",
-  -- "digestif",
+  "harper_ls",
   "jsonls",
   "lua_ls",
   "pyright",
   "ruff",
   "taplo",
   "texlab",
-  "yamlls",
   "vimls",
+  "yamlls",
+  -- "digestif",
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
