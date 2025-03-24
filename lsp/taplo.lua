@@ -1,4 +1,4 @@
 return {
-  cmd = { "taplo", "lsp", "stdio" },
+  cmd = { "bunx", "taplo", "lsp", "stdio" },
   filetypes = { "toml" },
 }

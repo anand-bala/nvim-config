@@ -1,6 +1,6 @@
 ---@type vim.lsp.ClientConfig
 return {
-  cmd = { "biome", "lsp-proxy" },
+  cmd = { "bunx", "biome", "lsp-proxy" },
   filetypes = {
     "astro",
     "css",

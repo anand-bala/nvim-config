@@ -1,6 +1,6 @@
 ---@type vim.lsp.ClientConfig
 return {
-  cmd = { "vim-language-server", "--stdio" },
+  cmd = { "bunx", "vim-language-server", "--stdio" },
   filetypes = { "vim" },
   root_markers = {
     "runtime",
