@@ -1,4 +1,5 @@
 local pyright = vim.fn.executable "basedpyright" == 1 and "basedpyright" or "pyright"
+---@type vim.lsp.Config
 return {
   cmd = { pyright .. "-langserver", "--stdio" },
   filetypes = { "python" },
@@ -24,8 +25,14 @@ return {
       },
     },
     basedpyright = {
+      autoSearchPaths = true,
+      useLibraryCodeForTypes = true,
+      diagnosticMode = "openFilesOnly",
+      inlayHints = {
+        callArgumentNames = true,
+      },
       analysis = {
-        typeCheckingMode = "strict",
+        useTypingExtensions = true,
       },
     },
   },
