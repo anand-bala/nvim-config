@@ -7,8 +7,7 @@ return {
   },
   settings = {
     buffer = {
-      enable = true,
-      matchStrategy = "exact", -- or 'fuzzy'
+      enable = false,
     },
     path = {
       enable = true,
