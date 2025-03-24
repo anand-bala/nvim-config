@@ -54,7 +54,7 @@ function M.get_configured_tools(bufnr)
   -- check lsp stuff
   for name in vim.spairs(vim.lsp._enabled_configs) do
     local config = (vim.lsp._resolve_config and vim.lsp._resolve_config(name)) or vim.lsp.config[name]
-    if vim.tbl_contains(config.filetypes or {}, ft) and type(config.cmd) == "table" and config.cmd[1] ~= nil then
+    if vim.tbl_contains(config.filetypes or { ft }, ft) and type(config.cmd) == "table" and config.cmd[1] ~= nil then
       tools[name] = {
         command = config.cmd[1],
         available = vim.fn.executable(config.cmd[1]) == 1,
