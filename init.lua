@@ -64,14 +64,6 @@ vim.g.tex_conceal = "abdgm"
 vim.g.tex_flavor = "latex"
 
 -- Use smarter complete options
--- vim.opt.completeopt to have a better completion experience
-vim.opt.completeopt = {
-  "menuone",
-  "popup",
-  "noinsert",
-  "noselect",
-  "fuzzy",
-}
 
 -- Avoid showing message extra message when using completion
 vim.opt.shortmess:append { W = true, I = true, c = true }
@@ -82,11 +74,19 @@ end
 
 -- Better cmdline menu options
 vim.opt.wildmode = {
-  "longest",
   "full",
 }
 vim.opt.wildoptions = {
   "pum",
+  "fuzzy",
+}
+
+-- vim.opt.completeopt to have a better completion experience
+vim.opt.completeopt = {
+  "menuone",
+  "popup",
+  "noinsert",
+  "noselect",
   "fuzzy",
 }
 

@@ -8,23 +8,37 @@ local augroup = vim.api.nvim_create_augroup
 
 require("oil").setup()
 require("mini.align").setup()
-require("helpview").setup {
-  preview = "mini",
-}
-require("hover").setup {
-  init = function()
-    -- Require providers
-    require "hover.providers.lsp"
-    -- require('hover.providers.gh')
-    -- require('hover.providers.gh_user')
-    -- require('hover.providers.jira')
-    -- require('hover.providers.dap')
-    require "hover.providers.fold_preview"
-    require "hover.providers.diagnostic"
-    require "hover.providers.man"
-    -- require('hover.providers.dictionary')
-  end,
-}
+do
+  local hover = require "hover"
+  hover.setup {
+    init = function()
+      -- Require providers
+      require "hover.providers.lsp"
+      -- require('hover.providers.gh')
+      -- require('hover.providers.gh_user')
+      -- require('hover.providers.jira')
+      -- require('hover.providers.dap')
+      require "hover.providers.fold_preview"
+      require "hover.providers.diagnostic"
+      require "hover.providers.man"
+      -- require('hover.providers.dictionary')
+    end,
+  }
+  vim.keymap.set("n", "K", function()
+    local hover_win = vim.b.hover_preview
+    if hover_win and vim.api.nvim_win_is_valid(hover_win) then
+      vim.api.nvim_set_current_win(hover_win)
+    else
+      ---@diagnostic disable-next-line: missing-parameter
+      hover.hover()
+    end
+  end, { desc = "hover.nvim" })
+  vim.keymap.set("n", "gK", hover.hover_select, { desc = "hover.nvim (select)" })
+  ---@diagnostic disable-next-line: missing-parameter
+  vim.keymap.set("n", "<C-p>", function() hover.hover_switch "previous" end, { desc = "hover.nvim (previous source)" })
+  ---@diagnostic disable-next-line: missing-parameter
+  vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
+end
 require("overseer").setup()
 
 autocmd({ "BufReadPost" }, {
@@ -104,25 +118,6 @@ autocmd({ "FileType" }, {
   end,
 })
 
--- Hovering
-local has_hover, hover = pcall(require, "hover")
-if has_hover then
-  vim.keymap.set("n", "K", function()
-    local hover_win = vim.b.hover_preview
-    if hover_win and vim.api.nvim_win_is_valid(hover_win) then
-      vim.api.nvim_set_current_win(hover_win)
-    else
-      ---@diagnostic disable-next-line: missing-parameter
-      hover.hover()
-    end
-  end, { desc = "hover.nvim" })
-  vim.keymap.set("n", "gK", hover.hover_select, { desc = "hover.nvim (select)" })
-  ---@diagnostic disable-next-line: missing-parameter
-  vim.keymap.set("n", "<C-p>", function() hover.hover_switch "previous" end, { desc = "hover.nvim (previous source)" })
-  ---@diagnostic disable-next-line: missing-parameter
-  vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
-end
-
 -- Formatting
 vim.g.formatting_opts = vim.g.formatting_opts or {}
 vim.g.enable_autoformat = vim.g.enable_autoformat or true
@@ -132,7 +127,6 @@ require("conform").setup {
   formatters_by_ft = {
     lua = { "stylua" },
     python = { "isort", "black" },
-    -- javascript = { "biome", stop_after_first = true },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
     cmake = { "gersemi" },

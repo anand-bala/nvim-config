@@ -67,7 +67,6 @@ paq {
   "avm99963/vim-jjdescription",
   "folke/lazydev.nvim",
   "b0o/schemastore.nvim",
-  "OXY2DEV/helpview.nvim",
 
   -- Helpers
   "williamboman/mason.nvim",
