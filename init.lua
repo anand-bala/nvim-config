@@ -254,22 +254,3 @@ vim.lsp.enable {
   "yamlls",
   -- "digestif",
 }
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(event)
-    local bufnr = event.buf
-    vim.keymap.set({ "n", "v" }, "<leader><Space>", vim.lsp.buf.code_action, { desc = "Code actions", buffer = bufnr })
-    vim.keymap.set({ "n" }, "<leader>rn", vim.lsp.buf.rename, { desc = "Rename symbol", buffer = bufnr })
-
-    if vim.opt.loadplugins then
-      local has_fzf_lua, fzf_lua = pcall(require, "fzf-lua")
-      if has_fzf_lua then
-        vim.keymap.set("n", "<C-]>", fzf_lua.lsp_definitions, { desc = "Go to definitions", buffer = bufnr })
-        vim.keymap.set("n", "gr", fzf_lua.lsp_references, { desc = "[G]o to [R]eferences", buffer = bufnr })
-        vim.keymap.set("n", "gd", fzf_lua.lsp_references, { desc = "[G]o to References (compat)", buffer = bufnr })
-      end
-    end
-  end,
-  desc = "LSP: setup default keymaps",
-  group = vim.api.nvim_create_augroup("LspDefaultKeymaps", { clear = true }),
-})
