@@ -60,85 +60,33 @@ autocmd({ "BufReadPost" }, {
   end,
 })
 
-vim.lsp.config("*", {
-  capabilities = require("blink.cmp").get_lsp_capabilities({}, true),
-})
-require("blink.cmp").setup {
-  keymap = {
-    preset = "enter",
-    ["<C-j>"] = { "snippet_forward" },
-    ["<C-p>"] = { "show", "select_prev", "fallback" },
-    ["<C-n>"] = { "show", "select_next", "fallback" },
-  },
-  cmdline = {
-    keymap = {
-      -- ["<Tab>"] = { "show", "accept" },
-      ["<CR>"] = { "accept_and_enter", "fallback" },
-    },
-  },
-  sources = {
-    per_filetype = {
-      tex = { "vimtex", "lsp", "snippets", "path", "buffer" },
-      lua = { "lazydev", "lsp", "snippets", "path" },
-    },
-    default = { "lsp", "snippets", "path", "buffer" },
-    providers = {
-      lsp = {
-        min_keyword_length = 0,
-      },
-      snippets = {
-        opts = {
-          extended_filetypes = {
-            cpp = { "c" },
-            markdown = { "tex" },
-            pandoc = { "markdown", "tex" },
-          },
-        },
-        score_offset = -5,
-      },
-      lazydev = {
-        name = "LazyDev",
-        module = "lazydev.integrations.blink",
-        -- make lazydev completions top priority (see `:h blink.cmp`)
-        score_offset = 100,
-      },
-      vimtex = {
-        name = "vimtex",
-        module = "integration.blink.vimtex",
-        -- module = "blink.compat.source",
-        -- override = {
-        --   get_trigger_characters = function() return { "{", ",", "[", "\\" } end,
-        -- },
-        fallbacks = { "lsp" },
-      },
-      cmdline = {
-        min_keyword_length = function(ctx)
-          -- when typing a command, only show when the keyword is 3 characters or longer
-          if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then return 3 end
-          return 0
-        end,
-      },
-    },
-    -- cmdline = {},
-  },
-  signature = { enabled = true },
-  -- completion = { accept = { auto_brackets = { enabled = true } } },
-  completion = {
-    -- list = {
-    --   selection = {
-    --     preselect = function(ctx) return ctx.mode == "cmdline" end,
-    --     auto_insert = function(ctx) return ctx.mode == "cmdline" end,
-    --   },
-    -- },
-    -- accept = {
-    --   auto_brackets = {
-    --     override_brackets_for_filetypes = {
-    --       tex = { "{", "}" },
-    --     },
-    --   },
-    -- },
+require("mini.completion").setup {
+  set_vim_settings = false,
+  mappings = {
+    --- disable force completion... just use <C-x><C-u>
+    force_twostep = "",
+    force_fallback = "",
   },
 }
+local keycode = vim.keycode or function(x) return vim.api.nvim_replace_termcodes(x, true, true, true) end
+local keys = {
+  ["cr"] = keycode "<CR>",
+  ["ctrl-y"] = keycode "<C-y>",
+  ["ctrl-y_cr"] = keycode "<C-y><CR>",
+}
+
+_G.cr_action = function()
+  if vim.fn.pumvisible() ~= 0 then
+    -- If popup is visible, confirm selected item or add new line otherwise
+    local item_selected = vim.fn.complete_info()["selected"] ~= -1
+    return item_selected and keys["ctrl-y"] or keys["ctrl-y_cr"]
+  else
+    -- If popup is not visible, use plain `<CR>`.
+    return keys["cr"]
+  end
+end
+
+vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
 
 require("mason").setup()
 require("mason-lspconfig").setup()

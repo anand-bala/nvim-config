@@ -2,6 +2,7 @@ if vim.g.loaded_ui_plugins ~= nil then return end
 vim.g.loaded_ui_plugins = 1
 
 require("mini.icons").setup()
+_G.MiniIcons.tweak_lsp_kind()
 _G.MiniIcons.mock_nvim_web_devicons()
 local nightfox = require "nightfox"
 --- Colorscheme

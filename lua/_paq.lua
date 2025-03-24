@@ -56,8 +56,7 @@ paq {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
 
-  "saghen/blink.compat",
-  { "saghen/blink.cmp", build = "cargo build --release" },
+  "echasnovski/mini.completion",
   "rafamadriz/friendly-snippets",
 
   -- Language specific stuff
