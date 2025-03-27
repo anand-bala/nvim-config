@@ -126,7 +126,7 @@ require("conform").setup {
   default_format_opts = { lsp_format = "fallback" },
   formatters_by_ft = {
     lua = { "stylua" },
-    python = { "isort", "black" },
+    -- python = { "isort", "black" },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
     cmake = { "gersemi" },
