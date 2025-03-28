@@ -26,6 +26,36 @@ function M.mason_install(tools)
   end)
 end
 
+--- Get the list of all tools (LSPs and conform.nvim formatters) configured
+---@return table<string, {command: string, available: boolean}>
+function M.get_all_configured_tools()
+  --- list of tools configured for current buffer
+  ---@type table<string,{ command: string, available: boolean }>
+  local tools = {}
+
+  -- check conform first
+  local has_conform, conform = pcall(require, "conform")
+  if has_conform then
+    local formatters = conform.list_all_formatters()
+    for _, fmt in ipairs(formatters) do
+      tools[fmt.name] = fmt
+    end
+  end
+
+  -- check lsp stuff
+  for name in vim.spairs(vim.lsp._enabled_configs) do
+    local config = (vim.lsp._resolve_config and vim.lsp._resolve_config(name)) or vim.lsp.config[name]
+    if type(config.cmd) == "table" and config.cmd[1] ~= nil then
+      tools[name] = {
+        command = config.cmd[1],
+        available = vim.fn.executable(config.cmd[1]) == 1,
+      }
+    end
+  end
+
+  return tools
+end
+
 --- Get the list of tools (LSPs and conform.nvim formatters) configured in the given
 --- buffer (default: current buffer).
 ---@param bufnr? integer
