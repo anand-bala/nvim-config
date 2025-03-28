@@ -72,7 +72,8 @@ paq {
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
 
-  -- Nice to haves
+  -- Profiling tools
+  "stevearc/profile.nvim",
   { "dstein64/vim-startuptime", opt = true },
 
   -- Common Dependencies
