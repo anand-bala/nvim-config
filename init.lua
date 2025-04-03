@@ -240,8 +240,8 @@ vim.lsp.config("*", {
 
 vim.lsp.enable {
   "bashls",
-  "biome",
   "basics_ls",
+  "biome",
   "clangd",
   "harper_ls",
   "jsonls",
@@ -251,6 +251,7 @@ vim.lsp.enable {
   "taplo",
   "texlab",
   "vimls",
+  "vtsls",
   "yamlls",
   -- "digestif",
 }
