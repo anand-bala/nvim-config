@@ -82,25 +82,45 @@ require("mini.completion").setup {
     force_fallback = "",
   },
 }
-local keycode = vim.keycode or function(x) return vim.api.nvim_replace_termcodes(x, true, true, true) end
-local keys = {
-  ["cr"] = keycode "<CR>",
-  ["ctrl-y"] = keycode "<C-y>",
-  ["ctrl-y_cr"] = keycode "<C-y><CR>",
-}
 
-_G.cr_action = function()
-  if vim.fn.pumvisible() ~= 0 then
-    -- If popup is visible, confirm selected item or add new line otherwise
-    local item_selected = vim.fn.complete_info()["selected"] ~= -1
-    return item_selected and keys["ctrl-y"] or keys["ctrl-y_cr"]
-  else
-    -- If popup is not visible, use plain `<CR>`.
-    return keys["cr"]
+-- Use CR for selecting completion items
+do
+  local keycode = vim.keycode or function(x) return vim.api.nvim_replace_termcodes(x, true, true, true) end
+  local keys = {
+    ["cr"] = keycode "<CR>",
+    ["ctrl-y"] = keycode "<C-y>",
+    ["ctrl-y_cr"] = keycode "<C-y><CR>",
+  }
+
+  local cr_action = function()
+    if vim.fn.pumvisible() ~= 0 then
+      -- If popup is visible, confirm selected item or add new line otherwise
+      local item_selected = vim.fn.complete_info()["selected"] ~= -1
+      return item_selected and keys["ctrl-y"] or keys["ctrl-y_cr"]
+    else
+      -- If popup is not visible, use plain `<CR>`.
+      return keys["cr"]
+    end
   end
+  vim.keymap.set("i", "<CR>", cr_action, { expr = true })
 end
 
-vim.keymap.set("i", "<CR>", "v:lua._G.cr_action()", { expr = true })
+--- use C-j (forward) and C-k (backward) for snippets
+vim.keymap.set({ "i", "s" }, "<C-j>", function()
+  if vim.snippet.active { direction = 1 } then
+    return "<cmd>lua vim.snippet.jump(1)<CR>"
+  else
+    return "<C-j>"
+  end
+end, { desc = "Jump forward if snippet tabstop is available", expr = true })
+
+vim.keymap.set({ "i", "s" }, "<C-k>", function()
+  if vim.snippet.active { direction = -1 } then
+    return "<cmd>lua vim.snippet.jump(-1)<CR>"
+  else
+    return "<C-k>"
+  end
+end, { desc = "Jump backward if snippet tabstop is available", expr = true })
 
 require("mason").setup()
 require("mason-lspconfig").setup()
