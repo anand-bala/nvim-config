@@ -146,6 +146,8 @@ require("conform").setup {
   default_format_opts = { lsp_format = "fallback" },
   formatters_by_ft = {
     lua = { "stylua" },
+    javascript = { "biome" },
+    typescript = { "biome" },
     -- python = { "isort", "black" },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
@@ -158,6 +160,7 @@ require("conform").setup {
     yamlfmt = { prepend_args = { "-formatter", "indent=2,retain_line_breaks=true" } },
     shfmt = { prepend_args = { "-i", "2" } },
     latexindent = { prepend_args = { "-l", "-m" } },
+    biome = { append_args = { "--indent-style=space" } },
   },
   format_on_save = function(bufnr)
     -- Disable with a global or buffer-local variable

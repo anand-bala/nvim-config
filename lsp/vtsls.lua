@@ -10,4 +10,16 @@ return {
     "typescript.tsx",
   },
   root_markers = { "tsconfig.json", "package.json", "jsconfig.json", ".jj", ".git" },
+  settings = {
+    typescript = {
+      format = {
+        enable = false,
+      },
+    },
+    javascript = {
+      format = {
+        enable = false,
+      },
+    },
+  },
 }
