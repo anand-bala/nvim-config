@@ -34,7 +34,7 @@ paq {
   "echasnovski/mini.ai",
   "rafikdraoui/jj-diffconflicts",
   "whiteinge/diffconflicts",
-  "stevearc/overseer.nvim",
+  "tpope/vim-dispatch",
 
   -- Fuzzy finders
   { "junegunn/fzf", build = "./install --bin" },

@@ -39,7 +39,6 @@ do
   ---@diagnostic disable-next-line: missing-parameter
   vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
 end
-require("overseer").setup()
 
 autocmd({ "BufReadPost" }, {
   group = augroup("Lazy loaded tools", { clear = true }),
