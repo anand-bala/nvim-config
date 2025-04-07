@@ -28,8 +28,8 @@ return {
         onEdit = false,
       },
       diagnosticsDelay = 300,
-      bibtexFormatter = "none",
-      latexFormatter = "none",
+      -- bibtexFormatter = "none",
+      -- latexFormatter = "none",
       latexindent = {
         modifyLineBreaks = true,
       },
