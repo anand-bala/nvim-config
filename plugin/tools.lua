@@ -40,38 +40,32 @@ do
   vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
 end
 
-autocmd({ "BufReadPost" }, {
-  group = augroup("Lazy loaded tools", { clear = true }),
-  once = true,
-  pattern = "*",
-  callback = function()
-    require("mini.ai").setup()
-    require("nvim-treesitter.configs").setup {
-      ensure_installed = {
-        "bash",
-        "c",
-        "cpp",
-        "html",
-        "lua",
-        "markdown",
-        "markdown_inline",
-        "python",
-        "regex",
-        "rust",
-        "vim",
-        "vimdoc",
-      },
-      highlight = { enable = true, disable = { "latex" } },
-      indent = { enable = true },
-      incremental_selection = { enable = true },
-      textobjects = { enable = true },
-      matchup = { enable = true },
-    }
-    require("treesitter-context").setup {
-      max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
-    }
-  end,
-})
+require("mini.ai").setup()
+require("nvim-treesitter.configs").setup {
+  ensure_installed = {
+    "bash",
+    "c",
+    "cpp",
+    "html",
+    "lua",
+    "markdown",
+    "markdown_inline",
+    "python",
+    "regex",
+    "rust",
+    "vim",
+    "vimdoc",
+  },
+  highlight = { enable = true, disable = { "latex" } },
+  indent = { enable = true },
+  incremental_selection = { enable = true },
+  textobjects = { enable = true },
+  matchup = { enable = true },
+}
+require("treesitter-context").setup {
+  max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+  trim_scope = "inner", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+}
 
 require("mini.completion").setup {
   set_vim_settings = false,
