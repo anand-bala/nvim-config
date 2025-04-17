@@ -57,6 +57,7 @@ paq {
   "nvim-treesitter/nvim-treesitter-context",
 
   "echasnovski/mini.completion",
+  "echasnovski/mini.snippets",
   "rafamadriz/friendly-snippets",
 
   -- Language specific stuff

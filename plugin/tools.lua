@@ -66,6 +66,23 @@ require("treesitter-context").setup {
   max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
   trim_scope = "inner", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 }
+do
+  -- Adjust latex -> tex
+  local latex_patterns = { "latex/**/*.json", "**/latex.json" }
+  local lang_patterns = { tex = latex_patterns, plaintex = latex_patterns }
+  local snippets = require "mini.snippets"
+  snippets.setup {
+    snippets = { snippets.gen_loader.from_lang { lang_patterns = lang_patterns } },
+    mappings = { expand = "", jump_next = "", jump_prev = "" },
+    expand = {
+      match = function(snips)
+        -- Do not match with whitespace to cursor's left
+        return snippets.default_match(snips, { pattern_fuzzy = "%S+" })
+      end,
+    },
+  }
+  if _G.MiniSnippets ~= nil then _G.MiniSnippets.start_lsp_server { match = false } end
+end
 
 require("mini.completion").setup {
   set_vim_settings = false,
@@ -76,8 +93,8 @@ require("mini.completion").setup {
   },
 }
 
--- Use CR for selecting completion items
 do
+  -- Use CR for selecting completion items
   local keycode = vim.keycode or function(x) return vim.api.nvim_replace_termcodes(x, true, true, true) end
   local keys = {
     ["cr"] = keycode "<CR>",
@@ -96,24 +113,19 @@ do
     end
   end
   vim.keymap.set("i", "<CR>", cr_action, { expr = true })
+
+  local jump_next = function()
+    local is_active = MiniSnippets.session.get() ~= nil
+    if is_active then
+      MiniSnippets.session.jump "next"
+      return ""
+    end
+    return "\t"
+  end
+  local jump_prev = function() MiniSnippets.session.jump "prev" end
+  vim.keymap.set("i", "<Tab>", jump_next, { desc = "Jump forward if snippet tabstop is available", expr = true })
+  vim.keymap.set("i", "<S-Tab>", jump_prev, { desc = "Jump backward if snippet tabstop is available" })
 end
-
---- use C-j (forward) and C-k (backward) for snippets
-vim.keymap.set({ "i", "s" }, "<C-j>", function()
-  if vim.snippet.active { direction = 1 } then
-    return "<cmd>lua vim.snippet.jump(1)<CR>"
-  else
-    return "<C-j>"
-  end
-end, { desc = "Jump forward if snippet tabstop is available", expr = true })
-
-vim.keymap.set({ "i", "s" }, "<C-k>", function()
-  if vim.snippet.active { direction = -1 } then
-    return "<cmd>lua vim.snippet.jump(-1)<CR>"
-  else
-    return "<C-k>"
-  end
-end, { desc = "Jump backward if snippet tabstop is available", expr = true })
 
 require("mason").setup()
 require("mason-lspconfig").setup()

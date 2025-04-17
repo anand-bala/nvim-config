@@ -13,7 +13,7 @@ return {
       enable = true,
     },
     snippet = {
-      enable = true,
+      enable = false,
       sources = vim.api.nvim_get_runtime_file("snippets/", true),
       matchStrategy = "fuzzy",
     },
