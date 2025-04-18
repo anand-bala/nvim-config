@@ -227,3 +227,5 @@ vim.g.procession_ignore_dirs = { "~" }
 vim.g.prosession_on_startup = 0
 
 vim.g.startuptime_event_width = 0
+
+require("flatten").setup()

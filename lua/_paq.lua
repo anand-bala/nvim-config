@@ -35,6 +35,7 @@ paq {
   "rafikdraoui/jj-diffconflicts",
   "whiteinge/diffconflicts",
   "tpope/vim-dispatch",
+  "willothy/flatten.nvim",
 
   -- Fuzzy finders
   { "junegunn/fzf", build = "./install --bin" },
