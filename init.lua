@@ -272,6 +272,7 @@ vim.lsp.enable {
   "basics_ls",
   "biome",
   "clangd",
+  "esbonio",
   "harper_ls",
   "jsonls",
   "lua_ls",
