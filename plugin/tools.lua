@@ -39,6 +39,16 @@ do
   ---@diagnostic disable-next-line: missing-parameter
   vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
 end
+--- non-lsp linters
+require("lint").linters_by_ft = {
+  python = { "mypy" },
+  rust = { "clippy" },
+  rst = { "rstcheck" },
+}
+autocmd({ "BufWritePost" }, {
+  group = augroup("Linting", { clear = true }),
+  callback = function() require("lint").try_lint() end,
+})
 
 require("mini.ai").setup()
 require("nvim-treesitter.configs").setup {
