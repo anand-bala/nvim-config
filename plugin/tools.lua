@@ -7,7 +7,7 @@ local autocmd = vim.api.nvim_create_autocmd
 local augroup = vim.api.nvim_create_augroup
 
 require("oil").setup()
-require("mini.align").setup()
+-- require("mini.align").setup()
 do
   local hover = require "hover"
   hover.setup {
