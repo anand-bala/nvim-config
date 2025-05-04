@@ -43,7 +43,7 @@ paq {
   { "ibhagwan/fzf-lua", branch = "main" },
 
   -- UI stuff
-  "rcarriga/nvim-notify",
+  -- "rcarriga/nvim-notify",
   "EdenEast/nightfox.nvim",
   "lewis6991/gitsigns.nvim",
   "stevearc/dressing.nvim",

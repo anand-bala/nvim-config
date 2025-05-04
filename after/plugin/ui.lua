@@ -30,14 +30,15 @@ nightfox.setup {
 }
 vim.cmd "colorscheme dayfox"
 
-vim.schedule(function()
-  ---@diagnostic disable-next-line: missing-fields
-  require("notify").setup {
-    render = "wrapped-compact",
-    stages = "static",
-  }
-  vim.notify = require "notify"
-end)
+require("vim._extui").enable {}
+--vim.schedule(function()
+--  ---@diagnostic disable-next-line: missing-fields
+--  require("notify").setup {
+--    render = "wrapped-compact",
+--    stages = "static",
+--  }
+--  vim.notify = require "notify"
+--end)
 
 local autocmd = vim.api.nvim_create_autocmd
 
