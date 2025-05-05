@@ -140,18 +140,18 @@ end
 require("mason").setup()
 require("mason-lspconfig").setup()
 
-autocmd({ "FileType" }, {
-  group = augroup("Auto-install tools", { clear = true }),
-  pattern = "*",
-  callback = function(ctx)
-    local tools = require("_utils").get_configured_tools(ctx.buf)
-    local to_install = {}
-    for name, info in pairs(tools) do
-      if not info.available then table.insert(to_install, name) end
-    end
-    require("_utils").mason_install(to_install)
-  end,
-})
+-- autocmd({ "FileType" }, {
+--   group = augroup("Auto-install tools", { clear = true }),
+--   pattern = "*",
+--   callback = function(ctx)
+--     local tools = require("_utils").get_configured_tools(ctx.buf)
+--     local to_install = {}
+--     for name, info in pairs(tools) do
+--       if not info.available then table.insert(to_install, name) end
+--     end
+--     require("_utils").mason_install(to_install)
+--   end,
+-- })
 
 -- Formatting
 vim.g.formatting_opts = vim.g.formatting_opts or {}
