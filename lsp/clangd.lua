@@ -1,3 +1,4 @@
+---@type vim.lsp.Config
 return {
   cmd = { "clangd" },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
@@ -19,4 +20,5 @@ return {
     },
     offsetEncoding = { "utf-8", "utf-16" },
   },
+  workspace_required = true,
 }
