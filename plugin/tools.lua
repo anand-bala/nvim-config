@@ -78,7 +78,7 @@ require("treesitter-context").setup {
 }
 do
   -- Adjust latex -> tex
-  local latex_patterns = { "latex/**/*.json", "**/latex.json" }
+  local latex_patterns = { "latex/**/*.json", "**/latex.json", "tex/**/*.json", "**/tex.json" }
   local lang_patterns = { tex = latex_patterns, plaintex = latex_patterns }
   local snippets = require "mini.snippets"
   snippets.setup {
