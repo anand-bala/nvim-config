@@ -278,6 +278,7 @@ vim.lsp.enable {
   "lua_ls",
   "pyright",
   "ruff",
+  "ty_ls",
   "taplo",
   "texlab",
   "vimls",
