@@ -145,9 +145,7 @@ autocmd({ "FileType" }, {
   group = augroup("Auto-install tools", { clear = true }),
   pattern = "*",
   callback = function(ctx)
-    if not vim.g.mason_autoinstall then
-      return
-    end
+    if not vim.g.mason_autoinstall then return end
     local tools = require("_utils").get_configured_tools(ctx.buf)
     local to_install = {}
     for name, info in pairs(tools) do
