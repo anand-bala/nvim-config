@@ -1,0 +1,50 @@
+{
+  "Inline Math": {
+    "prefix": "im",
+    "body": [
+      "\\$ $0 \\$"
+    ]
+  },
+  "Display Math": {
+    "prefix": "dm",
+    "body": [
+      "\\$\\$ $0.\\$\\$"
+    ]
+  },
+  "left right": {
+    "prefix": "lr",
+    "body": [
+      "\\left${1:(} $0 \\right${2:)}"
+    ]
+  },
+  "left( right)": {
+    "prefix": "lr(",
+    "body": [
+      "\\left( $0 \\right)"
+    ]
+  },
+  "left[ right]": {
+    "prefix": "lr[",
+    "body": [
+      "\\left[ $0 \\right]"
+    ]
+  },
+  "left| right|": {
+    "prefix": "lr|",
+    "body": [
+      "\\left| $0 \\right|"
+    ]
+  },
+  "left{ right}": {
+    "prefix": "lr{",
+    "body": [
+      "\\left{ $0 \\right}"
+    ]
+  },
+  "langle rangle": {
+    "prefix": "lra",
+    "body": [
+      "\\langle $0 \\rangle"
+    ]
+  }
+}
