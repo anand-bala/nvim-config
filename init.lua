@@ -285,4 +285,5 @@ vim.lsp.enable {
   "vtsls",
   "yamlls",
   -- "digestif",
+  "zotero_ls",
 }

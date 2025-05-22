@@ -82,6 +82,8 @@ paq {
   -- Common Dependencies
   "nvim-lua/plenary.nvim",
   "echasnovski/mini.icons",
+
+  "kkharji/sqlite.lua",
 }
 
 ---@type Package[]
