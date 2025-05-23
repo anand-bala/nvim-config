@@ -41,7 +41,7 @@ M.make_lsp_cmd = function(opts)
   ---@type lsp.InitializeResult
   local initializeResult = {
     capabilities = {
-      completionProvider = { triggerCharacters = M.config.ft.default.trigger_patterns, resolveProvider = false },
+      completionProvider = { triggerCharacters = M.config.ft.default.trigger_patterns, resolveProvider = true },
     },
   }
   local max_authors = opts.max_authors
@@ -84,6 +84,10 @@ M.make_lsp_cmd = function(opts)
     }
   end
 
+  ---@param item lsp.CompletionItem
+  ---@param db ZoteroDb
+  ---@return lsp.CompletionItem
+  local accepted_citation = function(item, db) end
 
   ---@param dispatchers vim.lsp.rpc.Dispatchers
   ---@return vim.lsp.rpc.PublicClient
