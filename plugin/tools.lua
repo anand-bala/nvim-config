@@ -94,14 +94,17 @@ do
   if _G.MiniSnippets ~= nil then _G.MiniSnippets.start_lsp_server { match = false } end
 end
 
-require("mini.completion").setup {
-  set_vim_settings = false,
-  mappings = {
-    --- disable force completion... just use <C-x><C-u>
-    force_twostep = "",
-    force_fallback = "",
-  },
-}
+do
+  require("mini.completion").setup {
+    set_vim_settings = false,
+    mappings = {
+      --- disable force completion... just use <C-x><C-u>
+      force_twostep = "",
+      force_fallback = "",
+    },
+  }
+  if _G.MiniCompletion ~= nil then vim.lsp.config("*", { capabilities = _G.MiniCompletion.get_lsp_capabilities() }) end
+end
 
 do
   -- Use CR for selecting completion items
