@@ -1,6 +1,6 @@
 vim.opt_local.spell = true
 vim.opt_local.spellfile = "project.utf-8.add"
-vim.opt_local.textwidth = 80
+vim.opt_local.textwidth = 77
 vim.opt_local.formatoptions = vim.opt_local.formatoptions + "]"
 vim.opt_local.formatlistpat = [[^\s*\(\d\+[\]:.)}\t ]\)\|\(\\item \)\s*]]
 
