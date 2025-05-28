@@ -54,8 +54,8 @@ end
 M.entry_to_bib_entry = function(entry)
   local bib_entry = "@"
   local citekey = entry.citekey or ""
-  bib_entry = bib_entry .. (item.itemType or "") .. "{" .. citekey .. ",\n"
-  for k, v in pairs(item) do
+  bib_entry = bib_entry .. (entry.itemType or "") .. "{" .. citekey .. ",\n"
+  for k, v in pairs(entry) do
     if k == "creators" then
       bib_entry = bib_entry .. "  author = {"
       local author = ""

@@ -261,6 +261,13 @@ vim.g.loaded_node_provider = 0
 
 -- Load/install plugins
 require "_paq"
+-- vim.g.loaded_tool_plugins = false
+-- vim.g.loaded_fzf_plugin = false
+-- vim.g.loaded_ui_plugins = false
+-- vim.g.loaded_securemodelines = false
+-- vim.g.loaded_scratch = false
+-- vim.g.loaded_tool_plugins = false
+-- vim.g.loaded_term_helper = false
 
 -- LSP Setup
 vim.lsp.config("*", {
@@ -269,7 +276,7 @@ vim.lsp.config("*", {
 
 vim.lsp.enable {
   "bashls",
-  "basics_ls",
+  -- "basics_ls",
   "biome",
   "clangd",
   "esbonio",
@@ -287,7 +294,7 @@ vim.lsp.enable {
   "vtsls",
   "yamlls",
   -- "digestif",
-  "zotero_ls",
+  -- "zotero_ls",
 }
 
 -- Disable modelines for .jjdescription files
