@@ -41,8 +41,8 @@ do
 end
 --- non-lsp linters
 require("lint").linters_by_ft = {
-  python = { "mypy" },
-  rust = { "clippy" },
+  -- python = { "mypy" },
+  -- rust = { "clippy" },
   rst = { "rstcheck" },
 }
 autocmd({ "BufWritePost" }, {
@@ -171,6 +171,7 @@ require("conform").setup {
     -- python = { "isort", "black" },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
+    sh = { "shfmt", "shellharden" },
     cmake = { "gersemi" },
     tex = { "latexindent", lsp_format = "never" },
     bib = { "bibtex-tidy", lsp_format = "never" },

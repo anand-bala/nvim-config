@@ -14,8 +14,5 @@ return {
     ".jj",
     ".git",
   },
-  capabilities = {
-    hoverProvider = false,
-  },
   settings = {},
 }
