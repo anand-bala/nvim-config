@@ -21,7 +21,7 @@ do
       require "hover.providers.fold_preview"
       require "hover.providers.diagnostic"
       require "hover.providers.man"
-      -- require('hover.providers.dictionary')
+      require "hover.providers.dictionary"
     end,
   }
   vim.keymap.set("n", "K", function()
