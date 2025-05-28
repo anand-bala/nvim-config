@@ -287,3 +287,9 @@ vim.lsp.enable {
   -- "digestif",
   "zotero_ls",
 }
+
+-- Disable modelines for .jjdescription files
+vim.api.nvim_create_autocmd("BufRead", {
+  pattern = "*.jjdescription",
+  callback = function(event) vim.bo[event.buf].modeline = false end,
+})
