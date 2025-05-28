@@ -30,7 +30,7 @@ nightfox.setup {
 }
 vim.cmd "colorscheme dayfox"
 
-require("vim._extui").enable {}
+-- require("vim._extui").enable {}
 --vim.schedule(function()
 --  ---@diagnostic disable-next-line: missing-fields
 --  require("notify").setup {
