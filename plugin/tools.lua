@@ -21,7 +21,7 @@ do
       require "hover.providers.fold_preview"
       require "hover.providers.diagnostic"
       require "hover.providers.man"
-      require "hover.providers.dictionary"
+      -- require "hover.providers.dictionary"
     end,
   }
   vim.keymap.set("n", "K", function()
@@ -244,3 +244,17 @@ vim.g.prosession_on_startup = 0
 vim.g.startuptime_event_width = 0
 
 require("flatten").setup()
+
+--- Zeal command
+vim.api.nvim_create_user_command("Zeal", function(args)
+  if vim.fn.executable "zeal" == 0 then
+    vim.notify("No executable named `zeal` on in PATH", vim.diagnostic.severity.ERROR)
+  end
+  local cmd = { "zeal" }
+  assert(type(args.args) == "string")
+  if args.args ~= "" then table.insert(cmd, args.args) end
+  vim.system(cmd)
+end, {
+  desc = "Run Zeal for offline documentation",
+  nargs = "?",
+})
