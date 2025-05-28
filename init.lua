@@ -36,7 +36,7 @@ vim.opt.undofile = true -- Save undo history
 -- vim.opt.clipboard = "unnamedplus" -- Sync OS and Neovim clipboard
 
 -- Create per-project shada files
-vim.opt.shadafile = (function()
+do
   local data = vim.fn.stdpath "state"
   assert(type(data) == "string")
 
@@ -44,8 +44,8 @@ vim.opt.shadafile = (function()
   local project_b64 = vim.base64.encode(vim.fn.fnamemodify(project_root, ":p"))
   local file = vim.fs.joinpath(data, "shada", project_b64 .. ".shada")
   vim.fn.mkdir(vim.fs.dirname(file), "p")
-  return file
-end)()
+  vim.opt.shadafile = file
+end
 
 -- Fixes for fish shell
 if string.match(vim.o.shell, "fish$") then
