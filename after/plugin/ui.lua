@@ -46,7 +46,6 @@ autocmd({ "VimEnter" }, {
   once = true,
   callback = function()
     require("gitsigns").setup()
-    require("dressing").setup()
     require("bqf").setup {
       ---@diagnostic disable-next-line: missing-fields
       preview = {
