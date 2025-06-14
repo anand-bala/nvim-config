@@ -72,7 +72,6 @@ paq {
 
   -- Helpers
   "mason-org/mason.nvim",
-  "mason-org/mason-lspconfig.nvim",
 
   -- Profiling tools
   "stevearc/profile.nvim",

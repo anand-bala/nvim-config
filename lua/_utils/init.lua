@@ -1,31 +1,5 @@
 local M = {}
 
----Install tool using mason, if mason is present
----@param tools string[]
-function M.mason_install(tools)
-  local has_mason, mason_registry = pcall(require, "mason-registry")
-  local has_masonlsp, mason_lspconfig = pcall(require, "mason-lspconfig")
-
-  if not has_mason then return end
-  local notify = require "mason-core.notify"
-  local show = vim.schedule_wrap(function(msg) notify(msg, vim.log.levels.INFO) end)
-
-  local show_error = vim.schedule_wrap(function(msg) notify(msg, vim.log.levels.ERROR) end)
-
-  mason_registry.refresh(function()
-    for _, tool in ipairs(tools) do
-      if has_masonlsp then tool = mason_lspconfig.get_mappings().lspconfig_to_mason[tool] or tool end
-      local pkg = mason_registry.get_package(tool)
-      if not pkg:is_installed() then
-        show(string.format("%s: installing", pkg.name))
-        pkg:once("install:success", function() show(string.format("%s: successfully installed", pkg.name)) end)
-        pkg:once("install:failed", function() show_error(string.format("%s: failed to install", pkg.name)) end)
-        pkg:install()
-      end
-    end
-  end)
-end
-
 --- Get the list of all tools (LSPs and conform.nvim formatters) configured
 ---@return table<string, {command: string, available: boolean}>
 function M.get_all_configured_tools()
