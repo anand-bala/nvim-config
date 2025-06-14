@@ -287,7 +287,7 @@ vim.lsp.enable {
   "jedi",
   -- "pylsp",
   "ruff",
-  "ty_ls",
+  "ty",
   "taplo",
   "texlab",
   "vimls",

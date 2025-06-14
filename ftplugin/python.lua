@@ -17,14 +17,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 vim.api.nvim_create_autocmd("LspAttach", {
-  group = vim.api.nvim_create_augroup("lsp_attach_disable_ruff_hover", { clear = true }),
+  group = vim.api.nvim_create_augroup("lsp_attach_disable_hover", { clear = true }),
   callback = function(args)
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client == nil then return end
-    if client.name == "ruff" then
-      -- Disable hover support from ruff
+    if vim.tbl_contains({ "ruff", "ty" }, client.name) then
+      -- Disable hover support from ruff and ty
       client.server_capabilities.hoverProvider = false
     end
   end,
-  desc = "LSP: Disable hover capability from Ruff",
+  desc = "LSP: Disable hover capability from ruff and ty",
 })
