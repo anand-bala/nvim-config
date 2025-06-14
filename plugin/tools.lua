@@ -14,10 +14,6 @@ do
     init = function()
       -- Require providers
       require "hover.providers.lsp"
-      -- require('hover.providers.gh')
-      -- require('hover.providers.gh_user')
-      -- require('hover.providers.jira')
-      -- require('hover.providers.dap')
       require "hover.providers.fold_preview"
       require "hover.providers.diagnostic"
       require "hover.providers.man"
@@ -39,12 +35,6 @@ do
   ---@diagnostic disable-next-line: missing-parameter
   vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
 end
---- non-lsp linters
-require("lint").linters_by_ft = {
-  -- python = { "mypy" },
-  -- rust = { "clippy" },
-  rst = { "rstcheck" },
-}
 autocmd({ "BufWritePost" }, {
   group = augroup("Linting", { clear = true }),
   callback = function() require("lint").try_lint() end,
@@ -73,7 +63,7 @@ require("nvim-treesitter.configs").setup {
   matchup = { enable = true },
 }
 require("treesitter-context").setup {
-  max_lines = 2, -- How many lines the window should span. Values <= 0 mean no limit.
+  max_lines = 4, -- How many lines the window should span. Values <= 0 mean no limit.
   trim_scope = "inner", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 }
 do

@@ -30,7 +30,6 @@ paq {
   "direnv/direnv.vim",
   "stevearc/oil.nvim",
   "andymass/vim-matchup",
-  -- "echasnovski/mini.align",
   "junegunn/vim-easy-align",
   "echasnovski/mini.ai",
   "rafikdraoui/jj-diffconflicts",
@@ -43,7 +42,6 @@ paq {
   { "ibhagwan/fzf-lua", branch = "main" },
 
   -- UI stuff
-  -- "rcarriga/nvim-notify",
   "EdenEast/nightfox.nvim",
   "lewis6991/gitsigns.nvim",
   "nvim-lualine/lualine.nvim",
@@ -52,7 +50,6 @@ paq {
   "lewis6991/hover.nvim",
 
   -- Coding tools
-  "mfussenegger/nvim-lint",
   "stevearc/conform.nvim",
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
   "nvim-treesitter/nvim-treesitter-context",
