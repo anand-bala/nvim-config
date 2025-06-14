@@ -1,7 +1,6 @@
-local pyright = vim.fn.executable "basedpyright" == 1 and "basedpyright" or "pyright"
 ---@type vim.lsp.Config
 return {
-  cmd = { pyright .. "-langserver", "--stdio" },
+  cmd = { "uvx", "--from", "basedpyright", "basedpyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = {
     "pyproject.toml",
