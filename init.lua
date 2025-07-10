@@ -247,6 +247,16 @@ vim.keymap.set(
 
 vim.api.nvim_create_user_command("Diagnostics", function(args)
   local severity = vim.diagnostic.severity[args.args] or nil
+  vim.diagnostic.setloclist { severity = severity }
+end, {
+  desc = "Adds LSP diagnostic to the Location list",
+  complete = function() return { "ERROR", "WARN", "HINT", "INFO" } end,
+  nargs = "?",
+})
+
+vim.api.nvim_create_user_command("WorkspaceDiagnostics", function(args)
+  vim.lsp.buf.workspace_diagnostics()
+  local severity = vim.diagnostic.severity[args.args] or nil
   vim.diagnostic.setqflist { severity = severity }
 end, {
   desc = "Adds LSP diagnostic to the Quickfix list",
@@ -280,14 +290,14 @@ vim.lsp.enable {
   "biome",
   "clangd",
   "esbonio",
-  "harper_ls",
+  -- "harper_ls",
   "jsonls",
   "lua_ls",
-  "pyright",
+  -- "pyright",
   "jedi",
   -- "pylsp",
   "ruff",
-  -- "ty",
+  "ty",
   "taplo",
   "texlab",
   "vimls",
@@ -296,6 +306,30 @@ vim.lsp.enable {
   -- "digestif",
   -- "zotero_ls",
 }
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  desc = "Disable lsp formatexpr for Python, markdown, and tex",
+  pattern = { "*.py", "*.md", "*.qmd", "*.tex" },
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then return end
+    -- Use builtin formatexpr
+    vim.opt_local.formatexpr = nil
+  end,
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = vim.api.nvim_create_augroup("lsp_attach_disable_hover", { clear = true }),
+  callback = function(args)
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client == nil then return end
+    if vim.tbl_contains({ "ruff", "ty" }, client.name) then
+      -- Disable hover support from ruff and ty
+      client.server_capabilities.hoverProvider = false
+    end
+  end,
+  desc = "LSP: Disable hover capability from ruff and ty",
+})
 
 -- Disable modelines for .jjdescription files
 vim.api.nvim_create_autocmd("BufRead", {
