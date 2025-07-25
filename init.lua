@@ -289,7 +289,7 @@ vim.lsp.enable {
   -- "basics_ls",
   "biome",
   "clangd",
-  "esbonio",
+  -- "esbonio",
   -- "harper_ls",
   "jsonls",
   "lua_ls",
@@ -304,7 +304,7 @@ vim.lsp.enable {
   "vtsls",
   "yamlls",
   -- "digestif",
-  -- "zotero_ls",
+  "zotero_ls",
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
