@@ -51,7 +51,7 @@ paq {
 
   -- Coding tools
   "stevearc/conform.nvim",
-  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+  { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", branch = "main" },
   "nvim-treesitter/nvim-treesitter-context",
 
   "echasnovski/mini.completion",
