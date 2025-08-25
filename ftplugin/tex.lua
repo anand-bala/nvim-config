@@ -4,6 +4,10 @@ vim.opt_local.textwidth = 77
 vim.opt_local.formatoptions = vim.opt_local.formatoptions + "]"
 vim.opt_local.formatlistpat = [[^\s*\(\d\+[\]:.)}\t ]\)\|\(\\item \)\s*]]
 
+--- Add treesitter highlighting
+vim.treesitter.start(nil, "latex")
+vim.bo.syntax = "ON" -- only if additional legacy syntax is needed
+
 local vimtex_compile_user_augroup = vim.api.nvim_create_augroup("CustomVimtexCompile", { clear = true })
 
 vim.api.nvim_create_autocmd("User", {

@@ -40,32 +40,31 @@ end
 --   callback = function() require("lint").try_lint() end,
 -- })
 
-require("mini.ai").setup()
-require("nvim-treesitter.configs").setup {
-  ensure_installed = {
-    "bash",
-    "c",
-    "cpp",
-    "html",
-    "lua",
-    "markdown",
-    "markdown_inline",
-    "python",
-    "regex",
-    "rust",
-    "vim",
-    "vimdoc",
-  },
-  highlight = { enable = true, disable = { "latex" } },
-  indent = { enable = true },
-  incremental_selection = { enable = true },
-  textobjects = { enable = true },
-  matchup = { enable = true },
-}
+vim.schedule(
+  function()
+    require("nvim-treesitter").install {
+      "latex",
+      "bash",
+      "c",
+      "cpp",
+      "html",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "regex",
+      "rust",
+      "vim",
+      "vimdoc",
+    }
+  end
+)
 require("treesitter-context").setup {
   max_lines = 4, -- How many lines the window should span. Values <= 0 mean no limit.
   trim_scope = "inner", -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
 }
+require("mini.ai").setup()
+
 do
   -- Adjust latex -> tex
   local latex_patterns = { "latex/**/*.json", "**/latex.json", "tex/**/*.json", "**/tex.json" }
