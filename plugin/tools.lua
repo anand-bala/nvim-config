@@ -148,7 +148,7 @@ require("conform").setup {
     cmake = { "gersemi" },
     tex = { "latexindent", lsp_format = "never" },
     bib = { "bibtex-tidy", lsp_format = "never" },
-    markdown = { "injected", "mdformat" },
+    markdown = { "injected", "mdslw" },
     matlab = { timeout_ms = 5000 },
   },
   formatters = {
@@ -156,6 +156,7 @@ require("conform").setup {
     shfmt = { prepend_args = { "-i", "2" } },
     latexindent = { prepend_args = { "-l", "-m" } },
     biome = { append_args = { "--indent-style=space" } },
+    mdslw = { prepend_args = { "--stdin-filepath", "$FILENAME" } },
     ["bibtex-tidy"] = {
       prepend_args = {
         "--omit=abstract,keywords",
