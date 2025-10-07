@@ -31,7 +31,7 @@ paq {
   "stevearc/oil.nvim",
   "andymass/vim-matchup",
   "junegunn/vim-easy-align",
-  "echasnovski/mini.ai",
+  "nvim-mini/mini.ai",
   "rafikdraoui/jj-diffconflicts",
   "whiteinge/diffconflicts",
   "tpope/vim-dispatch",
@@ -54,8 +54,8 @@ paq {
   { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate", branch = "main" },
   "nvim-treesitter/nvim-treesitter-context",
 
-  "echasnovski/mini.completion",
-  "echasnovski/mini.snippets",
+  "nvim-mini/mini.completion",
+  "nvim-mini/mini.snippets",
   "rafamadriz/friendly-snippets",
 
   -- Language specific stuff
@@ -77,7 +77,7 @@ paq {
 
   -- Common Dependencies
   "nvim-lua/plenary.nvim",
-  "echasnovski/mini.icons",
+  "nvim-mini/mini.icons",
 
   "kkharji/sqlite.lua",
 }
