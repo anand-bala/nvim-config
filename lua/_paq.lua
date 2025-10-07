@@ -64,6 +64,7 @@ paq {
   "preservim/vim-markdown",
   "lark-parser/vim-lark-syntax",
   "avm99963/vim-jjdescription",
+  "HiPhish/jinja.vim",
   "folke/lazydev.nvim",
   "b0o/schemastore.nvim",
 
