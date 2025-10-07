@@ -50,6 +50,8 @@ vim.schedule(function()
       },
     },
   }
+
+  require("fzf-lua").register_ui_select()
 end)
 
 command("Helptags", "FzfLua helptags", { force = true })
