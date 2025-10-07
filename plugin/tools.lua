@@ -10,7 +10,7 @@ require("oil").setup()
 -- require("mini.align").setup()
 do
   local hover = require "hover"
-  hover.setup {
+  hover.config {
     init = function()
       -- Require providers
       require "hover.providers.lsp"
@@ -21,19 +21,15 @@ do
     end,
   }
   vim.keymap.set("n", "K", function()
-    local hover_win = vim.b.hover_preview
-    if hover_win and vim.api.nvim_win_is_valid(hover_win) then
-      vim.api.nvim_set_current_win(hover_win)
-    else
-      ---@diagnostic disable-next-line: missing-parameter
-      hover.hover()
-    end
-  end, { desc = "hover.nvim" })
-  vim.keymap.set("n", "gK", hover.hover_select, { desc = "hover.nvim (select)" })
-  ---@diagnostic disable-next-line: missing-parameter
-  vim.keymap.set("n", "<C-p>", function() hover.hover_switch "previous" end, { desc = "hover.nvim (previous source)" })
-  ---@diagnostic disable-next-line: missing-parameter
-  vim.keymap.set("n", "<C-n>", function() hover.hover_switch "next" end, { desc = "hover.nvim (next source)" })
+    -- local hover_win = vim.b.hover_preview
+    -- if hover_win and vim.api.nvim_win_is_valid(hover_win) then
+    --   vim.api.nvim_set_current_win(hover_win)
+    -- else
+    hover.open()
+    -- end
+  end, { desc = "hover.nvim (open)" })
+  vim.keymap.set("n", "<C-p>", function() hover.switch "previous" end, { desc = "hover.nvim (previous source)" })
+  vim.keymap.set("n", "<C-n>", function() hover.switch "next" end, { desc = "hover.nvim (next source)" })
 end
 -- autocmd({ "BufWritePost" }, {
 --   group = augroup("Linting", { clear = true }),
