@@ -69,12 +69,6 @@ function M.get_configured_tools(bufnr)
   return tools
 end
 
----@param name string
----@param override? vim.lsp.Config
-function M.lsp_config(name, override)
-  return vim.tbl_deep_extend("force", require("lspconfig.configs." .. name).default_config, override or {})
-end
-
 --- Since I use jujutsu or git exclusively, this function checks for the project root
 --- marked by jj or git.
 ---
