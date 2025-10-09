@@ -376,6 +376,7 @@ vim.pack.add {
   "https://github.com/stevearc/conform.nvim",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main", data = { build = ":TSUpdate" } },
   "https://github.com/nvim-treesitter/nvim-treesitter-context",
+  { src = "https://github.com/nvim-treesitter/nvim-treesitter-textobjects", version = "main" },
 
   "https://github.com/nvim-mini/mini.completion",
   "https://github.com/nvim-mini/mini.snippets",
