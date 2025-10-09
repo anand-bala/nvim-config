@@ -296,7 +296,7 @@ vim.api.nvim_create_autocmd("PackChanged", {
     local pkg = event_data.spec
     local path = event_data.path
 
-    if kind == "update" and pkg.data.build ~= nil then
+    if kind == "update" and vim.tbl_get(pkg, "data", "build") ~= nil then
       ---@type vim.api.keyset.echo_opts
       local progress = {
         kind = "progress",
