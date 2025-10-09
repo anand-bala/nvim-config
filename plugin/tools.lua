@@ -64,7 +64,8 @@ require("mini.ai").setup()
 do
   -- Adjust latex -> tex
   local latex_patterns = { "latex/**/*.json", "**/latex.json", "tex/**/*.json", "**/tex.json" }
-  local lang_patterns = { tex = latex_patterns, plaintex = latex_patterns }
+  local cpp_patterns = { "cpp/**/*.json", "**/cpp.json", "c/**/*.json", "**/c.json" }
+  local lang_patterns = { tex = latex_patterns, plaintex = latex_patterns, cpp = cpp_patterns }
   local snippets = require "mini.snippets"
   snippets.setup {
     snippets = { snippets.gen_loader.from_lang { lang_patterns = lang_patterns } },
@@ -137,11 +138,11 @@ require("conform").setup {
     lua = { "stylua" },
     javascript = { "biome" },
     typescript = { "biome" },
+    cmake = { "cmake_format" },
     -- python = { "isort", "black" },
     yaml = { "yamlfmt" },
     bash = { "shfmt", "shellharden" },
     sh = { "shfmt", "shellharden" },
-    cmake = { "gersemi" },
     make = { "bake" },
     tex = { "latexindent", lsp_format = "never" },
     -- bib = { "bibtex-tidy", lsp_format = "never" },

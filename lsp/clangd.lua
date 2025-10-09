@@ -1,6 +1,6 @@
 ---@type vim.lsp.Config
 return {
-  cmd = { "clangd" },
+  cmd = { "clangd", "--background-index", "--background-index-priority=low" },
   filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
   root_markers = {
     ".clangd",

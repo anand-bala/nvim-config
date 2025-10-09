@@ -6,6 +6,7 @@ vim.lsp.config("*", {
 vim.lsp.enable {
   "bashls",
   -- "basics_ls",
+  "neocmake",
   "biome",
   "clangd",
   "emmet",
