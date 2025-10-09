@@ -52,7 +52,10 @@ autocmd({ "VimEnter" }, {
         winblend = 0,
       },
     }
-    require("quicker").setup()
+    require("quicker").setup {
+      -- Maximum width of the filename column
+      max_filename_width = function() return math.floor(math.min(40, vim.o.columns / 5)) end,
+    }
     require("lualine").setup {
       options = {
         section_separators = "",
