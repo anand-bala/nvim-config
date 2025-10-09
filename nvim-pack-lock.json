@@ -21,7 +21,7 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf": {
-      "rev": "bf77206",
+      "rev": "91c4bef",
       "src": "https://github.com/junegunn/fzf"
     },
     "fzf-lua": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-treesitter": {
-      "rev": "3ab4f2d2",
+      "rev": "de003000",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -111,7 +111,7 @@
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "schemastore.nvim": {
-      "rev": "7d0a0b9",
+      "rev": "0a900e5",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sqlite.lua": {
