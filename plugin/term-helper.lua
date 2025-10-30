@@ -3,24 +3,18 @@
 if vim.g.loaded_term_helper then return end
 
 local cmd = vim.api.nvim_create_user_command
-local map = vim.keymap.set
 
 local term_helper = {}
 
+local default_opts = {
+  vertical = true,
+  size = nil,
+  tab = false,
+  claude = false,
+}
 function term_helper.open_buffer(opts)
-  local defaults = {
-    vertical = true,
-    size = nil,
-    tab = false,
-  }
-  if type(opts) == "table" then
-    opts = vim.tbl_extend("keep", opts, defaults)
-  elseif opts == nil then
-    opts = defaults
-  else
-    error "Invalid options for open_buffer. Needs table."
-  end
-
+  vim.validate("opts", opts, "table", true)
+  opts = vim.tbl_extend("keep", opts or {}, default_opts)
   if opts.tab and opts.vertical then error "Can't have `tab` and `vertical` options both true" end
 
   local command = ""
@@ -41,6 +35,8 @@ function term_helper.open_buffer(opts)
 end
 
 function term_helper.open_term(args, opts)
+  vim.validate("opts", opts, "table", true)
+  opts = vim.tbl_extend("keep", opts or {}, default_opts)
   term_helper.open_buffer(opts)
 
   --- Default shell to use when opening the terminal
@@ -48,11 +44,23 @@ function term_helper.open_term(args, opts)
   local prev_shell = vim.o.shell
   vim.o.shell = shell
 
+  --- Get the current buffer number
   assert(type(args) == "string")
-
   vim.cmd(":terminal " .. args)
   vim.cmd ":startinsert"
 
+  local buf = vim.api.nvim_get_current_buf()
+
+  --- Claude uses its own ESC mapping
+  if not opts.claude then
+    -- Use ESC in terminal mode to switch to normal mode
+    vim.keymap.set(
+      "t",
+      "<Esc>",
+      "<C-\\><C-n>",
+      { remap = true, desc = "Use ESC in terminal mode to switch to normal mode", buffer = buf }
+    )
+  end
   vim.o.shell = prev_shell
 end
 
@@ -60,7 +68,10 @@ function term_helper.split_term(args, count) term_helper.open_term(args, { verti
 
 function term_helper.vsplit_term(args, count) term_helper.open_term(args, { vertical = true, size = count }) end
 
-function term_helper.tab_term(args) term_helper.open_term(args, { tab = true, vertical = false }) end
+function term_helper.tab_term(args, opts)
+  opts = opts or {}
+  term_helper.open_term(args, vim.tbl_deep_extend("keep", { tab = true, vertical = false }, opts))
+end
 
 cmd("Term", function(args) term_helper.split_term(args.args, args.count) end, {
   force = true,
@@ -79,12 +90,14 @@ cmd("TTerm", function(args) term_helper.tab_term(args.args) end, {
   nargs = "*",
 })
 
+cmd("Claude", function() term_helper.tab_term("claude", { claude = true }) end, {
+  force = true,
+  desc = "Open Claude Code in a new tab",
+})
+
 -- Launch terminal at bottom of window
 -- map("n", "`", "<cmd>Term<CR>", { silent = true, remap = false })
 -- Create new terminal vsplit
-map("n", "<C-w>|", "<cmd>VTerm<CR>", { silent = true, remap = false })
-
--- Escape out of terminal mode to normal mode
-map("t", "<Esc>", "<C-\\><C-n>", { silent = true, remap = false })
+vim.keymap.set("n", "<C-w>|", "<cmd>VTerm<CR>", { silent = true, remap = false })
 
 vim.g.loaded_term_helper = true
