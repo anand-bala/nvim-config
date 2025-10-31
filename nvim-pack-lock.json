@@ -21,11 +21,11 @@
       "src": "https://github.com/rafamadriz/friendly-snippets"
     },
     "fzf": {
-      "rev": "aa259fd",
+      "rev": "5cb6957",
       "src": "https://github.com/junegunn/fzf"
     },
     "fzf-lua": {
-      "rev": "5363c9c",
+      "rev": "a8458b7",
       "src": "https://github.com/ibhagwan/fzf-lua",
       "version": "'main'"
     },
@@ -46,7 +46,7 @@
       "src": "https://github.com/rafikdraoui/jj-diffconflicts"
     },
     "lazydev.nvim": {
-      "rev": "01bc2aa",
+      "rev": "371cd74",
       "src": "https://github.com/folke/lazydev.nvim"
     },
     "lualine.nvim": {
@@ -62,7 +62,7 @@
       "src": "https://github.com/nvim-mini/mini.ai"
     },
     "mini.completion": {
-      "rev": "0d794bb",
+      "rev": "2ab1c80",
       "src": "https://github.com/nvim-mini/mini.completion"
     },
     "mini.icons": {
@@ -82,7 +82,7 @@
       "src": "https://github.com/kevinhwang91/nvim-bqf"
     },
     "nvim-treesitter": {
-      "rev": "8fecb462",
+      "rev": "64f4755b",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
@@ -91,7 +91,7 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-context"
     },
     "nvim-treesitter-textobjects": {
-      "rev": "1b2d85d",
+      "rev": "5d63945",
       "src": "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
       "version": "'main'"
     },
@@ -112,11 +112,11 @@
       "src": "https://github.com/stevearc/quicker.nvim"
     },
     "rustaceanvim": {
-      "rev": "4c5fc77",
+      "rev": "be0d1d1",
       "src": "https://github.com/mrcjkb/rustaceanvim"
     },
     "schemastore.nvim": {
-      "rev": "54994d5",
+      "rev": "3b0d7d7",
       "src": "https://github.com/b0o/schemastore.nvim"
     },
     "sqlite.lua": {
