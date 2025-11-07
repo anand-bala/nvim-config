@@ -154,7 +154,7 @@ require("conform").setup {
   },
   formatters = {
     bake = { command = "mbake" },
-    yamlfmt = { prepend_args = { "-formatter", "indent=2,retain_line_breaks=true" } },
+    yamlfmt = { prepend_args = { "-formatter", "indent=2,retain_line_breaks=true,scan_folded_as_literal=true" } },
     shfmt = { prepend_args = { "-i", "2" } },
     latexindent = { prepend_args = { "-l", "-m" } },
     biome = { append_args = { "--indent-style=space" } },

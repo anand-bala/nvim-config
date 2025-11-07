@@ -6,6 +6,7 @@ return {
     -- https://github.com/redhat-developer/vscode-redhat-telemetry#how-to-disable-telemetry-reporting
     redhat = { telemetry = { enabled = false } },
     yaml = {
+      format = { enable = false },
       schemaStore = {
         -- You must disable built-in schemaStore support if you want to use
         -- this plugin and its advanced options like `ignore`.
@@ -18,6 +19,7 @@ return {
   },
   on_init = function(client)
     client.settings.yaml = vim.tbl_deep_extend("force", client.settings.yaml or {}, {
+      format = { enable = false },
       schemaStore = {
         -- You must disable built-in schemaStore support if you want to use
         -- this plugin and its advanced options like `ignore`.

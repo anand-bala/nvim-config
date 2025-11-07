@@ -20,6 +20,7 @@ vim.lsp.enable {
   -- "jedi",
   -- "pylsp",
   "ruff",
+  "ruby-ls",
   -- "ty",
   "zuban",
   "taplo",

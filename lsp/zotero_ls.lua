@@ -1,6 +1,6 @@
 ---@type vim.lsp.ClientConfig
 return {
-  cmd = { "zotero_ls" },
+  cmd = { "zotero_ls", "server" },
   filetypes = { "tex", "plaintex", "bib" },
   root_markers = {
     ".latexmkrc",
