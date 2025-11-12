@@ -375,6 +375,7 @@ vim.pack.add {
   "https://github.com/lewis6991/hover.nvim",
 
   -- Coding tools
+  "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/stevearc/conform.nvim",
   { src = "https://github.com/nvim-treesitter/nvim-treesitter", version = "main", data = { build = ":TSUpdate" } },
   "https://github.com/nvim-treesitter/nvim-treesitter-context",

@@ -1,20 +1,15 @@
 ---@type vim.lsp.Config
 return {
-  cmd = { "uvx", "ty", "server" },
-  filetypes = { "python" },
   settings = {
-    python = { ty = { disableLanguageServices = true } },
-    diagnosticMode = "workspace",
+    -- ty = { disableLanguageServices = false },
+    ty = {
+      diagnosticMode = "workspace",
+      experimental = {
+        rename = true,
+      },
+    },
   },
-  root_markers = {
-    "ty.toml",
-    "pyproject.toml",
-    "setup.py",
-    "setup.cfg",
-    "requirements.txt",
-    "Pipfile",
-    "pyrightconfig.json",
-    ".jj",
-    ".git",
+  init_options = {
+    logFile = vim.fs.joinpath(vim.fn.stdpath "log", "lsp", "ty.log"),
   },
 }

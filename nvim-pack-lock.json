@@ -11,26 +11,40 @@
     "jj-diffconflicts": [],
     "lazydev.nvim": [],
     "lualine.nvim": [],
-    "mason.nvim": [],
+    "mason.nvim": {
+      "rev": "57e5a8addb8c71fb063ee4acda466c7cf6ad2800"
+    },
     "mini.ai": [],
     "mini.completion": [],
     "mini.icons": [],
     "mini.snippets": [],
     "nightfox.nvim": [],
     "nvim-bqf": [],
+    "nvim-lspconfig": {
+      "rev": "abf6d190f2c06818489c0bd4b926e7e3a06c5e51",
+      "src": "https://github.com/neovim/nvim-lspconfig"
+    },
     "nvim-treesitter": {
+      "rev": "0cfa59947416d14e36a41e6fe4f025abd8760301",
       "version": "'main'"
     },
     "nvim-treesitter-context": [],
     "nvim-treesitter-textobjects": {
+      "rev": "227165aaeb07b567fb9c066f224816aa8f3ce63f",
       "version": "'main'"
     },
     "oil.nvim": [],
     "plenary.nvim": [],
+    "profile.nvim": {
+      "rev": "30433d7513f0d14665c1cfcea501c90f8a63e003",
+      "src": "https://github.com/stevearc/profile.nvim"
+    },
     "quicker.nvim": [],
-    "rustaceanvim": [],
+    "rustaceanvim": {
+      "rev": "6bd02e97a1f3102f06a72726764f24d3b3a33a85"
+    },
     "schemastore.nvim": {
-      "rev": "976b31e"
+      "rev": "eed1834170f343c14a6768f085b26b3571a55302"
     },
     "snacks.nvim": {
       "rev": "836e07336ba523d4da480cd66f0241815393e98e"
