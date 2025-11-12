@@ -3,9 +3,6 @@
 if vim.g.loaded_tool_plugins ~= nil then return end
 vim.g.loaded_tool_plugins = 1
 
-local autocmd = vim.api.nvim_create_autocmd
-local augroup = vim.api.nvim_create_augroup
-
 require("oil").setup()
 -- require("mini.align").setup()
 do
@@ -65,10 +62,11 @@ do
   -- Adjust latex -> tex
   local latex_patterns = { "latex/**/*.json", "**/latex.json", "tex/**/*.json", "**/tex.json" }
   local cpp_patterns = { "cpp/**/*.json", "**/cpp.json", "c/**/*.json", "**/c.json" }
-  local lang_patterns = { tex = latex_patterns, plaintex = latex_patterns, cpp = cpp_patterns }
+  local lang_patterns = { tex = latex_patterns, plaintex = latex_patterns, latex = latex_patterns, cpp = cpp_patterns }
   local snippets = require "mini.snippets"
+  local gen_loader = snippets.gen_loader
   snippets.setup {
-    snippets = { snippets.gen_loader.from_lang { lang_patterns = lang_patterns } },
+    snippets = { gen_loader.from_lang { lang_patterns = lang_patterns } },
     mappings = { expand = "", jump_next = "", jump_prev = "" },
     expand = {
       match = function(snips)
