@@ -5,10 +5,6 @@
     "direnv.vim": [],
     "flatten.nvim": [],
     "friendly-snippets": [],
-    "fzf": [],
-    "fzf-lua": {
-      "version": "'main'"
-    },
     "gitsigns.nvim": [],
     "hover.nvim": [],
     "jinja.vim": [],
@@ -35,6 +31,9 @@
     "rustaceanvim": [],
     "schemastore.nvim": {
       "rev": "976b31e"
+    },
+    "snacks.nvim": {
+      "rev": "836e07336ba523d4da480cd66f0241815393e98e"
     },
     "sqlite.lua": [],
     "vim-abolish": [],

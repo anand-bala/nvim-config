@@ -271,7 +271,8 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 
 -- vim.g.loaded_tool_plugins = false
--- vim.g.loaded_fzf_plugin = false
+vim.g.loaded_fzf_plugin = false
+-- vim.g.loaded_snacks_plugin = false
 -- vim.g.loaded_ui_plugins = false
 -- vim.g.loaded_securemodelines = false
 -- vim.g.loaded_scratch = false
@@ -361,8 +362,9 @@ vim.pack.add {
   "https://github.com/willothy/flatten.nvim",
 
   -- Fuzzy finders
-  { src = "https://github.com/junegunn/fzf", data = { build = "./install --bin" } },
-  { src = "https://github.com/ibhagwan/fzf-lua", version = "main" },
+  -- { src = "https://github.com/junegunn/fzf", data = { build = "./install --bin" } },
+  -- { src = "https://github.com/ibhagwan/fzf-lua", version = "main" },
+  "https://github.com/folke/snacks.nvim",
 
   -- UI stuff
   "https://github.com/EdenEast/nightfox.nvim",
