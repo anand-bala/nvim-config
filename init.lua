@@ -351,6 +351,7 @@ vim.pack.add {
   "https://github.com/tpope/vim-obsession",
   "https://github.com/tpope/vim-abolish",
   "https://github.com/arthurxavierx/vim-caser", -- Another casing plugin. Supports visual mode and text objects
+  "https://github.com/tpope/vim-surround",
   "https://github.com/direnv/direnv.vim",
   "https://github.com/stevearc/oil.nvim",
   "https://github.com/andymass/vim-matchup",

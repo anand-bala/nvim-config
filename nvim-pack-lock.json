@@ -61,6 +61,7 @@
     "vim-matchup": [],
     "vim-obsession": [],
     "vim-startuptime": [],
+    "vim-surround": [],
     "vimtex": []
   }
 }
