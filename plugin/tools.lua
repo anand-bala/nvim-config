@@ -124,7 +124,9 @@ do
   vim.keymap.set("i", "<S-Tab>", jump_prev, { desc = "Jump backward if snippet tabstop is available" })
 end
 
-require("mason").setup()
+require("mason").setup {
+  pip = { use_uv = true },
+}
 
 -- Formatting
 vim.g.formatting_opts = vim.g.formatting_opts or {}

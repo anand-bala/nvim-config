@@ -397,7 +397,7 @@ vim.pack.add {
   "https://github.com/b0o/schemastore.nvim",
 
   -- Helpers
-  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/KingMichaelPark/mason.nvim",
 
   -- Profiling tools
   "https://github.com/dstein64/vim-startuptime",
