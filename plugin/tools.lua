@@ -157,28 +157,7 @@ require("conform").setup {
     yamlfmt = { prepend_args = { "-formatter", "indent=2,retain_line_breaks=true,scan_folded_as_literal=true" } },
     shfmt = { prepend_args = { "-i", "2" } },
     latexindent = { prepend_args = { "-l", "-m" } },
-    biome = { append_args = { "--indent-style=space" } },
     mdslw = { prepend_args = { "--stdin-filepath", "$FILENAME" } },
-    -- ["bibtex-tidy"] = {
-    --   prepend_args = {
-    --     "--omit=abstract,keywords",
-    --     "--numeric",
-    --     "--months",
-    --     "--no-align",
-    --     "--sort=-year,key",
-    --     "--duplicates=key",
-    --     "--merge=combine",
-    --     "--strip-enclosing-braces",
-    --     "--no-escape",
-    --     "--sort-fields",
-    --     "--strip-comments",
-    --     "--trailing-commas",
-    --     "--encode-urls",
-    --     "--no-remove-dupe-fields",
-    --     "--enclosing-braces=title,journal,series,booktitle",
-    --     "--remove-braces=title,journal,series,booktitle",
-    --   },
-    -- },
   },
   format_on_save = function(bufnr)
     -- Disable with a global or buffer-local variable
