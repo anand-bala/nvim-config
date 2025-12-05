@@ -29,7 +29,7 @@ vim.keymap.set("", "<f1>", toggle_profile)
 vim.loader.enable()
 -- Set some sane defaults
 vim.opt.secure = true
-vim.opt.modelines = 0 -- Disable Modelines
+-- vim.opt.modelines = 0 -- Disable Modelines
 vim.opt.number = true -- Show line numbers
 vim.opt.visualbell = true -- Blink cursor on error instead of beeping (grr)
 vim.opt.cursorline = true -- Show which line your cursor is on
@@ -274,16 +274,9 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_fzf_plugin = false
 -- vim.g.loaded_snacks_plugin = false
 -- vim.g.loaded_ui_plugins = false
--- vim.g.loaded_securemodelines = false
 -- vim.g.loaded_scratch = false
 -- vim.g.loaded_tool_plugins = false
 -- vim.g.loaded_term_helper = false
-
--- Disable modelines for .jjdescription files
-vim.api.nvim_create_autocmd("BufRead", {
-  pattern = "*.jjdescription",
-  callback = function(event) vim.bo[event.buf].modeline = false end,
-})
 
 vim.api.nvim_create_autocmd("PackChanged", {
   pattern = "*",
