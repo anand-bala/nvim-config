@@ -80,8 +80,8 @@ autocmd({ "VimEnter" }, {
       },
 
       tabline = {
-        lualine_a = { "buffers" },
-        lualine_b = {},
+        lualine_a = { function() return vim.fn.ObsessionStatus("Ob", "X") end },
+        lualine_b = { "buffers" },
         lualine_c = {},
         lualine_x = {},
         lualine_y = {},
