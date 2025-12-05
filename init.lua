@@ -93,11 +93,8 @@ vim.g.tex_flavor = "latex"
 -- Use smarter complete options
 
 -- Avoid showing message extra message when using completion
-vim.opt.shortmess:append { W = true, I = true, c = true }
-if vim.fn.has "nvim-0.9.0" == 1 then
-  vim.opt.splitkeep = "screen"
-  vim.opt.shortmess:append { C = true }
-end
+vim.opt.shortmess:append { W = true, I = true, c = true, C = true }
+vim.opt.splitkeep = "screen"
 
 -- Better cmdline menu options
 vim.opt.wildmode = {
