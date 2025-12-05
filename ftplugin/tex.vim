@@ -10,7 +10,10 @@ if !exists("g:vimtex_complete_bib")
   let g:vimtex_complete_bib  = {}
 endif
 let g:vimtex_complete_bib.info_fmt = "@author_short (@year), \"@title\""
-let g:vimtex_view_method = "zathura"
+" let g:vimtex_view_method = "zathura"
+let g:vimtex_view_general_viewer = 'okular'
+let g:vimtex_view_general_options = '--unique file:@pdf\#src:@line@tex'
+
 let g:vimtex_view_forward_search_on_start = 0
 let g:vimtex_view_automatic = 0
 
