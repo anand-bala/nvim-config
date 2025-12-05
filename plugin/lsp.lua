@@ -5,24 +5,26 @@ vim.lsp.config("*", {
 
 vim.lsp.enable {
   "bashls",
-  -- "basics_ls",
   "neocmake",
   "biome",
   "clangd",
   "emmet_language_server",
   "cssls",
-  -- "esbonio",
-  -- "harper_ls",
   "jsonls",
   "jqls",
   "lua_ls",
-  -- "basedpyright",
+  "lemminx",
+
+  -- {{{ python
+  "basedpyright",
   -- "jedi_language_server",
   -- "pylsp",
-  "ruff",
-  "ruby_lsp",
-  "ty",
+  -- "ty",
   -- "zuban",
+  "ruff",
+  -- }}}
+
+  "ruby_lsp",
   "taplo",
   "texlab",
   "vimls",
@@ -30,6 +32,7 @@ vim.lsp.enable {
   "yamlls",
   -- "digestif",
   "zotero_ls",
+  "zls",
 }
 
 vim.api.nvim_create_autocmd("LspAttach", {
